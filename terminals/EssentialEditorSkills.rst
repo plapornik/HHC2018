@@ -1,7 +1,7 @@
 Essential Editor Skills
 ***********************
 
-Bushy Evergreen provides hints for the objective associated with :doc:`Question 1 </objectives/question1>` after you help him with the Essential Editor Skills Cranberry Pi terminal challenge.
+Bushy Evergreen provides hints for :doc:`Question 1 </objectives/question1>` after you help him with the Essential Editor Skills Cranberry Pi terminal challenge.
 
 Terminal Challenge
 ------------------

