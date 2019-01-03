@@ -65,3 +65,6 @@ Therefore, by using ``; /usr/bin/sqlite3 onboard.db .dump | grep 'Chan'`` we get
  Press Enter to continue...: 
 
 Therefore mr Chan's name is Scott.
+
+.. rubric:: Extra Info
+.. [#f1] After typing ``1`` we were taken to a registration page, which made us lose some time by trying to use that to solve the challenge. By typing ``q`` one cannot type anything more.
