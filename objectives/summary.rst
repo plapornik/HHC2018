@@ -32,6 +32,7 @@ Answer:
 Question 5: AD Privilege Discovery
 ----------------------------------
 
+
 Question 6: Badge Manipulation
 ------------------------------
 
