@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Terminal Challenges &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Summary" href="../summary/summary.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Holiday Hack Challenge 2018 Report
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../summary/summary.html">Summary</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Terminal Challenges</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Holiday Hack Challenge 2018 Report</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Terminal Challenges</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="terminal-challenges">
+<h1>Terminal Challenges<a class="headerlink" href="#terminal-challenges" title="Permalink to this headline">¶</a></h1>
+<p>The URL for the KringleCon home page contains some unicode characters from the Christmas emoji list.
+<a class="reference external" href="https://kringlecon.com/❄🎁⛄🎄🎅❄/">https://kringlecon.com/❄🎁⛄🎄🎅❄/</a></p>
+<p>The following table shows the encoding used</p>
+<table border="1" class="colwidths-given docutils" id="id1">
+<caption><span class="caption-text">URL encoding</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>❄</td>
+<td>%E2%9D%84</td>
+</tr>
+<tr class="row-odd"><td>🎁</td>
+<td>%F0%9F%8E</td>
+</tr>
+<tr class="row-even"><td>⛄</td>
+<td>%81%E2%9B</td>
+</tr>
+<tr class="row-odd"><td>🎄</td>
+<td>%8E%84%F0</td>
+</tr>
+<tr class="row-even"><td>🎅</td>
+<td>%9F%8E%85</td>
+</tr>
+<tr class="row-odd"><td>❄</td>
+<td>%E2%9D%84</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://kringlecon.com/js/main/christmasmagic.js">https://kringlecon.com/js/main/christmasmagic.js</a></p>
+<p>Profanity Filter</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;*dyke&quot;</span><span class="p">,</span><span class="s2">&quot;*fuck*&quot;</span><span class="p">,</span><span class="s2">&quot;*shit*&quot;</span><span class="p">,</span><span class="s2">&quot;5h1t&quot;</span><span class="p">,</span><span class="s2">&quot;5hit&quot;</span><span class="p">,</span><span class="s2">&quot;@$$&quot;</span><span class="p">,</span><span class="s2">&quot;a55&quot;</span><span class="p">,</span><span class="s2">&quot;a_s_s&quot;</span><span class="p">,</span><span class="s2">&quot;ahole&quot;</span><span class="p">,</span><span class="s2">&quot;anal&quot;</span><span class="p">,</span>
+<span class="s2">&quot;anus&quot;</span><span class="p">,</span><span class="s2">&quot;ash0le&quot;</span><span class="p">,</span><span class="s2">&quot;ash0les&quot;</span><span class="p">,</span><span class="s2">&quot;asholes&quot;</span><span class="p">,</span><span class="s2">&quot;ass&quot;</span><span class="p">,</span><span class="s2">&quot;ass monkey&quot;</span><span class="p">,</span><span class="s2">&quot;ass-fucker&quot;</span><span class="p">,</span><span class="s2">&quot;asses&quot;</span><span class="p">,</span>
+<span class="s2">&quot;assface&quot;</span><span class="p">,</span><span class="s2">&quot;assfucker&quot;</span><span class="p">,</span><span class="s2">&quot;assfukka&quot;</span><span class="p">,</span><span class="s2">&quot;assh0le&quot;</span><span class="p">,</span><span class="s2">&quot;assh0lez&quot;</span><span class="p">,</span><span class="s2">&quot;asshole&quot;</span><span class="p">,</span><span class="s2">&quot;assholes&quot;</span><span class="p">,</span>
+<span class="s2">&quot;assholz&quot;</span><span class="p">,</span><span class="s2">&quot;assrammer&quot;</span><span class="p">,</span><span class="s2">&quot;asswhole&quot;</span><span class="p">,</span><span class="s2">&quot;asswipe&quot;</span><span class="p">,</span><span class="s2">&quot;azzhole&quot;</span><span class="p">,</span><span class="s2">&quot;b!+ch&quot;</span><span class="p">,</span><span class="s2">&quot;b!tch&quot;</span><span class="p">,</span><span class="s2">&quot;b00b*&quot;</span><span class="p">,</span>
+<span class="s2">&quot;b00bs&quot;</span><span class="p">,</span><span class="s2">&quot;b17ch&quot;</span><span class="p">,</span><span class="s2">&quot;b1tch&quot;</span><span class="p">,</span><span class="s2">&quot;ballbag&quot;</span><span class="p">,</span><span class="s2">&quot;ballsack&quot;</span><span class="p">,</span><span class="s2">&quot;bassterds&quot;</span><span class="p">,</span><span class="s2">&quot;bastard&quot;</span><span class="p">,</span><span class="s2">&quot;bastards&quot;</span><span class="p">,</span>
+<span class="s2">&quot;bastardz&quot;</span><span class="p">,</span><span class="s2">&quot;basterds&quot;</span><span class="p">,</span><span class="s2">&quot;basterdz&quot;</span><span class="p">,</span><span class="s2">&quot;beastial&quot;</span><span class="p">,</span><span class="s2">&quot;beastiality&quot;</span><span class="p">,</span><span class="s2">&quot;bellend&quot;</span><span class="p">,</span><span class="s2">&quot;bestial&quot;</span><span class="p">,</span>
+<span class="s2">&quot;bestiality&quot;</span><span class="p">,</span><span class="s2">&quot;bi+ch&quot;</span><span class="p">,</span><span class="s2">&quot;bi7ch&quot;</span><span class="p">,</span><span class="s2">&quot;biatch&quot;</span><span class="p">,</span><span class="s2">&quot;bitch&quot;</span><span class="p">,</span><span class="s2">&quot;bitch*&quot;</span><span class="p">,</span><span class="s2">&quot;bitcher&quot;</span><span class="p">,</span><span class="s2">&quot;bitchers&quot;</span><span class="p">,</span>
+<span class="s2">&quot;bitches&quot;</span><span class="p">,</span><span class="s2">&quot;bitchin&quot;</span><span class="p">,</span><span class="s2">&quot;bitching&quot;</span><span class="p">,</span><span class="s2">&quot;bloody&quot;</span><span class="p">,</span><span class="s2">&quot;blow job&quot;</span><span class="p">,</span><span class="s2">&quot;blowjob&quot;</span><span class="p">,</span><span class="s2">&quot;blowjobs&quot;</span><span class="p">,</span>
+<span class="s2">&quot;boffing&quot;</span><span class="p">,</span><span class="s2">&quot;boiolas&quot;</span><span class="p">,</span><span class="s2">&quot;bollock&quot;</span><span class="p">,</span><span class="s2">&quot;bollock*&quot;</span><span class="p">,</span><span class="s2">&quot;bollok&quot;</span><span class="p">,</span><span class="s2">&quot;boner&quot;</span><span class="p">,</span><span class="s2">&quot;boobs&quot;</span><span class="p">,</span><span class="s2">&quot;booobs&quot;</span><span class="p">,</span>
+<span class="s2">&quot;boooobs&quot;</span><span class="p">,</span><span class="s2">&quot;booooobs&quot;</span><span class="p">,</span><span class="s2">&quot;booooooobs&quot;</span><span class="p">,</span><span class="s2">&quot;breasts&quot;</span><span class="p">,</span><span class="s2">&quot;bunny fucker&quot;</span><span class="p">,</span><span class="s2">&quot;butt-pirate&quot;</span><span class="p">,</span>
+<span class="s2">&quot;butthole&quot;</span><span class="p">,</span><span class="s2">&quot;buttmuch&quot;</span><span class="p">,</span><span class="s2">&quot;buttplug&quot;</span><span class="p">,</span><span class="s2">&quot;buttwipe&quot;</span><span class="p">,</span><span class="s2">&quot;c0ck&quot;</span><span class="p">,</span><span class="s2">&quot;c0cks&quot;</span><span class="p">,</span><span class="s2">&quot;c0cksucker&quot;</span><span class="p">,</span>
+<span class="s2">&quot;c0k&quot;</span><span class="p">,</span><span class="s2">&quot;cabron&quot;</span><span class="p">,</span><span class="s2">&quot;carpet muncher&quot;</span><span class="p">,</span><span class="s2">&quot;cawk&quot;</span><span class="p">,</span><span class="s2">&quot;cawks&quot;</span><span class="p">,</span><span class="s2">&quot;chink&quot;</span><span class="p">,</span><span class="s2">&quot;cipa&quot;</span><span class="p">,</span><span class="s2">&quot;cl1t&quot;</span><span class="p">,</span><span class="s2">&quot;clit&quot;</span><span class="p">,</span>
+<span class="s2">&quot;clitoris&quot;</span><span class="p">,</span><span class="s2">&quot;clits&quot;</span><span class="p">,</span><span class="s2">&quot;cnts&quot;</span><span class="p">,</span><span class="s2">&quot;cntz&quot;</span><span class="p">,</span><span class="s2">&quot;cnut&quot;</span><span class="p">,</span><span class="s2">&quot;cock&quot;</span><span class="p">,</span><span class="s2">&quot;cock*&quot;</span><span class="p">,</span><span class="s2">&quot;cock-head&quot;</span><span class="p">,</span>
+<span class="s2">&quot;cock-sucker&quot;</span><span class="p">,</span><span class="s2">&quot;cockface&quot;</span><span class="p">,</span><span class="s2">&quot;cockhead&quot;</span><span class="p">,</span><span class="s2">&quot;cockmunch&quot;</span><span class="p">,</span><span class="s2">&quot;cockmuncher&quot;</span><span class="p">,</span><span class="s2">&quot;cocks&quot;</span><span class="p">,</span>
+<span class="s2">&quot;cocksuck&quot;</span><span class="p">,</span><span class="s2">&quot;cocksucked&quot;</span><span class="p">,</span><span class="s2">&quot;cocksucker&quot;</span><span class="p">,</span><span class="s2">&quot;cocksucking&quot;</span><span class="p">,</span><span class="s2">&quot;cocksucks&quot;</span><span class="p">,</span><span class="s2">&quot;cocksuka&quot;</span><span class="p">,</span>
+<span class="s2">&quot;cocksukka&quot;</span><span class="p">,</span><span class="s2">&quot;cok&quot;</span><span class="p">,</span><span class="s2">&quot;cokmuncher&quot;</span><span class="p">,</span><span class="s2">&quot;coksucka&quot;</span><span class="p">,</span><span class="s2">&quot;coon&quot;</span><span class="p">,</span><span class="s2">&quot;cum&quot;</span><span class="p">,</span><span class="s2">&quot;cummer&quot;</span><span class="p">,</span><span class="s2">&quot;cumming&quot;</span><span class="p">,</span>
+<span class="s2">&quot;cums&quot;</span><span class="p">,</span><span class="s2">&quot;cumshot&quot;</span><span class="p">,</span><span class="s2">&quot;cunilingus&quot;</span><span class="p">,</span><span class="s2">&quot;cunillingus&quot;</span><span class="p">,</span><span class="s2">&quot;cunnilingus&quot;</span><span class="p">,</span><span class="s2">&quot;cunt&quot;</span><span class="p">,</span><span class="s2">&quot;cunt*&quot;</span><span class="p">,</span>
+<span class="s2">&quot;cuntlick&quot;</span><span class="p">,</span><span class="s2">&quot;cuntlicker&quot;</span><span class="p">,</span><span class="s2">&quot;cuntlicking&quot;</span><span class="p">,</span><span class="s2">&quot;cunts&quot;</span><span class="p">,</span><span class="s2">&quot;cuntz&quot;</span><span class="p">,</span><span class="s2">&quot;cyberfuc&quot;</span><span class="p">,</span><span class="s2">&quot;cyberfuck&quot;</span><span class="p">,</span>
+<span class="s2">&quot;cyberfucked&quot;</span><span class="p">,</span><span class="s2">&quot;cyberfucker&quot;</span><span class="p">,</span><span class="s2">&quot;cyberfuckers&quot;</span><span class="p">,</span><span class="s2">&quot;cyberfucking&quot;</span><span class="p">,</span><span class="s2">&quot;d1ck&quot;</span><span class="p">,</span><span class="s2">&quot;d4mn&quot;</span><span class="p">,</span>
+<span class="s2">&quot;damn&quot;</span><span class="p">,</span><span class="s2">&quot;daygo&quot;</span><span class="p">,</span><span class="s2">&quot;dego&quot;</span><span class="p">,</span><span class="s2">&quot;dick&quot;</span><span class="p">,</span><span class="s2">&quot;dick*&quot;</span><span class="p">,</span><span class="s2">&quot;dickhead&quot;</span><span class="p">,</span><span class="s2">&quot;dike*&quot;</span><span class="p">,</span><span class="s2">&quot;dild0&quot;</span><span class="p">,</span><span class="s2">&quot;dild0s&quot;</span><span class="p">,</span>
+<span class="s2">&quot;dildo&quot;</span><span class="p">,</span><span class="s2">&quot;dildos&quot;</span><span class="p">,</span><span class="s2">&quot;dilld0&quot;</span><span class="p">,</span><span class="s2">&quot;dilld0s&quot;</span><span class="p">,</span><span class="s2">&quot;dlck&quot;</span><span class="p">,</span><span class="s2">&quot;dog-fucker&quot;</span><span class="p">,</span><span class="s2">&quot;doggin&quot;</span><span class="p">,</span><span class="s2">&quot;dogging&quot;</span><span class="p">,</span>
+<span class="s2">&quot;donkeyribber&quot;</span><span class="p">,</span><span class="s2">&quot;doosh&quot;</span><span class="p">,</span><span class="s2">&quot;duche&quot;</span><span class="p">,</span><span class="s2">&quot;dyke&quot;</span><span class="p">,</span><span class="s2">&quot;dziwka&quot;</span><span class="p">,</span><span class="s2">&quot;ejackulate&quot;</span><span class="p">,</span><span class="s2">&quot;ejaculate&quot;</span><span class="p">,</span>
+<span class="s2">&quot;ejaculated&quot;</span><span class="p">,</span><span class="s2">&quot;ejaculates&quot;</span><span class="p">,</span><span class="s2">&quot;ejaculating&quot;</span><span class="p">,</span><span class="s2">&quot;ejaculatings&quot;</span><span class="p">,</span><span class="s2">&quot;ejaculation&quot;</span><span class="p">,</span>
+<span class="s2">&quot;ejakulate&quot;</span><span class="p">,</span><span class="s2">&quot;enculer&quot;</span><span class="p">,</span><span class="s2">&quot;f4nny&quot;</span><span class="p">,</span><span class="s2">&quot;f u c k&quot;</span><span class="p">,</span><span class="s2">&quot;f u c k e r&quot;</span><span class="p">,</span><span class="s2">&quot;f_u_c_k&quot;</span><span class="p">,</span><span class="s2">&quot;fag&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fag*&quot;</span><span class="p">,</span><span class="s2">&quot;fag1t&quot;</span><span class="p">,</span><span class="s2">&quot;faget&quot;</span><span class="p">,</span><span class="s2">&quot;fagg1t&quot;</span><span class="p">,</span><span class="s2">&quot;fagging&quot;</span><span class="p">,</span><span class="s2">&quot;faggit&quot;</span><span class="p">,</span><span class="s2">&quot;faggitt&quot;</span><span class="p">,</span><span class="s2">&quot;faggot&quot;</span><span class="p">,</span>
+<span class="s2">&quot;faggs&quot;</span><span class="p">,</span><span class="s2">&quot;fagit&quot;</span><span class="p">,</span><span class="s2">&quot;fagot&quot;</span><span class="p">,</span><span class="s2">&quot;fagots&quot;</span><span class="p">,</span><span class="s2">&quot;fags&quot;</span><span class="p">,</span><span class="s2">&quot;fagz&quot;</span><span class="p">,</span><span class="s2">&quot;faig&quot;</span><span class="p">,</span><span class="s2">&quot;faigs&quot;</span><span class="p">,</span><span class="s2">&quot;fanculo&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fanny&quot;</span><span class="p">,</span><span class="s2">&quot;fannyflaps&quot;</span><span class="p">,</span><span class="s2">&quot;fannyfucker&quot;</span><span class="p">,</span><span class="s2">&quot;fanyy&quot;</span><span class="p">,</span><span class="s2">&quot;fatass&quot;</span><span class="p">,</span><span class="s2">&quot;fcuk&quot;</span><span class="p">,</span><span class="s2">&quot;fcuker&quot;</span><span class="p">,</span><span class="s2">&quot;fcuking&quot;</span><span class="p">,</span>
+<span class="s2">&quot;feces&quot;</span><span class="p">,</span><span class="s2">&quot;feck&quot;</span><span class="p">,</span><span class="s2">&quot;fecker&quot;</span><span class="p">,</span><span class="s2">&quot;feg&quot;</span><span class="p">,</span><span class="s2">&quot;felcher&quot;</span><span class="p">,</span><span class="s2">&quot;felching&quot;</span><span class="p">,</span><span class="s2">&quot;fellate&quot;</span><span class="p">,</span><span class="s2">&quot;fellatio&quot;</span><span class="p">,</span>
+<span class="s2">&quot;ficken&quot;</span><span class="p">,</span><span class="s2">&quot;fingerfuck&quot;</span><span class="p">,</span><span class="s2">&quot;fingerfucked&quot;</span><span class="p">,</span><span class="s2">&quot;fingerfucker&quot;</span><span class="p">,</span><span class="s2">&quot;fingerfuckers&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fingerfucking&quot;</span><span class="p">,</span><span class="s2">&quot;fingerfucks&quot;</span><span class="p">,</span><span class="s2">&quot;fistfuck&quot;</span><span class="p">,</span><span class="s2">&quot;fistfucked&quot;</span><span class="p">,</span><span class="s2">&quot;fistfucker&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fistfuckers&quot;</span><span class="p">,</span><span class="s2">&quot;fistfucking&quot;</span><span class="p">,</span><span class="s2">&quot;fistfuckings&quot;</span><span class="p">,</span><span class="s2">&quot;fistfucks&quot;</span><span class="p">,</span><span class="s2">&quot;flange&quot;</span><span class="p">,</span><span class="s2">&quot;flikker&quot;</span><span class="p">,</span>
+<span class="s2">&quot;flipping the bird&quot;</span><span class="p">,</span><span class="s2">&quot;fook&quot;</span><span class="p">,</span><span class="s2">&quot;fooker&quot;</span><span class="p">,</span><span class="s2">&quot;foreskin&quot;</span><span class="p">,</span><span class="s2">&quot;fotze&quot;</span><span class="p">,</span><span class="s2">&quot;fu(*&quot;</span><span class="p">,</span><span class="s2">&quot;fuck&quot;</span><span class="p">,</span><span class="s2">&quot;fucka&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fucked&quot;</span><span class="p">,</span><span class="s2">&quot;fucker&quot;</span><span class="p">,</span><span class="s2">&quot;fuckers&quot;</span><span class="p">,</span><span class="s2">&quot;fuckhead&quot;</span><span class="p">,</span><span class="s2">&quot;fuckheads&quot;</span><span class="p">,</span><span class="s2">&quot;fuckin&quot;</span><span class="p">,</span><span class="s2">&quot;fucking&quot;</span><span class="p">,</span><span class="s2">&quot;fuckings&quot;</span>
+<span class="p">,</span><span class="s2">&quot;fuckingshitmotherfucker&quot;</span><span class="p">,</span><span class="s2">&quot;fuckme&quot;</span><span class="p">,</span><span class="s2">&quot;fucks&quot;</span><span class="p">,</span><span class="s2">&quot;fuckwhit&quot;</span><span class="p">,</span><span class="s2">&quot;fuckwit&quot;</span><span class="p">,</span><span class="s2">&quot;fudge packer&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fudgepacker&quot;</span><span class="p">,</span><span class="s2">&quot;fuk&quot;</span><span class="p">,</span><span class="s2">&quot;fuk*&quot;</span><span class="p">,</span><span class="s2">&quot;fukah&quot;</span><span class="p">,</span><span class="s2">&quot;fuken&quot;</span><span class="p">,</span><span class="s2">&quot;fuker&quot;</span><span class="p">,</span><span class="s2">&quot;fukin&quot;</span><span class="p">,</span><span class="s2">&quot;fukk&quot;</span><span class="p">,</span><span class="s2">&quot;fukkah&quot;</span><span class="p">,</span>
+<span class="s2">&quot;fukken&quot;</span><span class="p">,</span><span class="s2">&quot;fukker&quot;</span><span class="p">,</span><span class="s2">&quot;fukkin&quot;</span><span class="p">,</span><span class="s2">&quot;fuks&quot;</span><span class="p">,</span><span class="s2">&quot;fukwhit&quot;</span><span class="p">,</span><span class="s2">&quot;fukwit&quot;</span><span class="p">,</span><span class="s2">&quot;futkretzn&quot;</span><span class="p">,</span><span class="s2">&quot;fux&quot;</span><span class="p">,</span><span class="s2">&quot;fux0r&quot;</span><span class="p">,</span>
+<span class="s2">&quot;g00k&quot;</span><span class="p">,</span><span class="s2">&quot;gangbang&quot;</span><span class="p">,</span><span class="s2">&quot;gangbanged&quot;</span><span class="p">,</span><span class="s2">&quot;gangbangs&quot;</span><span class="p">,</span><span class="s2">&quot;gayboy&quot;</span><span class="p">,</span><span class="s2">&quot;gaygirl&quot;</span><span class="p">,</span><span class="s2">&quot;gaylord&quot;</span><span class="p">,</span><span class="s2">&quot;gays&quot;</span><span class="p">,</span>
+<span class="s2">&quot;gaysex&quot;</span><span class="p">,</span><span class="s2">&quot;gayz&quot;</span><span class="p">,</span><span class="s2">&quot;goatse&quot;</span><span class="p">,</span><span class="s2">&quot;god-dam&quot;</span><span class="p">,</span><span class="s2">&quot;god-damned&quot;</span><span class="p">,</span><span class="s2">&quot;goddamn&quot;</span><span class="p">,</span><span class="s2">&quot;goddamned&quot;</span><span class="p">,</span><span class="s2">&quot;gook&quot;</span><span class="p">,</span>
+<span class="s2">&quot;guiena&quot;</span><span class="p">,</span><span class="s2">&quot;h00r&quot;</span><span class="p">,</span><span class="s2">&quot;h0ar&quot;</span><span class="p">,</span><span class="s2">&quot;h0r&quot;</span><span class="p">,</span><span class="s2">&quot;h0re&quot;</span><span class="p">,</span><span class="s2">&quot;hardcoresex&quot;</span><span class="p">,</span><span class="s2">&quot;heshe&quot;</span><span class="p">,</span><span class="s2">&quot;hoar&quot;</span><span class="p">,</span><span class="s2">&quot;hoare&quot;</span><span class="p">,</span><span class="s2">&quot;hoer&quot;</span><span class="p">,</span>
+<span class="s2">&quot;hoer*&quot;</span><span class="p">,</span><span class="s2">&quot;homo&quot;</span><span class="p">,</span><span class="s2">&quot;honkey&quot;</span><span class="p">,</span><span class="s2">&quot;hoor&quot;</span><span class="p">,</span><span class="s2">&quot;hoore&quot;</span><span class="p">,</span><span class="s2">&quot;hore&quot;</span><span class="p">,</span><span class="s2">&quot;horniest&quot;</span><span class="p">,</span><span class="s2">&quot;horny&quot;</span><span class="p">,</span><span class="s2">&quot;hotsex&quot;</span><span class="p">,</span>
+<span class="s2">&quot;huevon&quot;</span><span class="p">,</span><span class="s2">&quot;hui&quot;</span><span class="p">,</span><span class="s2">&quot;injun&quot;</span><span class="p">,</span><span class="s2">&quot;jack-off&quot;</span><span class="p">,</span><span class="s2">&quot;jackoff&quot;</span><span class="p">,</span><span class="s2">&quot;jap&quot;</span><span class="p">,</span><span class="s2">&quot;japs&quot;</span><span class="p">,</span><span class="s2">&quot;jerk-off&quot;</span><span class="p">,</span><span class="s2">&quot;jisim&quot;</span><span class="p">,</span>
+<span class="s2">&quot;jism&quot;</span><span class="p">,</span><span class="s2">&quot;jiss&quot;</span><span class="p">,</span><span class="s2">&quot;jiz&quot;</span><span class="p">,</span><span class="s2">&quot;jizm&quot;</span><span class="p">,</span><span class="s2">&quot;jizz&quot;</span><span class="p">,</span><span class="s2">&quot;kanker*&quot;</span><span class="p">,</span><span class="s2">&quot;kawk&quot;</span><span class="p">,</span><span class="s2">&quot;kike&quot;</span><span class="p">,</span><span class="s2">&quot;klootzak&quot;</span><span class="p">,</span><span class="s2">&quot;knobead&quot;</span><span class="p">,</span>
+<span class="s2">&quot;knobed&quot;</span><span class="p">,</span><span class="s2">&quot;knobend&quot;</span><span class="p">,</span><span class="s2">&quot;knobhead&quot;</span><span class="p">,</span><span class="s2">&quot;knobjocky&quot;</span><span class="p">,</span><span class="s2">&quot;knobjokey&quot;</span><span class="p">,</span><span class="s2">&quot;knobs&quot;</span><span class="p">,</span><span class="s2">&quot;knobz&quot;</span><span class="p">,</span><span class="s2">&quot;knulle&quot;</span><span class="p">,</span>
+<span class="s2">&quot;kock&quot;</span><span class="p">,</span><span class="s2">&quot;kondum&quot;</span><span class="p">,</span><span class="s2">&quot;kondums&quot;</span><span class="p">,</span><span class="s2">&quot;kraut&quot;</span><span class="p">,</span><span class="s2">&quot;kuk&quot;</span><span class="p">,</span><span class="s2">&quot;kuksuger&quot;</span><span class="p">,</span><span class="s2">&quot;kum&quot;</span><span class="p">,</span><span class="s2">&quot;kummer&quot;</span><span class="p">,</span><span class="s2">&quot;kumming&quot;</span><span class="p">,</span>
+<span class="s2">&quot;kums&quot;</span><span class="p">,</span><span class="s2">&quot;kunilingus&quot;</span><span class="p">,</span><span class="s2">&quot;kunt&quot;</span><span class="p">,</span><span class="s2">&quot;kunts&quot;</span><span class="p">,</span><span class="s2">&quot;kuntz&quot;</span><span class="p">,</span><span class="s2">&quot;kurac&quot;</span><span class="p">,</span><span class="s2">&quot;kurwa&quot;</span><span class="p">,</span><span class="s2">&quot;kusi*&quot;</span><span class="p">,</span><span class="s2">&quot;kyrpa*&quot;</span><span class="p">,</span>
+<span class="s2">&quot;l3i+ch&quot;</span><span class="p">,</span><span class="s2">&quot;l3itch&quot;</span><span class="p">,</span><span class="s2">&quot;labia&quot;</span><span class="p">,</span><span class="s2">&quot;lesbo&quot;</span><span class="p">,</span><span class="s2">&quot;lezzian&quot;</span><span class="p">,</span><span class="s2">&quot;lipshits&quot;</span><span class="p">,</span><span class="s2">&quot;lipshitz&quot;</span><span class="p">,</span><span class="s2">&quot;lust&quot;</span><span class="p">,</span>
+<span class="s2">&quot;lusting&quot;</span><span class="p">,</span><span class="s2">&quot;m0f0&quot;</span><span class="p">,</span><span class="s2">&quot;m0fo&quot;</span><span class="p">,</span><span class="s2">&quot;m45terbate&quot;</span><span class="p">,</span><span class="s2">&quot;ma5terb8&quot;</span><span class="p">,</span><span class="s2">&quot;ma5terbate&quot;</span><span class="p">,</span><span class="s2">&quot;mamhoon&quot;</span><span class="p">,</span>
+<span class="s2">&quot;masochist&quot;</span><span class="p">,</span><span class="s2">&quot;masokist&quot;</span><span class="p">,</span><span class="s2">&quot;massterbait&quot;</span><span class="p">,</span><span class="s2">&quot;masstrbait&quot;</span><span class="p">,</span><span class="s2">&quot;masstrbate&quot;</span><span class="p">,</span><span class="s2">&quot;master-bate&quot;</span><span class="p">,</span>
+<span class="s2">&quot;masterb8&quot;</span><span class="p">,</span><span class="s2">&quot;masterbaiter&quot;</span><span class="p">,</span><span class="s2">&quot;masterbat*&quot;</span><span class="p">,</span><span class="s2">&quot;masterbat3&quot;</span><span class="p">,</span><span class="s2">&quot;masterbate&quot;</span><span class="p">,</span><span class="s2">&quot;masterbates&quot;</span><span class="p">,</span>
+<span class="s2">&quot;masterbation&quot;</span><span class="p">,</span><span class="s2">&quot;masterbations&quot;</span><span class="p">,</span><span class="s2">&quot;masturbat*&quot;</span><span class="p">,</span><span class="s2">&quot;masturbate&quot;</span><span class="p">,</span><span class="s2">&quot;merd*&quot;</span><span class="p">,</span><span class="s2">&quot;mibun&quot;</span><span class="p">,</span>
+<span class="s2">&quot;mo-fo&quot;</span><span class="p">,</span><span class="s2">&quot;mof0&quot;</span><span class="p">,</span><span class="s2">&quot;mofo&quot;</span><span class="p">,</span><span class="s2">&quot;motha fucker&quot;</span><span class="p">,</span><span class="s2">&quot;motha fuker&quot;</span><span class="p">,</span><span class="s2">&quot;motha fukkah&quot;</span><span class="p">,</span>
+<span class="s2">&quot;motha fukker&quot;</span><span class="p">,</span><span class="s2">&quot;mothafuck&quot;</span><span class="p">,</span><span class="s2">&quot;mothafucka&quot;</span><span class="p">,</span><span class="s2">&quot;mothafuckas&quot;</span><span class="p">,</span><span class="s2">&quot;mothafuckaz&quot;</span><span class="p">,</span>
+<span class="s2">&quot;mothafucked&quot;</span><span class="p">,</span><span class="s2">&quot;mothafucker&quot;</span><span class="p">,</span><span class="s2">&quot;mothafuckers&quot;</span><span class="p">,</span><span class="s2">&quot;mothafuckin&quot;</span><span class="p">,</span><span class="s2">&quot;mothafucking&quot;</span><span class="p">,</span>
+<span class="s2">&quot;mothafuckings&quot;</span><span class="p">,</span><span class="s2">&quot;mothafucks&quot;</span><span class="p">,</span><span class="s2">&quot;mother fucker&quot;</span><span class="p">,</span><span class="s2">&quot;mother fukah&quot;</span><span class="p">,</span><span class="s2">&quot;mother fuker&quot;</span><span class="p">,</span>
+<span class="s2">&quot;mother fukkah&quot;</span><span class="p">,</span><span class="s2">&quot;mother fukker&quot;</span><span class="p">,</span><span class="s2">&quot;mother-fucker&quot;</span><span class="p">,</span><span class="s2">&quot;motherfuck&quot;</span><span class="p">,</span><span class="s2">&quot;motherfucked&quot;</span><span class="p">,</span>
+<span class="s2">&quot;motherfucker&quot;</span><span class="p">,</span><span class="s2">&quot;motherfuckers&quot;</span><span class="p">,</span><span class="s2">&quot;motherfuckin&quot;</span><span class="p">,</span><span class="s2">&quot;motherfucking&quot;</span><span class="p">,</span><span class="s2">&quot;motherfuckings&quot;</span><span class="p">,</span>
+<span class="s2">&quot;motherfuckka&quot;</span><span class="p">,</span><span class="s2">&quot;motherfucks&quot;</span><span class="p">,</span><span class="s2">&quot;mouliewop&quot;</span><span class="p">,</span><span class="s2">&quot;muff&quot;</span><span class="p">,</span><span class="s2">&quot;muie&quot;</span><span class="p">,</span><span class="s2">&quot;mulkku&quot;</span><span class="p">,</span><span class="s2">&quot;muschi&quot;</span><span class="p">,</span>
+<span class="s2">&quot;mutha&quot;</span><span class="p">,</span><span class="s2">&quot;mutha fucker&quot;</span><span class="p">,</span><span class="s2">&quot;mutha fukah&quot;</span><span class="p">,</span><span class="s2">&quot;mutha fuker&quot;</span><span class="p">,</span><span class="s2">&quot;mutha fukkah&quot;</span><span class="p">,</span>
+<span class="s2">&quot;mutha fukker&quot;</span><span class="p">,</span><span class="s2">&quot;muthafecker&quot;</span><span class="p">,</span><span class="s2">&quot;muthafuckker&quot;</span><span class="p">,</span><span class="s2">&quot;muther&quot;</span><span class="p">,</span><span class="s2">&quot;mutherfucker&quot;</span><span class="p">,</span><span class="s2">&quot;n1gga&quot;</span><span class="p">,</span>
+<span class="s2">&quot;n1gger&quot;</span><span class="p">,</span><span class="s2">&quot;n1gr&quot;</span><span class="p">,</span><span class="s2">&quot;nastt&quot;</span><span class="p">,</span><span class="s2">&quot;nazi&quot;</span><span class="p">,</span><span class="s2">&quot;nazis&quot;</span><span class="p">,</span><span class="s2">&quot;nepesaurio&quot;</span><span class="p">,</span><span class="s2">&quot;nigg3r&quot;</span><span class="p">,</span><span class="s2">&quot;nigg4h&quot;</span><span class="p">,</span>
+<span class="s2">&quot;nigga&quot;</span><span class="p">,</span><span class="s2">&quot;niggah&quot;</span><span class="p">,</span><span class="s2">&quot;niggas&quot;</span><span class="p">,</span><span class="s2">&quot;niggaz&quot;</span><span class="p">,</span><span class="s2">&quot;nigger&quot;</span><span class="p">,</span><span class="s2">&quot;nigger*&quot;</span><span class="p">,</span><span class="s2">&quot;nigger;&quot;</span><span class="p">,</span><span class="s2">&quot;niggers&quot;</span><span class="p">,</span>
+<span class="s2">&quot;nigur;&quot;</span><span class="p">,</span><span class="s2">&quot;niiger;&quot;</span><span class="p">,</span><span class="s2">&quot;niigr;&quot;</span><span class="p">,</span><span class="s2">&quot;nob jokey&quot;</span><span class="p">,</span><span class="s2">&quot;nobjocky&quot;</span><span class="p">,</span><span class="s2">&quot;nobjokey&quot;</span><span class="p">,</span><span class="s2">&quot;numbnuts&quot;</span><span class="p">,</span>
+<span class="s2">&quot;nutsack&quot;</span><span class="p">,</span><span class="s2">&quot;orafis&quot;</span><span class="p">,</span><span class="s2">&quot;orgasim&quot;</span><span class="p">,</span><span class="s2">&quot;orgasim;&quot;</span><span class="p">,</span><span class="s2">&quot;orgasims&quot;</span><span class="p">,</span><span class="s2">&quot;orgasm&quot;</span><span class="p">,</span><span class="s2">&quot;orgasms&quot;</span><span class="p">,</span>
+<span class="s2">&quot;orgasum&quot;</span><span class="p">,</span><span class="s2">&quot;oriface&quot;</span><span class="p">,</span><span class="s2">&quot;orifice&quot;</span><span class="p">,</span><span class="s2">&quot;orifiss&quot;</span><span class="p">,</span><span class="s2">&quot;orospu&quot;</span><span class="p">,</span><span class="s2">&quot;p0rn&quot;</span><span class="p">,</span><span class="s2">&quot;packi&quot;</span><span class="p">,</span><span class="s2">&quot;packie&quot;</span><span class="p">,</span>
+<span class="s2">&quot;packy&quot;</span><span class="p">,</span><span class="s2">&quot;paki&quot;</span><span class="p">,</span><span class="s2">&quot;pakie&quot;</span><span class="p">,</span><span class="s2">&quot;paky&quot;</span><span class="p">,</span><span class="s2">&quot;paska*&quot;</span><span class="p">,</span><span class="s2">&quot;pecker&quot;</span><span class="p">,</span><span class="s2">&quot;peeenus&quot;</span><span class="p">,</span><span class="s2">&quot;peeenusss&quot;</span><span class="p">,</span>
+<span class="s2">&quot;peenus&quot;</span><span class="p">,</span><span class="s2">&quot;peinus&quot;</span><span class="p">,</span><span class="s2">&quot;pen1s&quot;</span><span class="p">,</span><span class="s2">&quot;penas&quot;</span><span class="p">,</span><span class="s2">&quot;penis&quot;</span><span class="p">,</span><span class="s2">&quot;penis-breath&quot;</span><span class="p">,</span><span class="s2">&quot;penisfucker&quot;</span><span class="p">,</span>
+<span class="s2">&quot;penus&quot;</span><span class="p">,</span><span class="s2">&quot;penuus&quot;</span><span class="p">,</span><span class="s2">&quot;phonesex&quot;</span><span class="p">,</span><span class="s2">&quot;phuc&quot;</span><span class="p">,</span><span class="s2">&quot;phuck&quot;</span><span class="p">,</span><span class="s2">&quot;phuk&quot;</span><span class="p">,</span><span class="s2">&quot;phuked&quot;</span><span class="p">,</span><span class="s2">&quot;phuker&quot;</span><span class="p">,</span><span class="s2">&quot;phuking&quot;</span><span class="p">,</span>
+<span class="s2">&quot;phukked&quot;</span><span class="p">,</span><span class="s2">&quot;phukker&quot;</span><span class="p">,</span><span class="s2">&quot;phukking&quot;</span><span class="p">,</span><span class="s2">&quot;phuks&quot;</span><span class="p">,</span><span class="s2">&quot;phuq&quot;</span><span class="p">,</span><span class="s2">&quot;picka&quot;</span><span class="p">,</span><span class="s2">&quot;pierdol*&quot;</span><span class="p">,</span><span class="s2">&quot;pigfucker&quot;</span><span class="p">,</span>
+<span class="s2">&quot;pillu*&quot;</span><span class="p">,</span><span class="s2">&quot;pimmel&quot;</span><span class="p">,</span><span class="s2">&quot;pimpis&quot;</span><span class="p">,</span><span class="s2">&quot;piss&quot;</span><span class="p">,</span><span class="s2">&quot;piss*&quot;</span><span class="p">,</span><span class="s2">&quot;pissed&quot;</span><span class="p">,</span><span class="s2">&quot;pisser&quot;</span><span class="p">,</span><span class="s2">&quot;pissers&quot;</span><span class="p">,</span><span class="s2">&quot;pisses&quot;</span><span class="p">,</span>
+<span class="s2">&quot;pissflaps&quot;</span><span class="p">,</span><span class="s2">&quot;pissin&quot;</span><span class="p">,</span><span class="s2">&quot;pissing&quot;</span><span class="p">,</span><span class="s2">&quot;pissoff&quot;</span><span class="p">,</span><span class="s2">&quot;pizda&quot;</span><span class="p">,</span><span class="s2">&quot;polac&quot;</span><span class="p">,</span><span class="s2">&quot;polack&quot;</span><span class="p">,</span><span class="s2">&quot;polak&quot;</span><span class="p">,</span>
+<span class="s2">&quot;poonani&quot;</span><span class="p">,</span><span class="s2">&quot;poontsee&quot;</span><span class="p">,</span><span class="s2">&quot;porn&quot;</span><span class="p">,</span><span class="s2">&quot;porno&quot;</span><span class="p">,</span><span class="s2">&quot;pornography&quot;</span><span class="p">,</span><span class="s2">&quot;pornos&quot;</span><span class="p">,</span><span class="s2">&quot;pr1c&quot;</span><span class="p">,</span><span class="s2">&quot;pr1ck&quot;</span><span class="p">,</span>
+<span class="s2">&quot;pr1k&quot;</span><span class="p">,</span><span class="s2">&quot;preteen&quot;</span><span class="p">,</span><span class="s2">&quot;prick&quot;</span><span class="p">,</span><span class="s2">&quot;pricks&quot;</span><span class="p">,</span><span class="s2">&quot;pube&quot;</span><span class="p">,</span><span class="s2">&quot;pula&quot;</span><span class="p">,</span><span class="s2">&quot;pule&quot;</span><span class="p">,</span><span class="s2">&quot;pusse&quot;</span><span class="p">,</span><span class="s2">&quot;pussee&quot;</span><span class="p">,</span>
+<span class="s2">&quot;pussi&quot;</span><span class="p">,</span><span class="s2">&quot;pussies&quot;</span><span class="p">,</span><span class="s2">&quot;pussy&quot;</span><span class="p">,</span><span class="s2">&quot;pussys&quot;</span><span class="p">,</span><span class="s2">&quot;puta&quot;</span><span class="p">,</span><span class="s2">&quot;puto&quot;</span><span class="p">,</span><span class="s2">&quot;puuke&quot;</span><span class="p">,</span><span class="s2">&quot;puuker&quot;</span><span class="p">,</span><span class="s2">&quot;qahbeh&quot;</span><span class="p">,</span>
+<span class="s2">&quot;queef*&quot;</span><span class="p">,</span><span class="s2">&quot;queers&quot;</span><span class="p">,</span><span class="s2">&quot;queerz&quot;</span><span class="p">,</span><span class="s2">&quot;qweers&quot;</span><span class="p">,</span><span class="s2">&quot;qweerz&quot;</span><span class="p">,</span><span class="s2">&quot;qweir&quot;</span><span class="p">,</span><span class="s2">&quot;rautenberg&quot;</span><span class="p">,</span><span class="s2">&quot;recktum&quot;</span><span class="p">,</span>
+<span class="s2">&quot;rectum&quot;</span><span class="p">,</span><span class="s2">&quot;retard&quot;</span><span class="p">,</span><span class="s2">&quot;rimjaw&quot;</span><span class="p">,</span><span class="s2">&quot;rimming&quot;</span><span class="p">,</span><span class="s2">&quot;s hit&quot;</span><span class="p">,</span><span class="s2">&quot;s.o.b.&quot;</span><span class="p">,</span><span class="s2">&quot;s_h_i_t&quot;</span><span class="p">,</span><span class="s2">&quot;sadist&quot;</span><span class="p">,</span>
+<span class="s2">&quot;scank&quot;</span><span class="p">,</span><span class="s2">&quot;schaffer&quot;</span><span class="p">,</span><span class="s2">&quot;scheiss*&quot;</span><span class="p">,</span><span class="s2">&quot;schlampe&quot;</span><span class="p">,</span><span class="s2">&quot;schlong&quot;</span><span class="p">,</span><span class="s2">&quot;schmuck&quot;</span><span class="p">,</span><span class="s2">&quot;screw&quot;</span><span class="p">,</span>
+<span class="s2">&quot;screwing&quot;</span><span class="p">,</span><span class="s2">&quot;scroat&quot;</span><span class="p">,</span><span class="s2">&quot;scrote&quot;</span><span class="p">,</span><span class="s2">&quot;scrotum&quot;</span><span class="p">,</span><span class="s2">&quot;semen&quot;</span><span class="p">,</span><span class="s2">&quot;sh!+&quot;</span><span class="p">,</span><span class="s2">&quot;sh!t&quot;</span><span class="p">,</span><span class="s2">&quot;sh!t*&quot;</span><span class="p">,</span><span class="s2">&quot;sh1t&quot;</span><span class="p">,</span>
+<span class="s2">&quot;sh1ter&quot;</span><span class="p">,</span><span class="s2">&quot;sh1ts&quot;</span><span class="p">,</span><span class="s2">&quot;sh1tter&quot;</span><span class="p">,</span><span class="s2">&quot;sh1tz&quot;</span><span class="p">,</span><span class="s2">&quot;shag&quot;</span><span class="p">,</span><span class="s2">&quot;shagger&quot;</span><span class="p">,</span><span class="s2">&quot;shaggin&quot;</span><span class="p">,</span><span class="s2">&quot;shagging&quot;</span><span class="p">,</span>
+<span class="s2">&quot;sharmuta&quot;</span><span class="p">,</span><span class="s2">&quot;sharmute&quot;</span><span class="p">,</span><span class="s2">&quot;shemale&quot;</span><span class="p">,</span><span class="s2">&quot;shi+&quot;</span><span class="p">,</span><span class="s2">&quot;shipal&quot;</span><span class="p">,</span><span class="s2">&quot;shit&quot;</span><span class="p">,</span><span class="s2">&quot;shitdick&quot;</span><span class="p">,</span><span class="s2">&quot;shite&quot;</span><span class="p">,</span>
+<span class="s2">&quot;shited&quot;</span><span class="p">,</span><span class="s2">&quot;shitey&quot;</span><span class="p">,</span><span class="s2">&quot;shitfuck&quot;</span><span class="p">,</span><span class="s2">&quot;shitfull&quot;</span><span class="p">,</span><span class="s2">&quot;shithead&quot;</span><span class="p">,</span><span class="s2">&quot;shiting&quot;</span><span class="p">,</span><span class="s2">&quot;shitings&quot;</span><span class="p">,</span>
+<span class="s2">&quot;shits&quot;</span><span class="p">,</span><span class="s2">&quot;shitted&quot;</span><span class="p">,</span><span class="s2">&quot;shitter&quot;</span><span class="p">,</span><span class="s2">&quot;shitters&quot;</span><span class="p">,</span><span class="s2">&quot;shitting&quot;</span><span class="p">,</span><span class="s2">&quot;shittings&quot;</span><span class="p">,</span><span class="s2">&quot;shitty&quot;</span><span class="p">,</span>
+<span class="s2">&quot;shity&quot;</span><span class="p">,</span><span class="s2">&quot;shitz&quot;</span><span class="p">,</span><span class="s2">&quot;shiz&quot;</span><span class="p">,</span><span class="s2">&quot;shyt&quot;</span><span class="p">,</span><span class="s2">&quot;shyte&quot;</span><span class="p">,</span><span class="s2">&quot;shytty&quot;</span><span class="p">,</span><span class="s2">&quot;shyty&quot;</span><span class="p">,</span><span class="s2">&quot;skanck&quot;</span><span class="p">,</span><span class="s2">&quot;skank&quot;</span><span class="p">,</span>
+<span class="s2">&quot;skankee&quot;</span><span class="p">,</span><span class="s2">&quot;skankey&quot;</span><span class="p">,</span><span class="s2">&quot;skanks&quot;</span><span class="p">,</span><span class="s2">&quot;skanky&quot;</span><span class="p">,</span><span class="s2">&quot;skribz&quot;</span><span class="p">,</span><span class="s2">&quot;skurwysyn&quot;</span><span class="p">,</span><span class="s2">&quot;slag&quot;</span><span class="p">,</span><span class="s2">&quot;slut&quot;</span><span class="p">,</span>
+<span class="s2">&quot;sluts&quot;</span><span class="p">,</span><span class="s2">&quot;slutty&quot;</span><span class="p">,</span><span class="s2">&quot;slutz&quot;</span><span class="p">,</span><span class="s2">&quot;smegma&quot;</span><span class="p">,</span><span class="s2">&quot;smut&quot;</span><span class="p">,</span><span class="s2">&quot;snatch&quot;</span><span class="p">,</span><span class="s2">&quot;son-of-a-bitch&quot;</span><span class="p">,</span><span class="s2">&quot;spac&quot;</span><span class="p">,</span>
+<span class="s2">&quot;sphencter&quot;</span><span class="p">,</span><span class="s2">&quot;spic&quot;</span><span class="p">,</span><span class="s2">&quot;spierdalaj&quot;</span><span class="p">,</span><span class="s2">&quot;splooge&quot;</span><span class="p">,</span><span class="s2">&quot;spunk&quot;</span><span class="p">,</span><span class="s2">&quot;suka&quot;</span><span class="p">,</span><span class="s2">&quot;t1tt1e5&quot;</span><span class="p">,</span><span class="s2">&quot;t1tties&quot;</span><span class="p">,</span>
+<span class="s2">&quot;teets&quot;</span><span class="p">,</span><span class="s2">&quot;teez&quot;</span><span class="p">,</span><span class="s2">&quot;testical&quot;</span><span class="p">,</span><span class="s2">&quot;testicle&quot;</span><span class="p">,</span><span class="s2">&quot;testicle*&quot;</span><span class="p">,</span><span class="s2">&quot;tit&quot;</span><span class="p">,</span><span class="s2">&quot;titfuck&quot;</span><span class="p">,</span><span class="s2">&quot;tits&quot;</span><span class="p">,</span>
+<span class="s2">&quot;titt&quot;</span><span class="p">,</span><span class="s2">&quot;titt*&quot;</span><span class="p">,</span><span class="s2">&quot;tittie5&quot;</span><span class="p">,</span><span class="s2">&quot;tittiefucker&quot;</span><span class="p">,</span><span class="s2">&quot;titties&quot;</span><span class="p">,</span><span class="s2">&quot;tittyfuck&quot;</span><span class="p">,</span><span class="s2">&quot;tittywank&quot;</span><span class="p">,</span>
+<span class="s2">&quot;titwank&quot;</span><span class="p">,</span><span class="s2">&quot;tosser&quot;</span><span class="p">,</span><span class="s2">&quot;turd&quot;</span><span class="p">,</span><span class="s2">&quot;tw4t&quot;</span><span class="p">,</span><span class="s2">&quot;twat&quot;</span><span class="p">,</span><span class="s2">&quot;twathead&quot;</span><span class="p">,</span><span class="s2">&quot;twatty&quot;</span><span class="p">,</span><span class="s2">&quot;twunt&quot;</span><span class="p">,</span><span class="s2">&quot;twunter&quot;</span><span class="p">,</span>
+<span class="s2">&quot;v14gra&quot;</span><span class="p">,</span><span class="s2">&quot;v1gra&quot;</span><span class="p">,</span><span class="s2">&quot;va1jina&quot;</span><span class="p">,</span><span class="s2">&quot;vag1na&quot;</span><span class="p">,</span><span class="s2">&quot;vagiina&quot;</span><span class="p">,</span><span class="s2">&quot;vagina&quot;</span><span class="p">,</span><span class="s2">&quot;vaj1na&quot;</span><span class="p">,</span><span class="s2">&quot;vajina&quot;</span><span class="p">,</span>
+<span class="s2">&quot;viagra&quot;</span><span class="p">,</span><span class="s2">&quot;vittu&quot;</span><span class="p">,</span><span class="s2">&quot;vullva&quot;</span><span class="p">,</span><span class="s2">&quot;vulva&quot;</span><span class="p">,</span><span class="s2">&quot;w00se&quot;</span><span class="p">,</span><span class="s2">&quot;w0p&quot;</span><span class="p">,</span><span class="s2">&quot;wang&quot;</span><span class="p">,</span><span class="s2">&quot;wank&quot;</span><span class="p">,</span><span class="s2">&quot;wank*&quot;</span><span class="p">,</span>
+<span class="s2">&quot;wanker&quot;</span><span class="p">,</span><span class="s2">&quot;wanky&quot;</span><span class="p">,</span><span class="s2">&quot;wetback*&quot;</span><span class="p">,</span><span class="s2">&quot;wh00r&quot;</span><span class="p">,</span><span class="s2">&quot;wh0re&quot;</span><span class="p">,</span><span class="s2">&quot;whoar&quot;</span><span class="p">,</span><span class="s2">&quot;whore&quot;</span><span class="p">,</span><span class="s2">&quot;wichser&quot;</span><span class="p">,</span>
+<span class="s2">&quot;willies&quot;</span><span class="p">,</span><span class="s2">&quot;willy&quot;</span><span class="p">,</span><span class="s2">&quot;wop*&quot;</span><span class="p">,</span><span class="s2">&quot;xrated&quot;</span><span class="p">,</span><span class="s2">&quot;xxx&quot;</span><span class="p">,</span><span class="s2">&quot;yed&quot;</span><span class="p">,</span><span class="s2">&quot;zabourah&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../summary/summary.html" class="btn btn-neutral" title="Summary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Antonios and Peter Lapornik
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
