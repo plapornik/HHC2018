@@ -6,23 +6,33 @@
 Holiday Hack Challenge 2018 Report
 ==================================
 
-
-
 .. toctree::
-   :maxdepth: 2
-   :caption: Objectives:
+  :maxdepth: 2
+  :caption: Objectives:
 
-   summary/summary
+  objectives/summary
+  objectives/question1
+  objectives/question2
+  objectives/question3
+  objectives/question4
+  objectives/question5
+  objectives/question6
+  objectives/question7
+  objectives/question8
+  objectives/question9
+  objectives/question10
+  objectives/question11
+  objectives/question12
+  objectives/question13
+  objectives/question14
    
-
-
 .. toctree::
-   :maxdepth: 2
-   :caption: Terminals:
+  :maxdepth: 2
+  :caption: Terminals:
 
-   terminals/EssentialEditorSkills
-   terminals/TheNameGame
-   terminals/LethalForensicELFication
+  terminals/EssentialEditorSkills
+  terminals/TheNameGame
+  terminals/LethalForensicELFication
 
 .. toctree::
   :maxdepth: 2
