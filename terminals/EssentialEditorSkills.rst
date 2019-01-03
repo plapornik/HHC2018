@@ -36,7 +36,8 @@ Terminal Challenge
 
 Our Solution
 ------------
-Enter ``:q`` followed by ``<ENTER>`` within the terminal.
+Enter ``:q!`` followed by ``<ENTER>`` within the terminal.
+Another solution would be ``:x``
 
 Hints for the Terminal Challenge
 --------------------------------
