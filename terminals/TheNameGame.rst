@@ -41,9 +41,12 @@ Terminal Challenge
  Please make a selection: 
 
 After typing ``2`` the following appears [#f1]_ :
+
 .. code-block:: none
+
  Validating data store for employee onboard information.
  Enter address of server: 
+
 We observed that if you type ``;ls`` it works as a normal shell.
 
 We see that the following items appear: ``menu.ps1``, ``onboard.db`` and ``runtoanswer``.
