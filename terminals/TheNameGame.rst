@@ -40,6 +40,8 @@ Terminal Challenge
 
  Please make a selection: 
 
+Our Solution
+------------
 After typing ``2`` the following appears [#f1]_ :
 
 .. code-block:: none
@@ -65,6 +67,28 @@ Therefore, by using ``; /usr/bin/sqlite3 onboard.db .dump | grep 'Chan'`` we get
  Press Enter to continue...: 
 
 Therefore mr Chan's name is Scott.
+
+Hints for the Terminal Challenge
+--------------------------------
+
+.. parsed-literal::
+ **PowerShell Command Injection**
+ From: Minty Candycane
+ `PowerShell Call/& Operator <https://ss64.com/ps/call.html>`_
+
+Hints for KringleCon Objective 2
+--------------------------------
+
+.. parsed-literal::
+ **Finding Browsable Directories**
+ From: Minty Candycane
+ On a website, finding browsable directories is sometimes as simple as removing characters from the end of a URL.
+
+.. parsed-literal::
+ **Website Directory Browsing**
+ From: Minty Candycane
+ `Website Directory Browsing <https://portswigger.net/kb/issues/00600100_directory-listing>`_
+
 
 .. rubric:: Extra Info
 .. [#f1] After typing ``1`` we were taken to a registration page, which made us lose some time by trying to use that to solve the challenge. By typing ``q`` one cannot type anything more.
