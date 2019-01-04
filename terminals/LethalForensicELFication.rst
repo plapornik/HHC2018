@@ -37,6 +37,34 @@ Terminal Challenge
 Our Solution
 ------------
 
+When using the command ``ls`` only ``runtoanswer`` appears. Thus, we used the command ``ls -a`` to display all items even the ones beginning with a '.' character.
+
+.. code-block:: none
+
+ .  ..  .bash_history  .bash_logout  .bashrc  .profile  .secrets  .viminfo  runtoanswer
+
+Thus we can see there's a vim artifact called .viminfo
+
+Using the command ``cat .viminfo`` and then through then scrolling through the document, we found the following info:
+
+.. code-block:: none
+
+ # Search String History (newest to oldest):
+ ? Elinore
+ |2,1,1536607217,,"Elinore"
+ ? God
+ |2,1,1536606833,,"God"
+ ? rousted
+ |2,1,1536605996,,"rousted"
+ ? While
+ |2,1,1536604909,,"While"
+ ? studied
+ |2,1,1536602549,,"studied"
+ ? sound
+ |2,1,1536600579,,"sound"
+
+The only female name in the string history is Elinore, which is the answer to this challenge.
+
 Hints for the Terminal Challenge
 --------------------------------
 
