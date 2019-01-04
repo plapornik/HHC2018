@@ -5,10 +5,12 @@ Narrative
 .. highlights::
  As you walk through the gates, a familiar red-suited holiday figure warmly welcomes all of his special visitors to KringleCon.
 
+.. highlights::
  Suddenly, all elves in the castle start looking very nervous. You can overhear some of them talking with worry in their voices.
 
  The toy soldiers, who were always gruff, now seem especially determined as they lock all the exterior entrances to the building and barricade all the doors. No one can get out! And the toy soldiers' grunts take on an increasingly sinister tone.
 
+.. highlights::
  The toy soldiers act even more aggressively. They are searching for something -- something very special inside of Santa’s castle -- and they will stop at NOTHING until they find it. Hans seems to be directing their activities.
 
  In the main lobby on the bottom floor of Santa's castle, Hans calls everyone around to deliver a speech. Make sure you visit Hans to hear his speech.
