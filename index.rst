@@ -46,4 +46,5 @@ Holiday Hack Challenge 2018 Report
 
   appendices/eastereggs
   appendices/badges
+  appendices/narrative
 
