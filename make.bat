@@ -32,5 +32,5 @@ goto end
 %SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS%
 
 :end
-xcopy /E /Y %BUILDDIR%\html\* %SOURCEDIR%\docs
+xcopy /E /Y %BUILDDIR%\html\* %SOURCEDIR%\docs >NUL
 popd
