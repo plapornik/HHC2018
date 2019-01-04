@@ -10,40 +10,41 @@ Solution
 
 After entering the final room and talking to Santa, he says the following:
 
-| You DID IT! You completed the hardest challenge. You see, Hans and the soldiers work for ME. I had to test you. And you passed the test!
+.. highlights::
 
-| You WON! Won what, you ask? Well, the jackpot, my dear! The grand and glorious jackpot!
+ *You DID IT! You completed the hardest challenge. You see, Hans and the soldiers work for ME. I had to test you. And you passed the test!*
 
-| You see, I finally found you!
+ *You WON! Won what, you ask? Well, the jackpot, my dear! The grand and glorious jackpot!*
 
-| I came up with the idea of KringleCon to find someone like you who could help me defend the North Pole against even the craftiest attackers.
+ *You see, I finally found you!*
 
-| That’s why we had so many different challenges this year.
+ *I came up with the idea of KringleCon to find someone like you who could help me defend the North Pole against even the craftiest attackers.*
 
-| We needed to find someone with skills all across the spectrum.
+ *That’s why we had so many different challenges this year.*
 
-| I asked my friend Hans to play the role of the bad guy to see if you could solve all those challenges and thwart the plot we devised.
+ *We needed to find someone with skills all across the spectrum.*
 
-| And you did!
+ *I asked my friend Hans to play the role of the bad guy to see if you could solve all those challenges and thwart the plot we devised.*
 
-| Oh, and those brutish toy soldiers? They are really just some of my elves in disguise.
+ *And you did!*
 
-| See what happens when they take off those hats?
+ *Oh, and those brutish toy soldiers? They are really just some of my elves in disguise.*
 
-|blue-soldier| |green-soldier|
+ *See what happens when they take off those hats?*
 
-.. |blue-soldier| image:: /images/kc18_soldiers2_blue_2.png
+ |blue-soldier| |green-soldier|
 
-.. |green-soldier| image:: /images/kc18_soldiers2_green_3.png
+ .. |blue-soldier| image:: /images/kc18_soldiers2_blue_2.png
 
-| Based on your victory… next year, I’m going to ask for your help in defending my whole operation from evil bad guys.
+ .. |green-soldier| image:: /images/kc18_soldiers2_green_3.png
 
-| And welcome to my vault room. Where's my treasure? Well, my treasure is Christmas joy and good will.
+ *Based on your victory… next year, I’m going to ask for your help in defending my whole operation from evil bad guys.*
 
-| You did such a GREAT job! And remember what happened to the people who suddenly got everything they ever wanted?
+ *And welcome to my vault room. Where's my treasure? Well, my treasure is Christmas joy and good will.*
 
-| They lived happily ever after.
+ *You did such a GREAT job! And remember what happened to the people who suddenly got everything they ever wanted?*
 
+ *They lived happily ever after.*
 
 Some fun with the soldier avatars
 ---------------------------------
