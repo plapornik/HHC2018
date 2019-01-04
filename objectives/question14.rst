@@ -49,7 +49,7 @@ After entering the final room and talking to Santa, he says the following:
 Some fun with the soldier avatars
 ---------------------------------
 
-With a bit of experiementing we found that we could also find avatars of different coloured soldiers (not just the ones in the room).
+With a bit of experiementing we found that we could also find avatars of different coloured soldiers (not just the ones in the castle).
 
 .. csv-table:: Alternative Soldier Avatars
   :header: Colour,With Helmet,Without Helmet

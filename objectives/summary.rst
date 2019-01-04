@@ -27,7 +27,7 @@ Question 4: Data Repo Analysis
 
 | Retrieve the encrypted ZIP file from the `North Pole Git repository <https://git.kringlecastle.com/Upatree/santas_castle_automation>`_. What is the password to open this file? For hints on achieving this objective, please visit Wunorse Openslae and help him with :doc:`Stall Mucking Report </terminals/StallMuckingReport>` Cranberry Pi terminal challenge.
 
-Answer: 
+Answer: *Yippee-ki-yay*
 
 Question 5: AD Privilege Discovery
 ----------------------------------
@@ -67,7 +67,7 @@ Question 9: Catch the Malware
 
 | Then create a rule that will catch all new infections. What is the success message displayed by the Snort terminal?
 
-Answer: 
+Answer: *Snort is alerting on all ransomware and only the ransomware!*
 
 Question 10: Identify the Domain
 --------------------------------
@@ -89,14 +89,14 @@ Question 12: Recover Alabaster's Password
 
 | After activating the kill-switch domain in the last question, Alabaster gives you `a zip file <https://www.holidayhackchallenge.com/2018/challenges/forensic_artifacts.zip>`_ with a memory dump and encrypted password database. Use these files to decrypt Alabaster's password database. What is the password entered in the database for the Vault entry?
 
-Answer: 
+Answer: *ED#ED#EED#EF#G#F#G#ABA#BA#B*
 
 Question 13: Santa's Door
 -------------------------
 
 | Use what you have learned from previous challenges to open the `door to Santa's vault <https://pianolockn.kringlecastle.com/>`_. What message do you get when you unlock the door?
 
-Answer:
+Answer: *You have unlocked Santa's vault!*
 
 Question 14: Who Is Behind It All?
 ----------------------------------
