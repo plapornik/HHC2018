@@ -30,9 +30,11 @@ After entering the final room and talking to Santa, he says the following:
 
 | See what happens when they take off those hats?
 
-.. image:: /images/kc18_soldiers2_blue_2.png
+|blue-soldier| |green-soldier|
 
-.. image:: /images/kc18_soldiers2_green_3.png
+.. |blue-soldier| image:: /images/kc18_soldiers2_blue_2.png
+
+.. |green-soldier| image:: /images/kc18_soldiers2_green_3.png
 
 | Based on your victory… next year, I’m going to ask for your help in defending my whole operation from evil bad guys.
 
@@ -48,7 +50,7 @@ Some fun with the soldier avatars
 
 With a bit of experiementing we found that we could also find avatars of different coloured soldiers (not just the ones in the room).
 
-.. csv-table:: Alternative Soldiers
+.. csv-table:: Alternative Soldier Avatars
   :header: Colour,With Helmet,Without Helmet
 
   Orange,.. image:: /images/kc18_soldiers_orange_2.png, .. image:: /images/kc18_soldiers2_orange_2.png
