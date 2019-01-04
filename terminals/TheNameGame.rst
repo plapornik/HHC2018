@@ -76,6 +76,11 @@ Hints for the Terminal Challenge
  From: Minty Candycane
  `PowerShell Call/& Operator <https://ss64.com/ps/call.html>`_
 
+.. parsed-literal::
+ **SQLite3 .dump'ing**
+ From: Minty Candycane
+ `SQLite3 Data Dump <https://www.digitalocean.com/community/questions/how-do-i-dump-an-sqlite-database>`_
+
 Hints for KringleCon Objective 2
 --------------------------------
 
