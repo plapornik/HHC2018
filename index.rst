@@ -33,6 +33,12 @@ Holiday Hack Challenge 2018 Report
   terminals/EssentialEditorSkills
   terminals/TheNameGame
   terminals/LethalForensicELFication
+  terminals/StallMuckingReport
+  terminals/CURLingMaster
+  terminals/YuleLogAnalysis
+  terminals/DevOpsFail
+  terminals/PythonEscapefromLA
+  terminals/SleighBellLottery
 
 .. toctree::
   :maxdepth: 2
