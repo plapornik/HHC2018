@@ -187,7 +187,10 @@
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
 <p>Our approach towards this challenge consisted of analysing the wannacookie code (written in PowerShell) and then using this to try to decrypt the password database.</p>
-<p>In this challenge we will utilise the wannacookie.ps1 code instead of the wannacookie.min.ps1 code.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this challenge we will utilise the wannacookie.ps1 code instead of the wannacookie.min.ps1 code.</p>
+</div>
 <p>The next step is to try and work out what type of file the <code class="docutils literal notranslate"><span class="pre">alabaster_passwords.elfdb</span></code> is. We found the simplest way to work this out was to open the file in a text editor and look at the initial characters. This provides the string <code class="docutils literal notranslate"><span class="pre">SQLite</span> <span class="pre">format</span> <span class="pre">3</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
