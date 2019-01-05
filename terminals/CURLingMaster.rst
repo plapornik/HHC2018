@@ -59,6 +59,7 @@ Our Solution
 Using the ``history`` command shows the following:
 
 .. code-block:: none
+ :emphasize-lines: 6
 
  elf@ad352fad5d1b:~$ history
      1  netstat -ant

@@ -36,18 +36,22 @@ Terminal Challenge
 
 Our Solution
 ------------
+Using the hint as a starting point, our aim was to look at historical artifacts to see if any contained information about the elf.
 
-When using the command ``ls`` only ``runtoanswer`` appears. Thus, we used the command ``ls -a`` to display all items even the ones beginning with a '.' character.
+The bash history obtained using the ``history`` command showed that the **vim** text editor was used but contained no information about the elf.
+
+We then looked at the current directory. The ``ls`` command only returned the ``runtoanswer`` file. Thus, we used the command ``ls -a`` to display all items including lines beginning with a '.' character. The output was as follows:
 
 .. code-block:: none
 
  .  ..  .bash_history  .bash_logout  .bashrc  .profile  .secrets  .viminfo  runtoanswer
 
-Thus we can see there's a vim artifact called .viminfo
+We can see there's a vim artifact called .viminfo
 
-Using the command ``cat .viminfo`` and then through then scrolling through the document, we found the following info:
+After using the command ``cat .viminfo`` and scrolling through the output, we found the following infoformation:
 
 .. code-block:: none
+  :emphasize-lines: 2,3
 
  # Search String History (newest to oldest):
  ? Elinore
@@ -85,3 +89,8 @@ Hints for KringleCon Objective 3
  **de Bruijn Sequence Generator**
  : Tangle Coalbox
  `de Bruijn sequence generator <http://www.hakank.org/comb/debruijn.cgi>`_
+
+Additional fun within the terminal
+----------------------------------
+
+The poem is located at ``/home/elf/.secrets/her/poem.txt`` 
