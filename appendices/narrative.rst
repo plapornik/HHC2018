@@ -20,6 +20,7 @@ Narrative
 
  A rumor spreads among the elves that Alabaster has lost his badge. Several elves say, "What do you think someone could do with that?"
 
+.. highlights::
  Hans has started monologuing again. Please visit him in Santa's lobby for a status update.
 
  Great work! You have blocked access to Santa's treasure... for now. Please visit Hans in Santa's Secret Room for an update.
