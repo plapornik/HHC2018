@@ -3,7 +3,7 @@ Stall Mucking Report
 
 
 
-.. image:: /images/StallMuckingReportMOTD.PNG
+.. image:: /images/StallMuckingReportMOTD.png
 
 Our Solution
 ------------

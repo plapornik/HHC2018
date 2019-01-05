@@ -82,7 +82,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="summary.html">Questions and Answers Summary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question1.html">Question 1: Orientation Challenge</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 2: Directory Browsing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 2: Directory Browsing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question3.html">Question 3: de Bruijn Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question4.html">Question 4: Data Repo Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question5.html">Question 5: AD Privilege Discovery</a></li>
@@ -177,6 +180,27 @@
             
   <div class="section" id="question-2-directory-browsing">
 <h1>Question 2: Directory Browsing<a class="headerlink" href="#question-2-directory-browsing" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Who submitted (First Last) the rejected talk titled <strong>Data Loss for Rainbow Teams: A Path in the Darkness</strong>? <a class="reference external" href="https://cfp.kringlecastle.com/">Please analyze the CFP site to find out</a>. For hints on achieving this objective, please visit Minty Candycane and help her with the <a class="reference internal" href="../terminals/TheNameGame.html"><span class="doc">The Name Game</span></a> Cranberry Pi terminal challenge.</div>
+</div>
+<p>Answer: <em>John McClane</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>Browse to the <a class="reference external" href="https://cfp.kringlecastle.com/">CFP site</a>.</p>
+<p>Click on the CFP link to open <a class="reference external" href="https://cfp.kringlecastle.com/cfp/cfp.html">https://cfp.kringlecastle.com/cfp/cfp.html</a></p>
+<p>We modified the URL by removing the characters from the end until we got <a class="reference external" href="https://cfp.kringlecastle.com/cfp/">https://cfp.kringlecastle.com/cfp/</a> and tried browsing to it. This produced the following output:</p>
+<img alt="../_images/cfp_directory.png" src="../_images/cfp_directory.png" />
+<p>We clicked on the <a class="reference external" href="https://cfp.kringlecastle.com/cfp/rejected-talks.csv">rejected-talks.csv</a> link to open the file in our browser.</p>
+<p>We searched for <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Loss</span> <span class="pre">for</span> <span class="pre">Rainbow</span> <span class="pre">Teams</span></code> and found the information that we wanted towards the top of the .csv file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>talkCandidateId,request,payload,status,error,timeout,firstName,lastName,title,talkName,approveVotes,rejectVotes
+qmt1,0,8040422,200,FALSE,FALSE,Banky,Orford,Marketing Coordinator,Kernel Introspection Spearphishing: Massively Multithreaded,4,8
+qmt2,1,8040423,200,FALSE,FALSE,Sarah,Thibodeaux,Event Planner,Crypto or Containers: Abused for Fun and Proft,4,8
+<span class="hll">qmt3,2,8040424,200,FALSE,FALSE,John,McClane,Director of Security,Data Loss for Rainbow Teams: A Path in the Darkness,1,11
+</span>qmt4,3,8040425,200,FALSE,FALSE,Davidde,Yellop,Analyst,Industrial Control Systems Content Filtering: Distributed,5,7
+qmt5,4,8040426,200,FALSE,FALSE,Berton,Tupie,Meeting Planner,Rootkits Emailed Malware: Extensible Models,5,7
+</pre></div>
+</div>
+</div>
 </div>
 
 
