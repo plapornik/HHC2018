@@ -92,7 +92,10 @@
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 12: Recover Alabaster’s Password</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 12: Recover Alabaster’s Password</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
@@ -112,6 +115,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/eastereggs.html">Easter Eggs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/badges.html">Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/narrative.html">Narrative</a></li>
 </ul>
 
             
@@ -180,7 +184,22 @@
 <div class="line">After activating the kill-switch domain in the last question, Alabaster gives you <a class="reference external" href="https://www.holidayhackchallenge.com/2018/challenges/forensic_artifacts.zip">a zip file</a> with a memory dump and encrypted password database. Use these files to decrypt Alabaster’s password database. What is the password entered in the database for the Vault entry?</div>
 </div>
 <p>Answer: <em>ED#ED#EED#EF#G#F#G#ABA#BA#B</em></p>
-<img alt="images/alabaster_passwords.elfdb.png" src="images/alabaster_passwords.elfdb.png" />
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>The following</p>
+<p>The next step is to try and work out what type of file the <code class="docutils literal notranslate"><span class="pre">alabaster_passwords.elfdb</span></code> is. We found the simplest way to work this out was to open the file in a text editor and look at the initial characters. This provides the string <code class="docutils literal notranslate"><span class="pre">SQLite</span> <span class="pre">format</span> <span class="pre">3</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A quick examination of the file using a text editor revealed a couple of passwords but the parts that were important consisted of binary data.</p>
+</div>
+<p>We didn’t have SQLite handily available so we simply opened the file in an online <a class="reference external" href="https://sqliteonline.com">SQLite application</a>.</p>
+<p>The database showing the contents of the passwords table is shown in the following figure. The password for the vault has been highlighted.</p>
+<img alt="../_images/alabaster_passwords.elfdb.png" src="../_images/alabaster_passwords.elfdb.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We tried using the passwords with online services such as NetFlix, but found out that the accounts did not exist. Perhaps Santa has his own regionalised versions of these online services.</p>
+</div>
+</div>
 </div>
 
 

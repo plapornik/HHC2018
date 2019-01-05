@@ -15,6 +15,7 @@ Narrative
 
  In the main lobby on the bottom floor of Santa's castle, Hans calls everyone around to deliver a speech. Make sure you visit Hans to hear his speech.
 
+.. highlights::
  The toy soldiers continue behaving very rudely, grunting orders to the guests and to each other in vaguely Germanic phrases. Suddenly, one of the toy soldiers appears wearing a grey sweatshirt that has written on it in red pen, "NOW I HAVE A ZERO-DAY. HO-HO-HO."
 
  A rumor spreads among the elves that Alabaster has lost his badge. Several elves say, "What do you think someone could do with that?"
