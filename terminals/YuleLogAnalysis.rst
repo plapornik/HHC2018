@@ -81,14 +81,15 @@ Thus, we used ``python evtx_dump.py ho-ho-no.evtx |grep -A20 '4625'`` to display
  <Data Name="TargetDomainName">EM.KRINGLECON</Data>
 
 The password spraying would generate a lot of failed attempts over a short timeframe.
-Using `` python evtx_dump.py ho-ho-no.evtx |grep -A20  "4625" |grep 'Time'`` we observed that most failed attempts were between 13:03 and 13:05.
+Using ``python evtx_dump.py ho-ho-no.evtx |grep -A20  "4625" |grep 'Time'`` we observed that most failed attempts were between 13:03 and 13:05.
 
-We then used ``python evtx_dump.py ho-ho-no.evtx |grep -A20 -B20  "4624" |grep -A15 ' 13:0' |grep 'TargetUserName'|grep -v 'Health'`` to find any successful logins in that timeframe and found that the only successful login was that of **minty.canycane** which was the answer to the challenge.
+We then used ``python evtx_dump.py ho-ho-no.evtx |grep -A20 -B20  "4624" |grep -A15 ' 13:0' |grep 'TargetUserName'`` to find any successful logins in that timeframe and found that the only successful login was that of **minty.canycane** which was the answer to the challenge.
 
-| in grep -B is for lines before and -A is for lines after.
+| To make the output easier to read we used ``|grep -v 'Health'`` to ignore any HealthMailBox records.
+| In grep -B is for lines before and -A is for lines after.
 
 .. note::
- The eventID was the http codes for different events.
+ The eventID was the http code for that event.
  4624 stands for successful login and 4625 stands for failed login.
  Therefore we used this to filter failed and successful attempts respectfully
 

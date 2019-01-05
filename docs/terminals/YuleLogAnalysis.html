@@ -253,14 +253,15 @@ n&gt;
 </pre></div>
 </div>
 <p>The password spraying would generate a lot of failed attempts over a short timeframe.
-Using `` python evtx_dump.py ho-ho-no.evtx <a href="#id1"><span class="problematic" id="id2">|</span></a>grep -A20  “4625” <a href="#id3"><span class="problematic" id="id4">|</span></a>grep ‘Time’`` we observed that most failed attempts were between 13:03 and 13:05.</p>
-<p>We then used <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">evtx_dump.py</span> <span class="pre">ho-ho-no.evtx</span> <span class="pre">|grep</span> <span class="pre">-A20</span> <span class="pre">-B20</span>&#160; <span class="pre">&quot;4624&quot;</span> <span class="pre">|grep</span> <span class="pre">-A15</span> <span class="pre">'</span> <span class="pre">13:0'</span> <span class="pre">|grep</span> <span class="pre">'TargetUserName'|grep</span> <span class="pre">-v</span> <span class="pre">'Health'</span></code> to find any successful logins in that timeframe and found that the only successful login was that of <strong>minty.canycane</strong> which was the answer to the challenge.</p>
+Using <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">evtx_dump.py</span> <span class="pre">ho-ho-no.evtx</span> <span class="pre">|grep</span> <span class="pre">-A20</span>&#160; <span class="pre">&quot;4625&quot;</span> <span class="pre">|grep</span> <span class="pre">'Time'</span></code> we observed that most failed attempts were between 13:03 and 13:05.</p>
+<p>We then used <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">evtx_dump.py</span> <span class="pre">ho-ho-no.evtx</span> <span class="pre">|grep</span> <span class="pre">-A20</span> <span class="pre">-B20</span>&#160; <span class="pre">&quot;4624&quot;</span> <span class="pre">|grep</span> <span class="pre">-A15</span> <span class="pre">'</span> <span class="pre">13:0'</span> <span class="pre">|grep</span> <span class="pre">'TargetUserName'</span></code> to find any successful logins in that timeframe and found that the only successful login was that of <strong>minty.canycane</strong> which was the answer to the challenge.</p>
 <div class="line-block">
-<div class="line">in grep -B is for lines before and -A is for lines after.</div>
+<div class="line">To make the output easier to read we used <code class="docutils literal notranslate"><span class="pre">|grep</span> <span class="pre">-v</span> <span class="pre">'Health'</span></code> to ignore any HealthMailBox records.</div>
+<div class="line">In grep -B is for lines before and -A is for lines after.</div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The eventID was the http codes for different events.
+<p class="last">The eventID was the http code for that event.
 4624 stands for successful login and 4625 stands for failed login.
 Therefore we used this to filter failed and successful attempts respectfully</p>
 </div>
