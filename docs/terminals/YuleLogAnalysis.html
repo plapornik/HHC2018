@@ -103,7 +103,11 @@
 <li class="toctree-l1"><a class="reference internal" href="LethalForensicELFication.html">Lethal ForensicELFication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="StallMuckingReport.html">Stall Mucking Report</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CURLingMaster.html">CURLing Master</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Yule Log Analysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Yule Log Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#our-solution">Our Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints-for-the-terminal-challenge">Hints for the Terminal Challenge</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="DevOpsFail.html">Dev Ops Fail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonEscapefromLA.html">Python Escape from LA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SleighBellLottery.html">Sleigh Bell Lottery</a></li>
@@ -177,6 +181,102 @@
             
   <div class="section" id="yule-log-analysis">
 <h1>Yule Log Analysis<a class="headerlink" href="#yule-log-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                             .;:cccckkxdc;.
+                         .o0xc;,,,,,XMMMMMkc:,.
+                       lXMMMX;,,,,,,XMMMMK,,coddcclOkxoc,.
+                     lk:oNMMMX;,,,,,XMMWN00o:,,,,,:MMMMMMoc;&#39;
+                   .0l,,,,dNMMX;,,,,XNNWMMMk,,,,,,:MMMMMx,,,,:;.
+                  .K;,,,,,,,xWMX;,,;Kx:kWMMMk,,,,,:MMMM0,,,,,,,:k&#39;
+                 .XklooooddolckWN:l0:,,,;kWMMO,,,,:MMMN;,,,,,cOWMMd
+               ;oooc;,,,cMMMMMMxkO0,,,,,,,:OMM0,,,:MMWc,,,,lKMMMMWKo
+            ;OMMWl,,,,,,cMMMMMO,,,:cc,,,,,,,:0M0,,:MMd,,,oXMMWKxc,,,c
+          cOdXMMMWl,,,,,cMMMMX,,,,,,,:xxo:,,,,cK0,:MO,;xNWKxc,,,,,,,:.
+        .0l,,,oNMMWl,,,,cMMMW:,,,,,,dXMWNMWXOdc;lxcX:xOxc,,,,,,,,,,,,:
+       ,0;,,,,,,dNMWo,,,cMMMl,,,,;xNMMMMW0kkkkkkddxdddxxxxxxxxxxxxxxxo
+      .Wl,,,,,,,,,dWMo,,cMMx,,,:OWMMW0xc,:c,,:dOkcK:kc:ok0NMMMMMMMMMMd
+      KMMWXOdl;,,,,;xWd,cM0,,l0MW0dc,,,,,,lkWWk:,OW,:XO:,,,;ldOXWMMMM&#39;
+     &#39;MMMMMMMMMN0ko:,;kdcN;o00dc,,,,,,,,,,,0x;,,oMW,,;XWk;,,,,,,,:okk
+     cNKKKKKKKKKKKKKKkoodxxdccccccccccccccco,,,:WMW,,,;XMWk;,,,,,,,l
+     :x,,,,,,,,,,,,,cdkoOldldOKWMMMMMMMMMMMx,,,XMMW,,,,;XMMWx,,,,;c
+     .K,,,,,,,,,cd0WKl,xN,oXo,,,:ok0NMMMMMMc,,OMMMW,,,,,;KMMMNd;l&#39;
+      dl,,,,cx0WMM0c,,lMN,,oMXl,,,,,,;ldOX0&#39;,dMMMMW,,,,,,;KMMMK;
+       OoxKWMMMWk:,,,;NMN,,,lWMKc,,,,,,,,ldclWMMMMW,,,,,,:oOl.
+        OMMMMNx;,,,,,KMMN,,,,lWMM0c,,,,,l. .,cdkO00ccc:;,.
+         cWXo,,,,,,,kMMMN,,,,,cWMMM0:,c:
+          .Kc,,,,,,:MMMMN,,,,,,dMMMMWk&#39;
+
+I am Pepper Minstix, and I&#39;m looking for your help.
+Bad guys have us tangled up in pepperminty kelp!
+&quot;Password spraying&quot; is to blame for this our grinchly fate.
+Should we blame our password policies which users hate?
+
+Here you&#39;ll find a web log filled with failure and success.
+One successful login there requires your redress.
+Can you help us figure out which user was attacked?
+Tell us who fell victim, and please handle this with tact...
+
+  Submit the compromised webmail username to
+  runtoanswer to complete this challenge.
+elf@711366eb1217:~$
+</pre></div>
+</div>
+<div class="section" id="our-solution">
+<h2>Our Solution<a class="headerlink" href="#our-solution" title="Permalink to this headline">¶</a></h2>
+<p>First, we run the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command with the following output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>evtx_dump.py  ho-ho-no.evtx  runtoanswer
+</pre></div>
+</div>
+<p>According to Pepper Minstix,there’s a Python script that can help you convert it into XML for easier grep’ing
+Thus, we used <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">evtx_dump.py</span> <span class="pre">ho-ho-no.evtx</span> <span class="pre">|grep</span> <span class="pre">-A20</span> <span class="pre">'4625'</span></code> to display all failed logins. We did this because password spraying would also have failed attempts and to look at the record structure.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="hll">&lt;EventID Qualifiers=&quot;&quot;&gt;4625&lt;/EventID&gt;
+</span>&lt;Version&gt;0&lt;/Version&gt;
+&lt;Level&gt;0&lt;/Level&gt;
+&lt;Task&gt;12544&lt;/Task&gt;
+&lt;Opcode&gt;0&lt;/Opcode&gt;
+&lt;Keywords&gt;0x8010000000000000&lt;/Keywords&gt;
+<span class="hll">&lt;TimeCreated SystemTime=&quot;2018-09-10 12:41:50.900736&quot;&gt;&lt;/TimeCreated&gt;
+</span>&lt;EventRecordID&gt;234488&lt;/EventRecordID&gt;
+&lt;Correlation ActivityID=&quot;{71a9b66f-4900-0001-a8b6-a9710049d401}&quot; RelatedActivityID=&quot;&quot;&gt;&lt;/Correlatio
+n&gt;
+&lt;Execution ProcessID=&quot;664&quot; ThreadID=&quot;712&quot;&gt;&lt;/Execution&gt;
+&lt;Channel&gt;Security&lt;/Channel&gt;
+&lt;Computer&gt;WIN-KCON-EXCH16.EM.KRINGLECON.COM&lt;/Computer&gt;
+&lt;Security UserID=&quot;&quot;&gt;&lt;/Security&gt;
+&lt;/System&gt;
+&lt;EventData&gt;&lt;Data Name=&quot;SubjectUserSid&quot;&gt;S-1-5-18&lt;/Data&gt;
+&lt;Data Name=&quot;SubjectUserName&quot;&gt;WIN-KCON-EXCH16$&lt;/Data&gt;
+&lt;Data Name=&quot;SubjectDomainName&quot;&gt;EM.KRINGLECON&lt;/Data&gt;
+&lt;Data Name=&quot;SubjectLogonId&quot;&gt;0x00000000000003e7&lt;/Data&gt;
+&lt;Data Name=&quot;TargetUserSid&quot;&gt;S-1-0-0&lt;/Data&gt;
+<span class="hll">&lt;Data Name=&quot;TargetUserName&quot;&gt;sparkle.redberry&lt;/Data&gt;
+</span>&lt;Data Name=&quot;TargetDomainName&quot;&gt;EM.KRINGLECON&lt;/Data&gt;
+</pre></div>
+</div>
+<p>The password spraying would generate a lot of failed attempts over a short timeframe.
+Using `` python evtx_dump.py ho-ho-no.evtx <a href="#id1"><span class="problematic" id="id2">|</span></a>grep -A20  “4625” <a href="#id3"><span class="problematic" id="id4">|</span></a>grep ‘Time’`` we observed that most failed attempts were between 13:03 and 13:05.</p>
+<p>We then used <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">evtx_dump.py</span> <span class="pre">ho-ho-no.evtx</span> <span class="pre">|grep</span> <span class="pre">-A20</span> <span class="pre">-B20</span>&#160; <span class="pre">&quot;4624&quot;</span> <span class="pre">|grep</span> <span class="pre">-A15</span> <span class="pre">'</span> <span class="pre">13:0'</span> <span class="pre">|grep</span> <span class="pre">'TargetUserName'|grep</span> <span class="pre">-v</span> <span class="pre">'Health'</span></code> to find any successful logins in that timeframe and found that the only successful login was that of <strong>minty.canycane</strong> which was the answer to the challenge.</p>
+<div class="line-block">
+<div class="line">in grep -B is for lines before and -A is for lines after.</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The eventID was the http codes for different events.
+4624 stands for successful login and 4625 stands for failed login.
+Therefore we used this to filter failed and successful attempts respectfully</p>
+</div>
+</div>
+<div class="section" id="hints-for-the-terminal-challenge">
+<h2>Hints for the Terminal Challenge<a class="headerlink" href="#hints-for-the-terminal-challenge" title="Permalink to this headline">¶</a></h2>
+<p>Pepper Minstix says:</p>
+<blockquote class="highlights">
+<div>“Parsing through .evtx files can be tricky, but there’s a Python script that can help you convert it into XML for easier grep’ing”</div></blockquote>
+<p>And gives the following hint:</p>
+<pre class="literal-block">
+<strong>Password Spraying</strong>
+From: Pepper Minstix
+<a class="reference external" href="https://securityweekly.com/2017/07/21/tsw11/">Password Spraying with MailSniper.ps1</a>
+</pre>
+</div>
 </div>
 
 
