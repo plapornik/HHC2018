@@ -7,13 +7,16 @@ Answer: *ED#ED#EED#EF#G#F#G#ABA#BA#B*
 
 Solution
 --------
+Our approach towards this challenge consisted of analysing the wannacookie code (written in PowerShell) and then using this to try to decrypt the password database.
 
-The following 
+.. note::
+In this challenge we will utilise the wannacookie.ps1 code instead of the wannacookie.min.ps1 code.
+
 
 The next step is to try and work out what type of file the ``alabaster_passwords.elfdb`` is. We found the simplest way to work this out was to open the file in a text editor and look at the initial characters. This provides the string ``SQLite format 3``. 
 
 .. note::
- A quick examination of the file using a text editor revealed a couple of passwords but the parts that were important consisted of binary data.
+ A quick examination of the file using a text editor revealed a couple of passwords but the parts of the file that were important consisted of binary data.
 
 We didn't have SQLite handily available so we simply opened the file in an online `SQLite application <https://sqliteonline.com>`_.
 
