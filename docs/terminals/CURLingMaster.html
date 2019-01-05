@@ -92,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../objectives/question9.html">Question 9</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../objectives/question10.html">Question 10</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../objectives/question11.html">Question 11</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../objectives/question12.html">Question 12</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question12.html">Question 12: Recover Alabaster’s Password</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../objectives/question13.html">Question 13</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../objectives/question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
@@ -102,7 +102,13 @@
 <li class="toctree-l1"><a class="reference internal" href="TheNameGame.html">The Name Game</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LethalForensicELFication.html">Lethal ForensicELFication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="StallMuckingReport.html">Stall Mucking Report</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">CURLing Master</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CURLing Master</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#terminal-challenge">Terminal Challenge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#our-solution">Our Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints-for-the-terminal-challenge">Hints for the Terminal Challenge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints-for-kringlecon-objective-5">Hints for Kringlecon Objective 5</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="YuleLogAnalysis.html">Yule Log Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DevOpsFail.html">Dev Ops Fail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PythonEscapefromLA.html">Python Escape from LA</a></li>
@@ -112,6 +118,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/eastereggs.html">Easter Eggs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/badges.html">Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/narrative.html">Narrative</a></li>
 </ul>
 
             
@@ -176,6 +183,159 @@
             
   <div class="section" id="curling-master">
 <h1>CURLing Master<a class="headerlink" href="#curling-master" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="terminal-challenge">
+<h2>Terminal Challenge<a class="headerlink" href="#terminal-challenge" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                  .....................................
+                 ...&#39;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,&#39;....
+                 ...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,&#39;...
+                  ......&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;,,,,,,,&#39;...
+                     ............................&#39;,,,,,,,...
+                                                ...,,,,,,&#39;...
+                                                 ..&#39;,,,,,,&#39;..
+                                                 ...,,,,,,,...
+                                                 ...,,,,,,,...
+            ........................................,,,,,,,&#39;......
+         .....&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;,,,,,,,,,,&#39;&#39;&#39;.....
+        ...............................................................
+        ...............................................................
+      .:llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllc.
+     .llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll;
+    &#39;llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll:
+   .kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk:
+   o0000000000000000000000000000000000000000000000000000000000000000000000O
+   O00000000000000000000000000000000000000000000000000000000000000000000000&#39;
+   O00000000000000000000000000000000000000000000000000000000000000000000000&#39;
+   d0000000000000000000000000000000000000000000000000000000000000000000000O.
+   &#39;OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOc
+    ,llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll:
+     ,llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll:
+      .clllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll&#39;
+        &#39;clllllllllllllllllllllllllllllllllllllllllllllllllllllllllll,
+          .,clllllllllllllllllllllllllllllllllllllllllllllllllllll;.
+              .&#39;;:cllllllllllllllllllllllllllllllllllllllllcc;,..
+
+
+
+I am Holly Evergreen, and now you won&#39;t believe:
+Once again the striper stopped; I think I might just leave!
+Bushy set it up to start upon a website call.
+Darned if I can CURL it on - my Linux skills apall.
+
+Could you be our CURLing master - fixing up this mess?
+If you are, there&#39;s one concern you surely must address.
+Something&#39;s off about the conf that Bushy put in place.
+Can you overcome this snag and save us all some face?
+
+  Complete this challenge by submitting the right HTTP
+  request to the server at http://localhost:8080/ to
+  get the candy striper started again. You may view
+  the contents of the nginx.conf file in
+  /etc/nginx/, if helpful.
+elf@ad352fad5d1b:~$
+</pre></div>
+</div>
+</div>
+<div class="section" id="our-solution">
+<h2>Our Solution<a class="headerlink" href="#our-solution" title="Permalink to this headline">¶</a></h2>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">history</span></code> command shows the following:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>elf@ad352fad5d1b:~$ history
+    1  netstat -ant
+    2  ncat --broker -nlvp 9090
+    3  echo &quot;\302\257\_(\343\203\204)_/\302\257&quot; &gt;&gt; /tmp/shruggins
+    4  cat /tmp/shruggins
+    5  curl --http2-prior-knowledge http://localhost:8080/index.php
+    6  telnet towel.blinkenlights.nl
+    7  fortune | cowsay | lolcat
+    8  ps -aux
+    9  sl
+   10  figlet I am your father
+   11  echo &#39;goHangasaLAmIimalaSAgnaHoG&#39; | rev
+   12  aptitude moo
+   13  aptitude -v moo
+   14  aptitude -vv moo
+   15  aptitude -vvv moo
+   16  aptitude -vvvv moo
+   17  aptitude -vvvvv moo
+   18  aptitude -vvvvvv moo
+   19  yes Giddyup
+   20  factor 512
+   21  aafire
+   22  history
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Some Linux Easter Eggs are shown here:</strong></div>
+<div class="line">6 plays an ASCII animation (<em>starwars</em>)</div>
+<div class="line">7a fortune: displays random <em>phrase</em></div>
+<div class="line">7b cowsay: displays a <em>cow</em> with a speech bubble which contains the phrase from fortune</div>
+<div class="line">7c lolcat: adds a <em>rainbow</em> of colors to the output</div>
+<div class="line">9 displays a <em>Steam Locomotive</em></div>
+<div class="line">10 displays a banner saying <em>‘I am your father’</em></div>
+<div class="line">11 displays <em>‘GoHangASalamiImALasagnaHog’</em></div>
+<div class="line">12* displays <em>‘There are no Easter Eggs in this program.’</em></div>
+<div class="line">* apt-get moo displays a cow and the phrase ‘Have you mooed today?’</div>
+<div class="line">13 displays <em>‘There really are no Easter Eggs in this program.’</em></div>
+<div class="line">14 displays <em>‘Didn’t I already tell you that there are no Easter Eggs in this program?’</em></div>
+<div class="line">17 displays the following:</div>
+</div>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>All right, you win.
+
+                               /----\
+                       -------/      \
+                      /               \
+                     /                |
+   -----------------/                  --------\
+   ----------------------------------------------
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">18 displays <em>‘What is it?  It’s an elephant being eaten by a snake, of course.’</em> This refers to the book The Little Prince</div>
+<div class="line">19 enters an infinite loop that prints ‘Giddyup’</div>
+<div class="line">20 factor breaks the number to its prime factors. So factor 512 displays <em>‘512: 2 2 2 2 2 2 2 2 2’</em></div>
+<div class="line">21 displays an ASCII animation (<em>fire</em>)</div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">history</span></code> we can see there is a command <code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">--http2-prior-knowledge</span> <span class="pre">http://localhost:8080/index.php</span></code></p>
+<p>When we run that we got the following:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>elf@11474400e06e:~$ curl --http2-prior-knowledge http://localhost:8080/index.php
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;Candy Striper Turner-On&#39;er&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+ &lt;p&gt;To turn the machine on, simply POST to this URL with parameter &quot;status=on&quot;
+
+ &lt;/body&gt;
+&lt;/html&gt;
+elf@11474400e06e:~$
+</pre></div>
+</div>
+<p>This instructs us to post the parameter <code class="docutils literal notranslate"><span class="pre">status=on</span></code> to turn the Candy Striper on.
+According to the <a class="reference external" href="https://curl.haxx.se/docs/manual.html">Curl Manual</a> “It’s easy to post data using curl. This is done using the -d &lt;data&gt; option.”
+Thus we used the same command but added <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">status=on</span></code> between <code class="docutils literal notranslate"><span class="pre">knowledge</span></code> and the URL.</p>
+</div>
+<div class="section" id="hints-for-the-terminal-challenge">
+<h2>Hints for the Terminal Challenge<a class="headerlink" href="#hints-for-the-terminal-challenge" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+<strong>HTTP/2.0 Basics</strong>
+From: Holly Evergreen
+<a class="reference external" href="https://developers.google.com/web/fundamentals/performance/http2/">HTTP/2.0</a>
+</pre>
+</div>
+<div class="section" id="hints-for-kringlecon-objective-5">
+<h2>Hints for Kringlecon Objective 5<a class="headerlink" href="#hints-for-kringlecon-objective-5" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+<strong>Bloodhound Tool</strong>
+From: Holly Evergreen
+<a class="reference external" href="https://github.com/BloodHoundAD/BloodHound">Bloodhound Tool</a>
+</pre>
+<pre class="literal-block">
+<strong>Bloodhound Demo</strong>
+From: Holly Evergreen
+<a class="reference external" href="https://youtu.be/gOpsLiJFI1o">Bloodhound Demo</a>
+</pre>
+</div>
 </div>
 
 
