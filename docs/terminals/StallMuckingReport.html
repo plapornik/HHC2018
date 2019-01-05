@@ -103,6 +103,8 @@
 <li class="toctree-l1"><a class="reference internal" href="LethalForensicELFication.html">Lethal ForensicELFication</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Stall Mucking Report</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#our-solution">Our Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints-for-the-terminal-challenge">Hints for the Terminal Challenge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hints-for-kringlecon-objective-4">Hints for KringleCon Objective 4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CURLingMaster.html">CURLing Master</a></li>
@@ -185,7 +187,7 @@
 <h2>Our Solution<a class="headerlink" href="#our-solution" title="Permalink to this headline">¶</a></h2>
 <p>We tried to solve this challenge by using different variations of the <code class="docutils literal notranslate"><span class="pre">ps</span></code> command.
 <code class="docutils literal notranslate"><span class="pre">ps</span></code> didn’t work therefore we tried <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-a</span></code>. When this didn’t work we tried <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-t</span></code>. This did show the credentials we were looking for, but they were cut at the edge of the terminal.
-Thus we used <code class="docutils literal notranslate"><span class="pre">|less</span></code> and found <code class="docutils literal notranslate"><span class="pre">directreindeerflatterystable</span></code> to be the most probable password.</p>
+Thus we used <code class="docutils literal notranslate"><span class="pre">|less</span></code> and found <code class="docutils literal notranslate"><span class="pre">directreindeerflatterystable</span></code> to be the most probable password for the user <code class="docutils literal notranslate"><span class="pre">report-upload</span></code>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
    11 pts/0    S      0:00 sudo -u manager /home/manager/samba-wrapper.sh --verbosity=none --no-ch
@@ -206,6 +208,38 @@ rtificate --extraneous-command-argument --do-not-run-as-tyler --accept-sage-advi
 (END)
 </pre></div>
 </div>
+<p>Then, we used the command <code class="docutils literal notranslate"><span class="pre">smbclient</span> <span class="pre">//localhost/report-upload/</span> <span class="pre">-U</span> <span class="pre">report-upload</span></code> so that we can add items to the samba share.
+After entering the password, we used <code class="docutils literal notranslate"><span class="pre">put</span> <span class="pre">report.txt</span></code> to upload the report.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>elf@4973850de893:~$ smbclient //localhost/report-upload/ -U report-upload
+WARNING: The &quot;syslog&quot; option is deprecated
+Enter report-upload&#39;s password:
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.5.12-Debian]
+smb: \&gt; put report.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="hints-for-the-terminal-challenge">
+<h2>Hints for the Terminal Challenge<a class="headerlink" href="#hints-for-the-terminal-challenge" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+<strong>Plaintext Credentials in Commands</strong>
+From: Wunorse Openslae
+<a class="reference external" href="https://blog.rackspace.com/passwords-on-the-command-line-visible-to-ps">Keeping Command Line Passwords Out of PS</a>
+</pre>
+</div>
+<div class="section" id="hints-for-kringlecon-objective-4">
+<h2>Hints for KringleCon Objective 4<a class="headerlink" href="#hints-for-kringlecon-objective-4" title="Permalink to this headline">¶</a></h2>
+<p>Wunorse Openslae hints to using the entropy=True option when running Trufflehog
+Two hints are also unlocked in the badge:</p>
+<pre class="literal-block">
+<strong>Trufflehog Tool</strong>
+From: Wunorse Openslae
+<a class="reference external" href="https://github.com/dxa4481/truffleHog">Trufflehog</a>
+</pre>
+<pre class="literal-block">
+<strong>Trufflehog Talk</strong>
+From: Wunorse Openslae
+Brian Hostetler is giving a great Trufflehog talk upstairs
+</pre>
 </div>
 </div>
 
