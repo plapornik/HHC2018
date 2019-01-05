@@ -47,8 +47,8 @@ Hints for the Terminal Challenge
   *From: Bushy Evergreen*
   `Indiana University Vi Tutorials <https://kb.iu.edu/d/afcz>`_
 
-Hints for KringleCon Objective 1
---------------------------------
+Hints for KringleCon :doc:`Question 1 </objectives/question1>`
+--------------------------------------------------------------
 
 After completing his challenge, Bushy Evergreen tells us that watching Ed Skoudis's talk may help.
 The following hint was also unlocked in our badge:

@@ -15,7 +15,8 @@ TODO: Insert text from Alabaster with the instructions
 https://www.holidayhackchallenge.com/2018/challenges/CHOCOLATE_CHIP_COOKIE_RECIPE.zip
 
 Environment
-----------
+-----------
+
 The environment we used to analyse the document was a virtual machine with the Kali Linux 2018.4 operating system. 
 
 .. note::
