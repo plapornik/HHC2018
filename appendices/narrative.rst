@@ -23,6 +23,7 @@ Narrative
 .. highlights::
  Hans has started monologuing again. Please visit him in Santa's lobby for a status update.
 
+.. highlights::
  Great work! You have blocked access to Santa's treasure... for now. Please visit Hans in Santa's Secret Room for an update.
 
  And then suddenly, Hans slips and falls into a snowbank. His nefarious plan thwarted, he's now just cold and wet.
