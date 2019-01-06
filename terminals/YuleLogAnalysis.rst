@@ -110,3 +110,19 @@ And gives the following hint:
  From: Pepper Minstix
  `Password Spraying with MailSniper.ps1 <https://securityweekly.com/2017/07/21/tsw11/>`_
 
+Hints for Kringlecon Objective 6
+--------------------------------
+
+.. parsed-literal::
+ **Barcode Creation**
+ From: Pepper Minstix
+ `Creating QR barcodes <https://www.the-qrcode-generator.com/>`_
+
+.. parsed-literal::
+ **SQL Injection**
+ From: Pepper Minstix
+ `SQL Injection <https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF#Auth_Bypass>`_
+
+
+
+

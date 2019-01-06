@@ -51,7 +51,7 @@ We can see there's a vim artifact called .viminfo
 After using the command ``cat .viminfo`` and scrolling through the output, we found the following infoformation:
 
 .. code-block:: none
-  :emphasize-lines: 2,3
+ :emphasize-lines: 2,3
 
  # Search String History (newest to oldest):
  ? Elinore

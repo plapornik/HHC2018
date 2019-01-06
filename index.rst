@@ -6,6 +6,16 @@
 Holiday Hack Challenge 2018 Report
 ==================================
 
+Introducing the team
+--------------------
+
+
+.. figure:: /images/policeLineup.PNG
+
+ Police lineup at the North Pole Police Station
+
+The team members were arrested by the `North Pole Police Department (NPPD) <https://nppd.northpolechristmastown.com/>`_ for hacking using their toes. **biggestbenjies** claims he is innocent because he has no toes and is very grumpy as a result.
+
 .. toctree::
   :maxdepth: 2
   :caption: Objectives:
