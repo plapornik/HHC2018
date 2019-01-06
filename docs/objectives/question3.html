@@ -83,7 +83,10 @@
 <li class="toctree-l1"><a class="reference internal" href="summary.html">Questions and Answers Summary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question1.html">Question 1: Orientation Challenge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question2.html">Question 2: Directory Browsing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 3: de Bruijn Sequences</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 3: de Bruijn Sequences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question4.html">Question 4: Data Repo Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question5.html">Question 5: AD Privilege Discovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
@@ -177,6 +180,21 @@
             
   <div class="section" id="question-3-de-bruijn-sequences">
 <h1>Question 3: de Bruijn Sequences<a class="headerlink" href="#question-3-de-bruijn-sequences" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">The KringleCon Speaker Unpreparedness room is a place for frantic speakers to furiously complete their presentations. The room is protected by a <a class="reference external" href="https://doorpasscoden.kringlecastle.com/">door passcode</a>. Upon entering the correct passcode, what message is presented to the speaker? For hints on achieving this objective, please visit Tangle Coalbox and help him with the <a class="reference internal" href="../terminals/LethalForensicELFication.html"><span class="doc">Lethal ForensicELFication</span></a> Cranberry Pi terminal challenge.</div>
+</div>
+<p>Answer: <em>Welcome unprepared speaker!</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/door_passcode.png" src="../_images/door_passcode.png" />
+<p>The door passcode consists of 4 symbols from a set of 4 symbols.
+Mathematically this means there are 4 * 4 * 4 * 4 = 256 combinations.</p>
+<p>Instead of brute forcing the door, we decided to follow the hint and use the <a class="reference external" href="http://www.hakank.org/comb/debruijn.cgi">de Bruijn sequence generator</a> to cut down on the number of guesses we needed to make.</p>
+<p>The sequence we generated consisted of the following:</p>
+<blockquote class="highlights">
+<div>0 0 0 0 1 0 0 0 2 0 0 0 3 0 0 1 1 0 0 1 2 0 0 1 3 0 0 2 1 0 0 2 2 0 0 2 3 0 0 3 1 0 0 3 2 0 0 3 3 0 1 0 1 0 2 0 1 0 3 0 1 1 1 0 1 1 2 0 1 1 3 0 1 2 1 0 1 2 2 0 1 2 3 0 1 3 1 0 1 3 2 0 1 3 3 0 2 0 2 0 3 0 2 1 1 0 2 1 2 0 2 1 3 0 2 2 1 0 2 2 2 0 2 2 3 0 2 3 1 0 2 3 2 0 2 3 3 0 3 0 3 1 1 0 3 1 2 0 3 1 3 0 3 2 1 0 3 2 2 0 3 2 3 0 3 3 1 0 3 3 2 0 3 3 3 1 1 1 1 2 1 1 1 3 1 1 2 2 1 1 2 3 1 1 3 2 1 1 3 3 1 2 1 2 1 3 1 2 2 2 1 2 2 3 1 2 3 2 1 2 3 3 1 3 1 3 2 2 1 3 2 3 1 3 3 2 1 3 3 3 2 2 2 2 3 2 2 3 3 2 3 2 3 3 3 3 (0 0 0)</div></blockquote>
+<p>Referring to above diagram, we entered the sequence one character at a time (substituting the symbols for numbers) into the door passcode and soon revealed the correct code.</p>
+</div>
 </div>
 
 
