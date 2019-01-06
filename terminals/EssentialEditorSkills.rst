@@ -50,7 +50,7 @@ Hints for the Terminal Challenge
 Hints for KringleCon :doc:`Question 1 </objectives/question1>`
 --------------------------------------------------------------
 
-After completing his challenge, Bushy Evergreen tells us that watching Ed Skoudis's talk may help.
+After completing his challenge, Bushy Evergreen tells us that watching `Ed Skoudis' talk <https://youtu.be/31JsKzsbFUo>`_ may help.
 The following hint was also unlocked in our badge:
 
 .. parsed-literal::

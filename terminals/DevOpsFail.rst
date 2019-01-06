@@ -199,7 +199,7 @@ Hints for Kringlecon Objective 7
 .. parsed-literal::
  **CSV Injection Talk**
  From: Sparkle Redberry
- Somehow Brian Hostetler is giving a talk on CSV injection WHILE he's giving a talk on Trufflehog. Whatta' guy!
+ Somehow `Brian Hostetler is giving a talk on CSV injection <https://youtu.be/Z3qpcKVv2Bg>`_  WHILE he's giving a talk on Trufflehog. Whatta' guy!
 
 .. parsed-literal::
  **OWASP on CSV Injection**

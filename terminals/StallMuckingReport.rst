@@ -69,7 +69,7 @@ Two hints are also unlocked in the badge:
 .. parsed-literal::
  **Trufflehog Talk**
  From: Wunorse Openslae
- Brian Hostetler is giving a great Trufflehog talk upstairs
+ `Brian Hostetler is giving a great Trufflehog talk <https://youtu.be/myKrWVaq3Cw>`_ upstairs
 
 
 

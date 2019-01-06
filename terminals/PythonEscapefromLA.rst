@@ -118,7 +118,7 @@ Hints for the Terminal Challenge
 .. parsed-literal::
  **Python Escape**
  From: SugarPlum Mary
- Check out Mark Baggett's talk upstairs
+ Check out `Mark Baggett's talk <https://youtu.be/ZVx2Sxl3B9c>`_ upstairs
 
 Hints for Kringlecon Objective 8
 --------------------------------
@@ -126,4 +126,4 @@ Hints for Kringlecon Objective 8
 .. parsed-literal::
  **HTTP/2.0 Intro and Decryption**
  From: SugarPlum Mary
- Did you see Chris' & Chris' talk on HTTP/2.0?
+ Did you see `Chris' & Chris' talk <https://youtu.be/9E-8HkDs-kQ>`_ on HTTP/2.0?
