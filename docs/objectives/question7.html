@@ -87,7 +87,13 @@
 <li class="toctree-l1"><a class="reference internal" href="question4.html">Question 4: Data Repo Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question5.html">Question 5: AD Privilege Discovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 7: HR Incident Response</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 7: HR Incident Response</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#alternative-injection-string">Alternative injection string</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
@@ -177,6 +183,33 @@
             
   <div class="section" id="question-7-hr-incident-response">
 <h1>Question 7: HR Incident Response<a class="headerlink" href="#question-7-hr-incident-response" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Santa uses an Elf Resources website to look for talented information security professionals. <a class="reference external" href="https://careers.kringlecastle.com/">Gain access to the website</a> and fetch the document <code class="docutils literal notranslate"><span class="pre">C:\candidate_evaluation.docx</span></code>. Which terrorist organization is secretly supported by the job applicant whose name begins with “K”? For hints on achieving this objective, please visit Sparkle Redberry and help her with the <a class="reference internal" href="../terminals/DevOpsFail.html"><span class="doc">Dev Ops Fail</span></a> Cranberry Pi terminal challenge.</div>
+</div>
+<p>Answer: <em>Fancy Beaver</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>We initially created a simple CSV file called <code class="docutils literal notranslate"><span class="pre">kringle.csv</span></code> conatining the string <code class="docutils literal notranslate"><span class="pre">test</span></code>. After submitting the application we received the following message:</p>
+<img alt="../_images/careers_application_success.png" src="../_images/careers_application_success.png" />
+<p>We then tried browsing to <a class="reference external" href="https://careers.kringlecastle.com/candidate_evaluation.docx">https://careers.kringlecastle.com/candidate_evaluation.docx</a> and received the following 404 error.</p>
+<img alt="../_images/careers_404_error.png" src="../_images/careers_404_error.png" />
+<p>Using the hints associated with this question, our aim was to submit a CSV file that contained a CSV injection that copied the <code class="docutils literal notranslate"><span class="pre">candidate_evaluation.docx</span></code> file from <code class="docutils literal notranslate"><span class="pre">C:\</span></code> to <code class="docutils literal notranslate"><span class="pre">C:\careerportal\resources\public\</span></code>.</p>
+<p>We modified our <code class="docutils literal notranslate"><span class="pre">kringle.csv</span></code> file so that it contained the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>=cmd|&#39;/c copy C:\candidate_evaluation.docx C:\careerportal\resources\public\c1.docx&#39;!A1
+</pre></div>
+</div>
+<p>After submiting the application with this file, we used <a class="reference external" href="https://careers.kringlecastle.com/public/c1.docx">https://careers.kringlecastle.com/public/c1.docx</a> to retrieve the file.</p>
+<p>The downloaded document contained the following information attached to Krampus’s rejection:</p>
+<img alt="../_images/krampus_rejection.png" src="../_images/krampus_rejection.png" />
+<div class="section" id="alternative-injection-string">
+<h3>Alternative injection string<a class="headerlink" href="#alternative-injection-string" title="Permalink to this headline">¶</a></h3>
+<p>Here is an alternate CSV injection string that uses PowerShell to copy the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>=cmd|&#39;/c powershell.exe -w hidden $e=(copy C:\candidate_evaluation.docx C:\careerportal\resources\public\c2.docx);powershell -e $e&#39;!A1
+</pre></div>
+</div>
+<p>In this case, <a class="reference external" href="https://careers.kringlecastle.com/public/c2.docx">https://careers.kringlecastle.com/public/c2.docx</a> is needed to download the document.</p>
+</div>
+</div>
 </div>
 
 
