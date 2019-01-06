@@ -3,6 +3,9 @@ Stall Mucking Report
 
 
 
+Terminal Challenge
+------------------
+
 .. image:: /images/StallMuckingReportMOTD.png
 
 Our Solution
