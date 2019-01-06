@@ -84,9 +84,11 @@
 <li class="toctree-l1"><a class="reference internal" href="question1.html">Question 1: Orientation Challenge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question2.html">Question 2: Directory Browsing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question3.html">Question 3: de Bruijn Sequences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question3.html#solution">Solution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question4.html">Question 4: Data Repo Analysis</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 5: AD Privilege Discovery</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 5: AD Privilege Discovery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
@@ -178,6 +180,22 @@
             
   <div class="section" id="question-5-ad-privilege-discovery">
 <h1>Question 5: AD Privilege Discovery<a class="headerlink" href="#question-5-ad-privilege-discovery" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Using the data set contained in this <a class="reference external" href="https://download.holidayhackchallenge.com/HHC2018-DomainHack_2018-12-19.ova">SANS Slingshot Linux image</a>, find a reliable path from a Kerberoastable user to the Domain Admins group. What’s the user’s logon name (in <a class="reference external" href="mailto:username&#37;&#52;&#48;domain&#46;tld">username<span>&#64;</span>domain<span>&#46;</span>tld</a> format)? Remember to avoid RDP as a control path as it depends on separate local privilege escalation flaws. For hints on achieving this objective, please visit Holly Evergreen and help her with the <a class="reference internal" href="../terminals/CURLingMaster.html"><span class="doc">CURLing Master</span></a> Cranberry Pi terminal challenge.</div>
+</div>
+<p>Answer: <em>LDUBEJ00320&#64;AD.KRINGLECASTLE.COM</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>We downloaded the Linux image and imported it into <strong>VMware Workstation 15 Player</strong>.</p>
+<p>After running the virtual machine we started the <strong>BloodHound</strong> application.</p>
+<p>As shown below, we clicked on the <strong>More Info</strong> button then clicked on <strong>Queries</strong> and selected <strong>Shortest Paths to Domain Admins from Kerberoastable Users</strong></p>
+<img alt="../_images/BloodHoundQuery.png" src="../_images/BloodHoundQuery.png" />
+<p>In the dialog window that popped up, we selected the <strong>DOMAIN ADMINS&#64;AD.KRINGLECASTLE.COM</strong> Domain Admins group.</p>
+<p>We then clicked on the <strong>Settings</strong> button and changed <strong>Node Label Display</strong> to <strong>Always Display</strong>.</p>
+<p>This displayed the following graph:</p>
+<img alt="../_images/question5_ShortestPath.png" src="../_images/question5_ShortestPath.png" />
+<p>The user’s login name that we needed was <strong>LDUBEJ00320&#64;AD.KRINGLECASTLE.COM</strong></p>
+</div>
 </div>
 
 

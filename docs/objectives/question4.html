@@ -84,8 +84,10 @@
 <li class="toctree-l1"><a class="reference internal" href="question1.html">Question 1: Orientation Challenge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question2.html">Question 2: Directory Browsing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question3.html">Question 3: de Bruijn Sequences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question3.html#solution">Solution</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 4: Data Repo Analysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 4: Data Repo Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question5.html">Question 5: AD Privilege Discovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
@@ -178,6 +180,31 @@
             
   <div class="section" id="question-4-data-repo-analysis">
 <h1>Question 4: Data Repo Analysis<a class="headerlink" href="#question-4-data-repo-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Retrieve the encrypted ZIP file from the <a class="reference external" href="https://git.kringlecastle.com/Upatree/santas_castle_automation">North Pole Git repository</a>. What is the password to open this file? For hints on achieving this objective, please visit Wunorse Openslae and help him with <a class="reference internal" href="../terminals/StallMuckingReport.html"><span class="doc">Stall Mucking Report</span></a> Cranberry Pi terminal challenge.</div>
+</div>
+<p>Answer: <em>Yippee-ki-yay</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>Following the hints associated with this question, we used the <strong>TruffleHog</strong> application to analyse the git repository.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">trufflehog</span> <span class="pre">--regex</span> <span class="pre">https://git.kringlecastle.com/Upatree/santas_castle_automation.git</span> <span class="pre">|</span> <span class="pre">less</span></code> command returned information that included the following:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+Our Lead InfoSec Engineer Bushy Evergreen has been noticing an increase of brute force attacks in our logs. Furthermore, Albaster discovered and published a vulnerability with our password length at the last Hacker Conference.
++
++Bushy directed our elves to change the password used to lock down our sensitive files to something stronger. Good thing he caught it before those dastardly villians did!
++
++
++Hopefully this is the last time we have to change our password again until next Christmas.
++
++
++
++
+<span class="hll">+Password = &#39;Yippee-ki-yay&#39;
+</span>+
++
+</pre></div>
+</div>
+<p>The password we needed was <strong>Yippee-ki-yay</strong></p>
+</div>
 </div>
 
 
