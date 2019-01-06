@@ -6,7 +6,7 @@ Python Escape from LA
 Terminal Challenge
 ------------------
 
-.. code-block:: Python
+.. code-block:: none
 
                 :lllllllllllllllllllllllllllllllllllllllll,                      
                 'lllllllllllllllllllllllllllllllllllllllll:                      
