@@ -57,10 +57,6 @@ Terminal Challenge
  Find Sparkle's password, then run the runtoanswer tool.
  elf@a5311ed79e30:~$                                                         
 
-
-
-
-
 Our Solution
 ------------
 
