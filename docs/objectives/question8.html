@@ -89,7 +89,13 @@
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Question 8: Network Traffic Forensics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-the-ssl-keys">Obtaining the SSL keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-and-analysing-the-packet-capture">Obtaining and analysing the packet capture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-and-analysing-alabaster-s-email">Obtaining and analysing Alabaster’s email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-other-leaked-credentials">Using the other leaked credentials</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
@@ -187,6 +193,107 @@
 <p>Answer: <em>mary had a little lamb</em></p>
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>Obtaining a capture of the network traffic was easy with the packalyzer application, however an analysis soon revealed that the bulk of the traffic was encrypted. Based on the question we assumed this was HTTP/2 traffic. To decode this traffic with Wireshark, we needed to find the appropriate SSL session keys. The obvious place to look for the keys was on the server hosting the packalyzer application.</p>
+<div class="section" id="obtaining-the-ssl-keys">
+<h3>Obtaining the SSL keys<a class="headerlink" href="#obtaining-the-ssl-keys" title="Permalink to this headline">¶</a></h3>
+<p>The hints from SugarPlum Mary suggested that a good starting point was to look at the source code of the packalyzer site root. After browsing to <a class="reference external" href="https://packalyzer.kringlecastle.com">https://packalyzer.kringlecastle.com</a> we used the <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Chrome</span> <span class="pre">-&gt;</span> <span class="pre">View</span> <span class="pre">page</span> <span class="pre">source</span></code> option and found the following comment in the code:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>//File upload Function. All extensions and sizes are validated server-side in app.js
+</pre></div>
+</div>
+<p>As shown in the following figure, we also used <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Chrome</span> <span class="pre">-&gt;</span> <span class="pre">Developer</span> <span class="pre">tools</span> <span class="pre">-&gt;</span> <span class="pre">Source</span></code> to determine that most of the scripts, images and CSS files were accessible from somewhere under <a class="reference external" href="http://packalyzer.kringlecastle.com/pub/">http://packalyzer.kringlecastle.com/pub/</a></p>
+<img alt="../_images/packalyzer_pub.png" src="../_images/packalyzer_pub.png" />
+<p>After a few guesses we determined that the server-side code was accessible using <code class="docutils literal notranslate"><span class="pre">https://packalyzer.kringlecastle.com/pub/app.js</span></code></p>
+<p>According to SugarPlum Mary, the file had <em>suspicious-looking development code using environment variables to store SSL keys and open up directories</em>. This was soon verified to be true. Of particular importance were the following code snippets:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">key_log_path</span> <span class="o">=</span> <span class="p">(</span> <span class="o">!</span><span class="nx">dev_mode</span> <span class="o">||</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DEV</span> <span class="o">+</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SSLKEYLOGFILE</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">keylog</span> <span class="o">:</span> <span class="nx">key_log_path</span>     <span class="c1">//used for dev mode to view traffic. Stores a few minutes worth at a time</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">dev_mode</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">dev_mode</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">//Can set env variable to open up directories during dev</span>
+   <span class="kr">const</span> <span class="nx">env_dirs</span> <span class="o">=</span> <span class="nx">load_envs</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+   <span class="kr">const</span> <span class="nx">env_dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/pub/&#39;</span><span class="p">,</span><span class="s1">&#39;/uploads/&#39;</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">We lost quite a bit of time at this stage because we forgot that Linux is case-sensitive (<code class="docutils literal notranslate"><span class="pre">dev</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">DEV</span></code>).</p>
+</div>
+<p>We initially found that <code class="docutils literal notranslate"><span class="pre">https://packalyzer.kringlecastle.com/SSLKEYLOGFILE/</span></code> returned:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Error: ENOENT: no such file or directory, open &#39;/opt/http2packalyzer_clientrandom_ssl.log/&#39;
+</pre></div>
+</div>
+<p>This suggests that <code class="docutils literal notranslate"><span class="pre">SSLKEYLOGFILE</span></code> gets expanded out to <code class="docutils literal notranslate"><span class="pre">packalyzer_clientrandom_ssl.log</span></code></p>
+<p>Trying <code class="docutils literal notranslate"><span class="pre">https://packalyzer.kringlecastle.com/pub/packalyzer_clientrandom_ssl.log</span></code> resulted in <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">ENOENT:</span> <span class="pre">no</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory,</span> <span class="pre">open</span> <span class="pre">'/opt/http2/pub//packalyzer_clientrandom_ssl.log'</span></code>. However, <code class="docutils literal notranslate"><span class="pre">https://packalyzer.kringlecastle.com/DEV/packalyzer_clientrandom_ssl.log</span></code> resulted in what looked like a log containing SSL session keys:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CLIENT_RANDOM</span> <span class="mf">1E58</span><span class="n">F8926F251276C62A30276185CC827CDAF5E13F737F2AF3534B316CB1345A</span> <span class="mi">73</span><span class="n">EFC236EB72F5047E0581496A70B9DAF136330B2AD5A37EC96C07F6662C00F726C6C05EC64FF21656A32A9368667F28</span>
+<span class="n">CLIENT_RANDOM</span> <span class="n">AE13A9FF12D360A1FDC9E65275CEDA1B38C116A90EE2608480F4F710A8844C65</span> <span class="n">A1DD204566A4B85C305C6443F37AE14587D09A69540D73D554F09E7F180594457AA0E045D67366B4214D807548BD3A33</span>
+<span class="n">CLIENT_RANDOM</span> <span class="n">E2592D4C2A14639EFD01CFB439026C3B2BC06955C18C4C324BCCAF830F1E2EBB</span> <span class="mi">2949</span><span class="n">F0BC1C030B053C29B4ADE666FA5DF6BECA8D3A0360C5F90A365BE3554E2AABB7C2E1B4CF237505DACF9FB2D471E2</span>
+<span class="n">CLIENT_RANDOM</span> <span class="mi">6</span><span class="n">AF59347F8DD1FE9902A8CBEF515C8DB27E2B64BE42A8F14904C9D6658BE0FB3</span> <span class="n">D0D880C9AACDD708E28EFE1D44522F6CB509C440E2FF3A0292A905973CBB07189563EB4447EDAFEC9A0F674EEF714742</span>
+<span class="n">CLIENT_RANDOM</span> <span class="mf">381371E7</span><span class="n">B055B2AD1261B65E2CC504CCC361D6281DF6C9941EC3CFE038303901</span> <span class="mi">4</span><span class="n">C223FD22CBCCCD9A5DC73357329298D020A9372A693342D4BEADD5C881DFE4834C3152269128E184ADB37389CE4FDAF</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="obtaining-and-analysing-the-packet-capture">
+<h3>Obtaining and analysing the packet capture<a class="headerlink" href="#obtaining-and-analysing-the-packet-capture" title="Permalink to this headline">¶</a></h3>
+<p>We tried using the keys to analyse a capture that we had saved earlier but were unsuccessful. We realised that one of the comments in the code shown above states that it only <strong>stores a few minutes worth (of keys) at a time</strong>. We needed to download the SSL keys shortly after capturing the traffic.</p>
+<p>We then obtained a recent capture (using Packalyzer) and a recent SSL session keys file (using <a class="reference external" href="https://packalyzer.kringlecastle.com/DEV/packalyzer_clientrandom_ssl.log">https://packalyzer.kringlecastle.com/DEV/packalyzer_clientrandom_ssl.log</a>). With these two items, we were able to successfully decode the HTTP/2 traffic.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>To decode HTTP/2 traffic in Wireshark you need to specify the SSL keys file in the SSL protocol preferences.</p>
+<img alt="../_images/wireshark_SSL_prefs.png" class="last" src="../_images/wireshark_SSL_prefs.png" />
+</div>
+<p>After spending some time analysing the traffic we discovered that the information we wanted consisted of JSON data. We created the following Wireshark display filter to display only the packets that contained password information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">json</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;username&quot;</span>
+</pre></div>
+</div>
+<p>We then compiled the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Username</th>
+<th class="head">Password</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pepper</td>
+<td>Shiz-Bamer_wabl182</td>
+</tr>
+<tr class="row-odd"><td>bushy</td>
+<td>Floppity_Floopy-flab19283</td>
+</tr>
+<tr class="row-even"><td><strong>alabaster</strong></td>
+<td><strong>Packer-p&#64;re-turntable192</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="obtaining-and-analysing-alabaster-s-email">
+<h3>Obtaining and analysing Alabaster’s email<a class="headerlink" href="#obtaining-and-analysing-alabaster-s-email" title="Permalink to this headline">¶</a></h3>
+<p>We logged into the Packalyzer application using Alabaster’s credentials. Under his saved captures we found the following:</p>
+<img alt="../_images/packalyzer_alabaster.png" src="../_images/packalyzer_alabaster.png" />
+<p>We downloaded the capture file and opened it in Wireshark. The capture mainly consisted of SMTP traffic. We followed the TCP stream and found that the capture consisted of a text message followed by a file attachment encoded in base64 format.</p>
+<p>The text consisted of the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hey</span> <span class="n">alabaster</span><span class="p">,</span>
+
+<span class="n">Santa</span> <span class="n">said</span> <span class="n">you</span> <span class="n">needed</span> <span class="n">help</span> <span class="n">understanding</span> <span class="n">musical</span> <span class="n">notes</span> <span class="k">for</span> <span class="n">accessing</span> <span class="n">the</span> <span class="n">vault</span><span class="o">.</span> <span class="n">He</span> <span class="n">said</span> <span class="n">your</span> <span class="n">favorite</span> <span class="n">key</span> <span class="n">was</span> <span class="n">D</span><span class="o">.</span> <span class="n">Anyways</span><span class="p">,</span> <span class="n">the</span> <span class="n">following</span> <span class="n">attachment</span> <span class="n">should</span> <span class="n">give</span> <span class="n">you</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">information</span> <span class="n">you</span> <span class="n">need</span> <span class="n">about</span> <span class="n">transposing</span> <span class="n">music</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>To analyse the attachment, we utilised an online <a class="reference external" href="https://www.freeformatter.com/base64-encoder.html">Base64 Encoder/Decoder</a>. The first few bytes of the output included <code class="docutils literal notranslate"><span class="pre">PDF-1.5</span></code> which was a good indicator that the attachment was a PDF file. The online tool also had the ability to save the decoded output which we called <code class="docutils literal notranslate"><span class="pre">alabaster.pdf</span></code>.</p>
+<p>The file included instructions about how to transpose music and included the song <code class="docutils literal notranslate"><span class="pre">Mary</span> <span class="pre">Had</span> <span class="pre">a</span> <span class="pre">Little</span> <span class="pre">Lamb</span></code>.</p>
+</div>
+<div class="section" id="using-the-other-leaked-credentials">
+<h3>Using the other leaked credentials<a class="headerlink" href="#using-the-other-leaked-credentials" title="Permalink to this headline">¶</a></h3>
+<p>The account credentials for Pepper and Bushy that we discovered above, worked but didn’t seem to contain anything interesting.</p>
+</div>
 </div>
 </div>
 
