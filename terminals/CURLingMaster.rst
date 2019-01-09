@@ -4,7 +4,7 @@ CURLing Master
 Terminal Challenge
 ------------------
 
-.. image:: /image/CURLingMasterMOTD.png
+.. image:: /images/CURLingMasterMOTD.png
 
 
 .. code-block:: none

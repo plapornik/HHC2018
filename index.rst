@@ -49,7 +49,6 @@ The team members were arrested by the `North Pole Police Department (NPPD) <http
   terminals/DevOpsFail
   terminals/PythonEscapefromLA
   terminals/SleighBellLottery
-  terminals/GoogleVent
 
 .. toctree::
   :maxdepth: 2
@@ -58,4 +57,4 @@ The team members were arrested by the `North Pole Police Department (NPPD) <http
   appendices/eastereggs
   appendices/badges
   appendices/narrative
-
+  appendices/GoogleVent

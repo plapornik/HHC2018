@@ -110,7 +110,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../terminals/DevOpsFail.html">Dev Ops Fail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../terminals/PythonEscapefromLA.html">Python Escape from LA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../terminals/SleighBellLottery.html">Sleigh Bell Lottery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../terminals/GoogleVent.html">Google Vent</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Appendices:</span></p>
 <ul>
@@ -187,6 +186,36 @@
 <p>Answer: <em>mary had a little lamb</em></p>
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>The hints from SugarPlum Mary suggested that a good starting point was to look at the source code of the packalyzer site root. After browsing to <a class="reference external" href="https://packalyzer.kringlecon.com">https://packalyzer.kringlecon.com</a> we used the <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Chrome</span> <span class="pre">-&gt;</span> <span class="pre">View</span> <span class="pre">page</span> <span class="pre">source</span></code> option and found the following comment:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>//File upload Function. All extensions and sizes are validated server-side in app.js
+</pre></div>
+</div>
+<p>As shown in the following figure, we also used <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Chrome</span> <span class="pre">-&gt;</span> <span class="pre">Developer</span> <span class="pre">tools</span> <span class="pre">-&gt;</span> <span class="pre">Source</span></code> to determine that most of the scripts were accessible from <a class="reference external" href="http://packalyzer.kringlecastle.com/pub/">http://packalyzer.kringlecastle.com/pub/</a></p>
+<img alt="../_images/packalyzer_pub.png" src="../_images/packalyzer_pub.png" />
+<p>After a couple of attempts we determined that the server-side code was accessible using <code class="docutils literal notranslate"><span class="pre">https://packalyzer.kringlecastle.com/pub/app.js</span></code></p>
+<p>According to SugarPlum Mary, the file had <em>suspicious-looking development code using environment variables to store SSL keys and open up directories</em>. This was soon verified to be true. Of particular importance were the following snippets:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">dev_mode</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">key_log_path</span> <span class="o">=</span> <span class="p">(</span> <span class="o">!</span><span class="nx">dev_mode</span> <span class="o">||</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">DEV</span> <span class="o">+</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">SSLKEYLOGFILE</span> <span class="p">)</span>
+
+<span class="nx">key</span><span class="o">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/keys/server.key&#39;</span><span class="p">),</span>
+<span class="nx">cert</span><span class="o">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/keys/server.crt&#39;</span><span class="p">),</span>
+
+<span class="nx">keylog</span> <span class="o">:</span> <span class="nx">key_log_path</span>     <span class="c1">//used for dev mode to view traffic. Stores a few minutes worth at a time</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">dev_mode</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">//Can set env variable to open up directories during dev</span>
+   <span class="kr">const</span> <span class="nx">env_dirs</span> <span class="o">=</span> <span class="nx">load_envs</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+   <span class="kr">const</span> <span class="nx">env_dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/pub/&#39;</span><span class="p">,</span><span class="s1">&#39;/uploads/&#39;</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">We lost quite a bit of time at this stage because we ignored that Linux is case-sensitive (<code class="docutils literal notranslate"><span class="pre">dev</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">DEV</span></code>).</p>
+</div>
+<p>We initially found that <code class="docutils literal notranslate"><span class="pre">https://packalyzer.kringlecastle.com/SSLKEYLOGFILE/</span></code> returned:</p>
+<p>This elf then told me that manipulating values in the URL gave back weird and descriptive errors.</p>
 </div>
 </div>
 
