@@ -6,6 +6,9 @@ Dev Ops Fail
 Terminal Challenge
 ------------------
 
+.. image:: /images/devopsMOTD.png
+
+
 .. code-block:: none                                             
                                                                           
                                     .0.                                    

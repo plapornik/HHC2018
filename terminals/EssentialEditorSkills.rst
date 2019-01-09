@@ -5,6 +5,10 @@ Bushy Evergreen provides hints for :doc:`Question 1 </objectives/question1>` aft
 
 Terminal Challenge
 ------------------
+
+.. image:: /images/essentialMOTD.png
+
+
 .. code-block:: none
 
                     ........................................

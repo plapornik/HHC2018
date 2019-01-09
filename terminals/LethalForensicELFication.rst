@@ -5,6 +5,10 @@ Lethal ForensicELFication
 
 Terminal Challenge
 ------------------
+
+.. image:: /images/elficationMOTD.png
+
+
 .. code-block:: none
 
                          ............'''',,,;;;::ccclloooddxxkkOO00KKXXNNWWMMMMMM

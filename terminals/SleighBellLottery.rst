@@ -1,6 +1,11 @@
 Sleigh Bell Lottery
 ===================
 
+
+.. image:: /images/sleighbellMOTD.png
+
+
+
 Hints for the Terminal Challenge
 --------------------------------
 

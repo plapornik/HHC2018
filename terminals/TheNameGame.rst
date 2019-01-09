@@ -5,6 +5,10 @@ Minty Candycane provides hints for :doc:`Question 2 </objectives/question2>` aft
 
 Terminal Challenge
 ------------------
+
+.. image:: /images/namegameMOTD.png
+
+
 .. code-block:: none
 
  We just hired this new worker,

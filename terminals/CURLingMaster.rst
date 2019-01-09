@@ -3,6 +3,10 @@ CURLing Master
 
 Terminal Challenge
 ------------------
+
+.. image:: /image/CURLingMasterMOTD.png
+
+
 .. code-block:: none
 
                    .....................................                        

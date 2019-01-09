@@ -6,6 +6,10 @@ Python Escape from LA
 Terminal Challenge
 ------------------
 
+.. image:: /images/pythonescapeMOTD.png
+
+
+
 .. code-block:: none
 
                 :lllllllllllllllllllllllllllllllllllllllll,                      
