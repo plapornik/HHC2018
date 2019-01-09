@@ -46,7 +46,8 @@ Another solution would be ``:x``
 Hints for the Terminal Challenge
 --------------------------------
 
- .. parsed-literal::
+.. parsed-literal::
+
   **Vi Editor Basics**
   *From: Bushy Evergreen*
   `Indiana University Vi Tutorials <https://kb.iu.edu/d/afcz>`_
@@ -58,6 +59,7 @@ After completing his challenge, Bushy Evergreen tells us that watching `Ed Skoud
 The following hint was also unlocked in our badge:
 
 .. parsed-literal::
+
   **Past Holiday Hack Challenges**
   From: Bushy Evergreen
   `Past Holiday Hack Challenges <https://holidayhackchallenge.com/past-challenges/>`_
