@@ -8,8 +8,6 @@ Terminal Challenge
 
 .. image:: /images/yuleMOTD.png
 
-https://docker.kringlecon.com/?challenge=gitpasshist&id=cac77ede-8983-4f5c-a6c2-d779d878c3ef
-
 .. code-block:: none
 
 
