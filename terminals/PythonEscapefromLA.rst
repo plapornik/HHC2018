@@ -1,8 +1,6 @@
 Python Escape from LA
 =====================
 
-
-
 Terminal Challenge
 ------------------
 

@@ -10,8 +10,8 @@ Solution
 
 Obtaining a capture of the network traffic was easy with the packalyzer application, however an analysis soon revealed that the bulk of the traffic was encrypted. Based on the question we assumed this was HTTP/2 traffic. To decode this traffic with Wireshark, we needed to find the appropriate SSL session keys. The obvious place to look for the keys was on the server hosting the packalyzer application.
 
-Obtaining the SSL keys
-^^^^^^^^^^^^^^^^^^^^^^
+Step 1: Obtaining the SSL keys
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The hints from SugarPlum Mary suggested that a good starting point was to look at the source code of the packalyzer site root. After browsing to https://packalyzer.kringlecastle.com we used the ``Google Chrome -> View page source`` option and found the following comment in the code:
 
@@ -68,8 +68,8 @@ Trying ``https://packalyzer.kringlecastle.com/pub/packalyzer_clientrandom_ssl.lo
  CLIENT_RANDOM 6AF59347F8DD1FE9902A8CBEF515C8DB27E2B64BE42A8F14904C9D6658BE0FB3 D0D880C9AACDD708E28EFE1D44522F6CB509C440E2FF3A0292A905973CBB07189563EB4447EDAFEC9A0F674EEF714742
  CLIENT_RANDOM 381371E7B055B2AD1261B65E2CC504CCC361D6281DF6C9941EC3CFE038303901 4C223FD22CBCCCD9A5DC73357329298D020A9372A693342D4BEADD5C881DFE4834C3152269128E184ADB37389CE4FDAF
 
-Obtaining and analysing the packet capture
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Step 2: Obtaining and analysing the packet capture
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We tried using the keys to analyse a capture that we had saved earlier but were unsuccessful. We realised that one of the comments in the code shown above states that it only **stores a few minutes worth (of keys) at a time**. We needed to download the SSL keys shortly after capturing the traffic.
 
@@ -94,8 +94,8 @@ We then compiled the following table:
  bushy,Floppity_Floopy-flab19283
  **alabaster**,**Packer-p@re-turntable192**
 
-Obtaining and analysing Alabaster's email
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Step 3: Obtaining and analysing Alabaster's email
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We logged into the Packalyzer application using Alabaster's credentials. Under his saved captures we found the following:
 
@@ -116,5 +116,6 @@ To analyse the attachment, we utilised an online `Base64 Encoder/Decoder <https:
 The file included instructions about how to transpose music and included the song ``Mary Had a Little Lamb``.
 
 Using the other leaked credentials
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The account credentials for Pepper and Bushy that we discovered above, worked but didn't seem to contain anything interesting.
+----------------------------------
+
+The account credentials for Pepper and Bushy that we discovered above, were valid Packalyzer credentials but didn't seem to contain anything interesting.

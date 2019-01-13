@@ -196,8 +196,8 @@ Hints for the Terminal Challenge
  From: Sparkle Redberry
  `Git Cheat Sheet <https://gist.github.com/hofmannsven/6814451>`_
 
-Hints for Kringlecon Objective 7
---------------------------------
+Hints for Kringlecon :doc:`Question 7 </objectives/question7>`
+--------------------------------------------------------------
 
 .. parsed-literal::
  **CSV Injection Talk**

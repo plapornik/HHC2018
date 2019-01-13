@@ -106,6 +106,8 @@ html_copy_source = False
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'HolidayHackChallenge2018Reportdoc'
 
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
+html_show_sphinx = False
 
 # -- Options for LaTeX output ------------------------------------------------
 

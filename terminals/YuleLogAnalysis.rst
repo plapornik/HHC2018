@@ -1,8 +1,6 @@
 Yule Log Analysis
 =================
 
-
-
 Terminal Challenge
 ------------------
 
@@ -117,8 +115,8 @@ And gives the following hint:
  From: Pepper Minstix
  `Password Spraying with MailSniper.ps1 <https://securityweekly.com/2017/07/21/tsw11/>`_
 
-Hints for Kringlecon Objective 6
---------------------------------
+Hints for Kringlecon :doc:`Question 6 </objectives/question6>`
+--------------------------------------------------------------
 
 .. parsed-literal::
  **Barcode Creation**

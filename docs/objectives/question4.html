@@ -86,7 +86,8 @@
 <li class="toctree-l1"><a class="reference internal" href="question3.html">Question 3: de Bruijn Sequences</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Question 4: Data Repo Analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#locating-the-zip-file">Locating the ZIP file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-analysing-the-git-repository">Step 1: Analysing the GIT repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-locating-the-zip-file">Step 2: Locating the ZIP file</a></li>
 </ul>
 </li>
 </ul>
@@ -95,11 +96,11 @@
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -189,6 +190,8 @@
 <p>Answer: <em>Yippee-ki-yay</em></p>
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-analysing-the-git-repository">
+<h3>Step 1: Analysing the GIT repository<a class="headerlink" href="#step-1-analysing-the-git-repository" title="Permalink to this headline">¶</a></h3>
 <p>Following the hints associated with this question, we used the <strong>TruffleHog</strong> application to analyse the git repository.</p>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">trufflehog</span> <span class="pre">--regex</span> <span class="pre">https://git.kringlecastle.com/Upatree/santas_castle_automation.git</span> <span class="pre">|</span> <span class="pre">less</span></code> command returned information that included the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+Our Lead InfoSec Engineer Bushy Evergreen has been noticing an increase of brute force attacks in our logs. Furthermore, Albaster discovered and published a vulnerability with our password length at the last Hacker Conference.
@@ -207,8 +210,9 @@
 </pre></div>
 </div>
 <p>The password we needed was <strong>Yippee-ki-yay</strong></p>
-<div class="section" id="locating-the-zip-file">
-<h3>Locating the ZIP file<a class="headerlink" href="#locating-the-zip-file" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="step-2-locating-the-zip-file">
+<h3>Step 2: Locating the ZIP file<a class="headerlink" href="#step-2-locating-the-zip-file" title="Permalink to this headline">¶</a></h3>
 <p>Clicking on the <strong>Find File</strong> button in the online git repository did not return any ZIP files.</p>
 <p>We cloned the git repository using the  <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://git.kringlecastle.com/Upatree/santas_castle_automation.git</span></code> command. Following this we used the <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span> <span class="pre">-name</span> <span class="pre">*.zip</span></code> command to return the <code class="docutils literal notranslate"><span class="pre">./santas_castle_automation/schematics/ventilation_diagram.zip</span></code> file path.</p>
 <p>Inside the <code class="docutils literal notranslate"><span class="pre">ventilation_diagram.zip</span></code> file were diagrams for the <strong>Google Ventilation Maze</strong>.</p>
@@ -239,8 +243,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

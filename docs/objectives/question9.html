@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Question 9 &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
+  <title>Question 9: Catch the Malware &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
   
 
   
@@ -89,11 +89,19 @@
 <li class="toctree-l1"><a class="reference internal" href="question6.html">Question 6: Badge Manipulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 9</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 9: Catch the Malware</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-analysing-the-packet-captures">Step 1: Analysing the packet captures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-analysing-how-snort-was-configured">Step 2: Analysing how Snort was configured</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-creating-the-snort-rule">Step 3: Creating the Snort rule</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -158,7 +166,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Question 9</li>
+      <li>Question 9: Catch the Malware</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -175,8 +183,69 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="question-9">
-<h1>Question 9<a class="headerlink" href="#question-9" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="question-9-catch-the-malware">
+<h1>Question 9: Catch the Malware<a class="headerlink" href="#question-9-catch-the-malware" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Alabaster Snowball is in dire need of your help. Santa’s file server has been hit with malware. Help Alabaster Snowball deal with the malware on Santa’s server by completing several tasks. For hints on achieving this objective, please visit Shinny Upatree and help him with the <a class="reference internal" href="../terminals/SleighBellLottery.html"><span class="doc">Sleigh Bell Lottery</span></a> Cranberry Pi terminal challenge.</div>
+<div class="line">To start, assist Alabaster by accessing (clicking) the snort terminal below:</div>
+</div>
+<img alt="../_images/snort.png" src="../_images/snort.png" />
+<div class="line-block">
+<div class="line">Then create a rule that will catch all new infections. What is the success message displayed by the Snort terminal?</div>
+</div>
+<p>Answer: <em>Snort is alerting on all ransomware and only the ransomware!</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-analysing-the-packet-captures">
+<h3>Step 1: Analysing the packet captures<a class="headerlink" href="#step-1-analysing-the-packet-captures" title="Permalink to this headline">¶</a></h3>
+<p>We downloaded a packet capture from <a class="reference external" href="http://snortsensor1.kringlecastle.com/">http://snortsensor1.kringlecastle.com/</a> and opened it using Wireshark.</p>
+<p>We noticed that the following string was repeated frequently within the DNS query and response packets: <code class="docutils literal notranslate"><span class="pre">77616E6E61636F6F6B69652E6D696E2E707331</span></code>. We believed that this was associated with the malware we needed to stop.</p>
+<p>We performed a HEX -&gt; ASCII translation on the string to create the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Item</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Decoded text</td>
+<td>wannacookie.min.ps1</td>
+</tr>
+<tr class="row-odd"><td>Decoded DNS query</td>
+<td>77616E6E61636F6F6B69652E6D696E2E707331</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">wannacookie.min.ps1</span></code> string confirmed that we were looking at the correct data.</p>
+</div>
+<div class="section" id="step-2-analysing-how-snort-was-configured">
+<h3>Step 2: Analysing how Snort was configured<a class="headerlink" href="#step-2-analysing-how-snort-was-configured" title="Permalink to this headline">¶</a></h3>
+<p>We analysed the following files to determine how Snort was configured within the terminal:</p>
+<ul class="simple">
+<li><strong>snort.conf</strong> - This file showed us that site specific rules were configured in the <code class="docutils literal notranslate"><span class="pre">$RULE_PATH/local.rules</span></code> file, where <code class="docutils literal notranslate"><span class="pre">$RULE_PATH</span> <span class="pre">=</span> <span class="pre">/etc/snort/rules</span></code></li>
+<li><strong>classification.config</strong> - This file showed us the exisiting classifications. <code class="docutils literal notranslate"><span class="pre">malware-cnc</span></code> should be used for our rule.</li>
+<li><strong>local.rules</strong> - This revealed that no local rules had previously been created</li>
+</ul>
+</div>
+<div class="section" id="step-3-creating-the-snort-rule">
+<h3>Step 3: Creating the Snort rule<a class="headerlink" href="#step-3-creating-the-snort-rule" title="Permalink to this headline">¶</a></h3>
+<p>To create the rule we edited <code class="docutils literal notranslate"><span class="pre">/etc/snort/rules/local.rules</span></code> using <strong>nano</strong> and created the following rule:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>alert udp any any &lt;&gt; any any (content: &quot;77616E6E61636F6F6B69652E6D696E2E707331&quot;;msg:&quot;MALWARE-CNC: wannacookie malware&quot;;sid:1000004;classtype:malware-cnc;)
+</pre></div>
+</div>
+<ul class="simple">
+<li>The rule matches UDP traffic in either direction with content that includes <code class="docutils literal notranslate"><span class="pre">77616E6E61636F6F6B69652E6D696E2E707331</span></code>.</li>
+<li>The rule will log the following message: <code class="docutils literal notranslate"><span class="pre">MALWARE-CNC:</span> <span class="pre">wannacookie</span> <span class="pre">malware</span></code></li>
+<li>The rule utilises a custom signature ID of <code class="docutils literal notranslate"><span class="pre">1000004</span></code></li>
+<li>The rule utilises the <code class="docutils literal notranslate"><span class="pre">malware-cnc</span></code> classification</li>
+</ul>
+<p>After saving the rule, we received the following terminal message: <code class="docutils literal notranslate"><span class="pre">Congratulation!</span> <span class="pre">Snort</span> <span class="pre">is</span> <span class="pre">alerting</span> <span class="pre">on</span> <span class="pre">all</span> <span class="pre">ransomware</span> <span class="pre">and</span> <span class="pre">only</span> <span class="pre">the</span> <span class="pre">ransomware!</span></code></p>
+</div>
+</div>
 </div>
 
 
@@ -202,8 +271,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

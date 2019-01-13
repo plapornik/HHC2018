@@ -1,8 +1,6 @@
 Lethal ForensicELFication
 =========================
 
-
-
 Terminal Challenge
 ------------------
 
@@ -81,8 +79,8 @@ Hints for the Terminal Challenge
  From: Tangle Coalbox
  `Forensic Relevance of Vim Artifacts <https://tm4n6.com/2017/11/15/forensic-relevance-of-vim-artifacts/>`_
 
-Hints for KringleCon Objective 3
---------------------------------
+Hints for KringleCon :doc:`Question 3 </objectives/question3>`
+--------------------------------------------------------------
 
 .. parsed-literal::
  **Opening a Ford Lock Code**

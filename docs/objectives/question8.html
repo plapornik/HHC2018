@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Question 9" href="question9.html" />
+    <link rel="next" title="Question 9: Catch the Malware" href="question9.html" />
     <link rel="prev" title="Question 7: HR Incident Response" href="question7.html" /> 
 
   
@@ -90,19 +90,19 @@
 <li class="toctree-l1"><a class="reference internal" href="question7.html">Question 7: HR Incident Response</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Question 8: Network Traffic Forensics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#obtaining-the-ssl-keys">Obtaining the SSL keys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#obtaining-and-analysing-the-packet-capture">Obtaining and analysing the packet capture</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#obtaining-and-analysing-alabaster-s-email">Obtaining and analysing Alabaster’s email</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-the-other-leaked-credentials">Using the other leaked credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-obtaining-the-ssl-keys">Step 1: Obtaining the SSL keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-obtaining-and-analysing-the-packet-capture">Step 2: Obtaining and analysing the packet capture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-obtaining-and-analysing-alabaster-s-email">Step 3: Obtaining and analysing Alabaster’s email</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-other-leaked-credentials">Using the other leaked credentials</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -194,8 +194,8 @@
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
 <p>Obtaining a capture of the network traffic was easy with the packalyzer application, however an analysis soon revealed that the bulk of the traffic was encrypted. Based on the question we assumed this was HTTP/2 traffic. To decode this traffic with Wireshark, we needed to find the appropriate SSL session keys. The obvious place to look for the keys was on the server hosting the packalyzer application.</p>
-<div class="section" id="obtaining-the-ssl-keys">
-<h3>Obtaining the SSL keys<a class="headerlink" href="#obtaining-the-ssl-keys" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-1-obtaining-the-ssl-keys">
+<h3>Step 1: Obtaining the SSL keys<a class="headerlink" href="#step-1-obtaining-the-ssl-keys" title="Permalink to this headline">¶</a></h3>
 <p>The hints from SugarPlum Mary suggested that a good starting point was to look at the source code of the packalyzer site root. After browsing to <a class="reference external" href="https://packalyzer.kringlecastle.com">https://packalyzer.kringlecastle.com</a> we used the <code class="docutils literal notranslate"><span class="pre">Google</span> <span class="pre">Chrome</span> <span class="pre">-&gt;</span> <span class="pre">View</span> <span class="pre">page</span> <span class="pre">source</span></code> option and found the following comment in the code:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>//File upload Function. All extensions and sizes are validated server-side in app.js
 </pre></div>
@@ -239,8 +239,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="obtaining-and-analysing-the-packet-capture">
-<h3>Obtaining and analysing the packet capture<a class="headerlink" href="#obtaining-and-analysing-the-packet-capture" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-2-obtaining-and-analysing-the-packet-capture">
+<h3>Step 2: Obtaining and analysing the packet capture<a class="headerlink" href="#step-2-obtaining-and-analysing-the-packet-capture" title="Permalink to this headline">¶</a></h3>
 <p>We tried using the keys to analyse a capture that we had saved earlier but were unsuccessful. We realised that one of the comments in the code shown above states that it only <strong>stores a few minutes worth (of keys) at a time</strong>. We needed to download the SSL keys shortly after capturing the traffic.</p>
 <p>We then obtained a recent capture (using Packalyzer) and a recent SSL session keys file (using <a class="reference external" href="https://packalyzer.kringlecastle.com/DEV/packalyzer_clientrandom_ssl.log">https://packalyzer.kringlecastle.com/DEV/packalyzer_clientrandom_ssl.log</a>). With these two items, we were able to successfully decode the HTTP/2 traffic.</p>
 <div class="admonition note">
@@ -276,8 +276,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="obtaining-and-analysing-alabaster-s-email">
-<h3>Obtaining and analysing Alabaster’s email<a class="headerlink" href="#obtaining-and-analysing-alabaster-s-email" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-3-obtaining-and-analysing-alabaster-s-email">
+<h3>Step 3: Obtaining and analysing Alabaster’s email<a class="headerlink" href="#step-3-obtaining-and-analysing-alabaster-s-email" title="Permalink to this headline">¶</a></h3>
 <p>We logged into the Packalyzer application using Alabaster’s credentials. Under his saved captures we found the following:</p>
 <img alt="../_images/packalyzer_alabaster.png" src="../_images/packalyzer_alabaster.png" />
 <p>We downloaded the capture file and opened it in Wireshark. The capture mainly consisted of SMTP traffic. We followed the TCP stream and found that the capture consisted of a text message followed by a file attachment encoded in base64 format.</p>
@@ -290,10 +290,10 @@
 <p>To analyse the attachment, we utilised an online <a class="reference external" href="https://www.freeformatter.com/base64-encoder.html">Base64 Encoder/Decoder</a>. The first few bytes of the output included <code class="docutils literal notranslate"><span class="pre">PDF-1.5</span></code> which was a good indicator that the attachment was a PDF file. The online tool also had the ability to save the decoded output which we called <code class="docutils literal notranslate"><span class="pre">alabaster.pdf</span></code>.</p>
 <p>The file included instructions about how to transpose music and included the song <code class="docutils literal notranslate"><span class="pre">Mary</span> <span class="pre">Had</span> <span class="pre">a</span> <span class="pre">Little</span> <span class="pre">Lamb</span></code>.</p>
 </div>
-<div class="section" id="using-the-other-leaked-credentials">
-<h3>Using the other leaked credentials<a class="headerlink" href="#using-the-other-leaked-credentials" title="Permalink to this headline">¶</a></h3>
-<p>The account credentials for Pepper and Bushy that we discovered above, worked but didn’t seem to contain anything interesting.</p>
 </div>
+<div class="section" id="using-the-other-leaked-credentials">
+<h2>Using the other leaked credentials<a class="headerlink" href="#using-the-other-leaked-credentials" title="Permalink to this headline">¶</a></h2>
+<p>The account credentials for Pepper and Bushy that we discovered above, were valid Packalyzer credentials but didn’t seem to contain anything interesting.</p>
 </div>
 </div>
 
@@ -305,7 +305,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="question9.html" class="btn btn-neutral float-right" title="Question 9" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="question9.html" class="btn btn-neutral float-right" title="Question 9: Catch the Malware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="question7.html" class="btn btn-neutral" title="Question 7: HR Incident Response" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -320,8 +320,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 
