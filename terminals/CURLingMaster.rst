@@ -146,8 +146,8 @@ Hints for the Terminal Challenge
  From: Holly Evergreen
  `HTTP/2.0 <https://developers.google.com/web/fundamentals/performance/http2/>`_
 
-Hints for Kringlecon Objective 5
---------------------------------
+Hints for Kringlecon :doc:`Question 5 </objectives/question5>`
+--------------------------------------------------------------
 
 .. parsed-literal::
  **Bloodhound Tool**

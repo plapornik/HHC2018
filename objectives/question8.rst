@@ -116,5 +116,6 @@ To analyse the attachment, we utilised an online `Base64 Encoder/Decoder <https:
 The file included instructions about how to transpose music and included the song ``Mary Had a Little Lamb``.
 
 Using the other leaked credentials
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The account credentials for Pepper and Bushy that we discovered above, worked but didn't seem to contain anything interesting.
+----------------------------------
+
+The account credentials for Pepper and Bushy that we discovered above, were valid Packalyzer credentials but didn't seem to contain anything interesting.

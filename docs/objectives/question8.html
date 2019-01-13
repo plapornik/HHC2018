@@ -93,16 +93,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#step-1-obtaining-the-ssl-keys">Step 1: Obtaining the SSL keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-2-obtaining-and-analysing-the-packet-capture">Step 2: Obtaining and analysing the packet capture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-3-obtaining-and-analysing-alabaster-s-email">Step 3: Obtaining and analysing Alabaster’s email</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-the-other-leaked-credentials">Using the other leaked credentials</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-other-leaked-credentials">Using the other leaked credentials</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -290,10 +290,10 @@
 <p>To analyse the attachment, we utilised an online <a class="reference external" href="https://www.freeformatter.com/base64-encoder.html">Base64 Encoder/Decoder</a>. The first few bytes of the output included <code class="docutils literal notranslate"><span class="pre">PDF-1.5</span></code> which was a good indicator that the attachment was a PDF file. The online tool also had the ability to save the decoded output which we called <code class="docutils literal notranslate"><span class="pre">alabaster.pdf</span></code>.</p>
 <p>The file included instructions about how to transpose music and included the song <code class="docutils literal notranslate"><span class="pre">Mary</span> <span class="pre">Had</span> <span class="pre">a</span> <span class="pre">Little</span> <span class="pre">Lamb</span></code>.</p>
 </div>
-<div class="section" id="using-the-other-leaked-credentials">
-<h3>Using the other leaked credentials<a class="headerlink" href="#using-the-other-leaked-credentials" title="Permalink to this headline">¶</a></h3>
-<p>The account credentials for Pepper and Bushy that we discovered above, worked but didn’t seem to contain anything interesting.</p>
 </div>
+<div class="section" id="using-the-other-leaked-credentials">
+<h2>Using the other leaked credentials<a class="headerlink" href="#using-the-other-leaked-credentials" title="Permalink to this headline">¶</a></h2>
+<p>The account credentials for Pepper and Bushy that we discovered above, were valid Packalyzer credentials but didn’t seem to contain anything interesting.</p>
 </div>
 </div>
 
@@ -320,8 +320,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

@@ -1,8 +1,6 @@
 Stall Mucking Report
 ====================
 
-
-
 Terminal Challenge
 ------------------
 
@@ -56,8 +54,9 @@ Hints for the Terminal Challenge
  From: Wunorse Openslae
  `Keeping Command Line Passwords Out of PS <https://blog.rackspace.com/passwords-on-the-command-line-visible-to-ps>`_
 
-Hints for KringleCon Objective 4
---------------------------------
+Hints for KringleCon :doc:`Question 4 </objectives/question4>`
+--------------------------------------------------------------
+
 Wunorse Openslae hints to using the entropy=True option when running Trufflehog
 Two hints are also unlocked in the badge:
 

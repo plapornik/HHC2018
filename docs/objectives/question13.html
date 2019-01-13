@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Question 13 &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
+  <title>Question 13: Santa’s Door &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
   
 
   
@@ -91,9 +91,12 @@
 <li class="toctree-l1"><a class="reference internal" href="question8.html">Question 8: Network Traffic Forensics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question9.html">Question 9: Catch the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question10.html">Question 10: Identify the Domain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="question11.html">Question 11: Stop the Malware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="question12.html">Question 12: Recover Alabaster’s Password</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 13</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Question 13: Santa’s Door</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="question14.html">Question 14: Who Is Behind It All?</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Terminals:</span></p>
@@ -159,7 +162,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Question 13</li>
+      <li>Question 13: Santa’s Door</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,8 +179,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="question-13">
-<h1>Question 13<a class="headerlink" href="#question-13" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="question-13-santa-s-door">
+<h1>Question 13: Santa’s Door<a class="headerlink" href="#question-13-santa-s-door" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Use what you have learned from previous challenges to open the <a class="reference external" href="https://pianolockn.kringlecastle.com/">door to Santa’s vault</a>. What message do you get when you unlock the door?</div>
+</div>
+<p>Answer: <em>You have unlocked Santa’s vault!</em></p>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<p>The items that were needed to find the door code included:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The vault password from <a class="reference internal" href="question12.html"><span class="doc">Question 12</span></a></li>
+<li>The body of the email message found in <a class="reference internal" href="question8.html"><span class="doc">Question 8</span></a></li>
+</ul>
+</div></blockquote>
+<p>The vault password was the following musical tune: <strong>ED#ED#EED#EF#G#F#G#ABA#BA#B</strong>.</p>
+<p>The email message said that Alabaster’s favourite musical key was <strong>D</strong>.</p>
+<p>We utilised <a class="reference external" href="https://music">https://music</a> to determine that the vault password was keyed to <strong>G</strong>. We also used the site to transpose the tune to <strong>D</strong>.</p>
+<p>The resulting tune was: <strong>TODO</strong></p>
+<p>After opening the door we got the following message: <strong>You have unlocked Santa’s vault!</strong></p>
+</div>
 </div>
 
 
@@ -203,8 +225,7 @@
         &copy; Copyright 2019, Antonios and Peter Lapornik
 
     </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  </div> 
 
 </footer>
 

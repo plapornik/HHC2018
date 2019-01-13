@@ -20,14 +20,14 @@ We downloaded a packet capture from http://snortsensor1.kringlecastle.com/ and o
 
 We noticed that the following string was repeated frequently within the DNS query and response packets: ``77616E6E61636F6F6B69652E6D696E2E707331``. We believed that this was associated with the malware we needed to stop.
 
-We perform a HEX -> ASCII translation on the string to create the following table:
+We performed a HEX -> ASCII translation on the string to create the following table:
 
-================= ============================================================================
+================= ======================================
 Item              Value
-================= ============================================================================
+================= ======================================
 Decoded text      wannacookie.min.ps1
 Decoded DNS query 77616E6E61636F6F6B69652E6D696E2E707331
-================= ============================================================================
+================= ======================================
 
 The ``wannacookie.min.ps1`` string confirmed that we were looking at the correct data.
 
