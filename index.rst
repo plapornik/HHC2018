@@ -55,6 +55,5 @@ The team members were arrested by the `North Pole Police Department (NPPD) <http
   :caption: Appendices:
 
   appendices/eastereggs
-  appendices/badges
   appendices/narrative
   appendices/GoogleVent

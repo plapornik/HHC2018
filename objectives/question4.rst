@@ -41,5 +41,5 @@ Clicking on the **Find File** button in the online git repository did not return
 
 We cloned the git repository using the  ``git clone https://git.kringlecastle.com/Upatree/santas_castle_automation.git`` command. Following this we used the ``find . -name *.zip`` command to return the ``./santas_castle_automation/schematics/ventilation_diagram.zip`` file path.
 
-Inside the ``ventilation_diagram.zip`` file were diagrams for the **Google Ventilation Maze**.
+Inside the ``ventilation_diagram.zip`` file were diagrams for the :doc:`Google Ventilation Maze </appendices/GoogleVent>`.
 
