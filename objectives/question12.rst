@@ -36,7 +36,7 @@ An analysis of wannacookie.ps1 revealed the following:
 
 4. **$Byte_key** gets encrypted using a X509 public key via the **Pub_Key_Enc()** function. The result gets stored in a variable called **$Pub_key_encrypted_Key**. The **$Byte_key** and **$Hex_key** variables are later destroyed. It was later proven that this complicated the decryption process because the symmetric key was no longer in memory (i.e. it was not in the memory dump). We realised that to decrypt the file we would need to find a way to obtain the private key.
 
-5. **$Pub_key_encrypted_Key** is a string a 512 hexadecimal digits.
+5. **$Pub_key_encrypted_Key** is a string with a length of 512 hexadecimal digits.
 
 6. The symmetric key gets hashed using SHA1. The hash has a length of 40 and consists of HEX digits.
 
@@ -140,7 +140,7 @@ We started Power Dump using the following command::
 
 We used option 1 to load the dump file (**powershell.exe_181109_104716.dmp**). We used option 2 to process the dump file. We then used option 4 to search for stored PowerShell variables.
 
-To find the key we used the following filters::
+To find the key we used the following filters derived from the information we found in Part 1::
 
  matches "^[a-fA-F0-9]+$"
  len == 512
@@ -149,7 +149,7 @@ This resulted in one match::
 
    3cf903522e1a3966805b50e7f7dd51dc7969c73cfb1663a75a56ebf4aa4a1849d1949005437dc44b8464dca05680d531b7a971672d87b24b7a6d672d1d811e6c34f42b2f8d7f2b43aab698b537d2df2f401c2a09fbe24c5833d2c5861139c4b4d3147abb55e671d0cac709d1cfe86860b6417bf019789950d0bf8d83218a56e69309a2bb17dcede7abfffd065ee0491b379be44029ca4321e60407d44e6e381691dae5e551cb2354727ac257d977722188a946c75a295e714b668109d75c00100b94861678ea16f8b79b756e45776d29268af1720bc49995217d814ffd1e4b6edce9ee57976f9ab398f9a8479cf911d7d47681a77152563906a2c29c6d12f971
 
-To find the hash we used the following filters::
+To find the hash we used the following filters derived from the information we found in Part 1::
 
  matches "^[a-fA-F0-9]+$"
  len == 40
