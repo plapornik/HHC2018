@@ -6,9 +6,12 @@
 Holiday Hack Challenge 2018 Report
 ==================================
 
+This is our report for the **SANS Holiday Hack Challenge 2018**.
+
+The report can be found at https://plapornik.github.io/HHC2018/index.html
+
 Introducing the team
 --------------------
-
 
 .. figure:: /images/policeLineup.PNG
 
@@ -57,3 +60,4 @@ The team members were arrested by the `North Pole Police Department (NPPD) <http
   appendices/eastereggs
   appendices/narrative
   appendices/GoogleVent
+
