@@ -1,7 +1,6 @@
 Sleigh Bell Lottery
 ===================
 
-
 .. image:: /images/sleighbellMOTD.png
 
 Our Solution
@@ -108,7 +107,7 @@ Hints for the Terminal Challenge
 Hints for Kringlecon :doc:`Question 9 </objectives/question9>`
 --------------------------------------------------------------
 
-After completing the challenge Shiny Upatree said the following:
+**Conversation with Shiny Upatree**
 
 | Sweet candy goodness - I win! Thank you so much!
 | Have you heard that Kringle Castle was hit by a new ransomware called Wannacookie?

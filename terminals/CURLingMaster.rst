@@ -6,57 +6,6 @@ Terminal Challenge
 
 .. image:: /images/CURLingMasterMOTD.png
 
-
-.. code-block:: none
-
-                   .....................................                        
-                  ...',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'....                      
-                  ...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'...                     
-                   ......'''''''''''''''''''''''',,,,,,,'...                    
-                      ............................',,,,,,,...                   
-                                                 ...,,,,,,'...                  
-                                                  ..',,,,,,'..                  
-                                                  ...,,,,,,,...                 
-                                                  ...,,,,,,,...                 
-             ........................................,,,,,,,'......             
-          .....''''''''''''''''''''''''''''''''''''',,,,,,,,,,'''.....          
-         ...............................................................        
-         ...............................................................        
-       .:llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllc.       
-      .llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll;      
-     'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll:     
-    .kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk:    
-    o0000000000000000000000000000000000000000000000000000000000000000000000O    
-    O00000000000000000000000000000000000000000000000000000000000000000000000'   
-    O00000000000000000000000000000000000000000000000000000000000000000000000'   
-    d0000000000000000000000000000000000000000000000000000000000000000000000O.   
-    'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOc    
-     ,llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll:     
-      ,llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll:      
-       .clllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll'       
-         'clllllllllllllllllllllllllllllllllllllllllllllllllllllllllll,         
-           .,clllllllllllllllllllllllllllllllllllllllllllllllllllll;.           
-               .';:cllllllllllllllllllllllllllllllllllllllllcc;,..              
-                                                                               
-
-
- I am Holly Evergreen, and now you won't believe:
- Once again the striper stopped; I think I might just leave!
- Bushy set it up to start upon a website call.
- Darned if I can CURL it on - my Linux skills apall.
-
- Could you be our CURLing master - fixing up this mess?
- If you are, there's one concern you surely must address.
- Something's off about the conf that Bushy put in place.
- Can you overcome this snag and save us all some face?
-
-   Complete this challenge by submitting the right HTTP 
-   request to the server at http://localhost:8080/ to 
-   get the candy striper started again. You may view 
-   the contents of the nginx.conf file in 
-   /etc/nginx/, if helpful.
- elf@ad352fad5d1b:~$ 
-
 Our Solution
 ------------
 

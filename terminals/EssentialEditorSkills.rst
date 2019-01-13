@@ -8,36 +8,6 @@ Terminal Challenge
 
 .. image:: /images/essentialMOTD.png
 
-
-.. code-block:: none
-
-                    ........................................
-                 .;oooooooooooool;,,,,,,,,:loooooooooooooll:
-               .:oooooooooooooc;,,,,,,,,:ooooooooooooollooo:
-             .';;;;;;;;;;;;;;,''''''''';;;;;;;;;;;;;,;ooooo:
-           .''''''''''''''''''''''''''''''''''''''''';ooooo:
-         ;oooooooooooool;''''''',:loooooooooooolc;',,;ooooo:
-      .:oooooooooooooc;',,,,,,,:ooooooooooooolccoc,,,;ooooo:
-    .cooooooooooooo:,''''''',:ooooooooooooolcloooc,,,;ooooo,
-    coooooooooooooo,,,,,,,,,;ooooooooooooooloooooc,,,;ooo,
-    coooooooooooooo,,,,,,,,,;ooooooooooooooloooooc,,,;l'
-    coooooooooooooo,,,,,,,,,;ooooooooooooooloooooc,,..
-    coooooooooooooo,,,,,,,,,;ooooooooooooooloooooc.
-    coooooooooooooo,,,,,,,,,;ooooooooooooooloooo:.
-    coooooooooooooo,,,,,,,,,;ooooooooooooooloo;
-    :llllllllllllll,'''''''';llllllllllllllc,
-
-
-
-  I'm in quite a fix, I need a quick escape.
-  Pepper is quite pleased, while I watch here, agape.
-  Her editor's confusing, though "best" she says - she yells!
-  My lesson one and your role is exit back to shellz.
-
-  -Bushy Evergreen
-
-  Exit vi.
-
 Our Solution
 ------------
 Enter ``:q!`` followed by ``<ENTER>`` within the terminal.

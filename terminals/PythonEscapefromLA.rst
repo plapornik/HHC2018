@@ -6,86 +6,6 @@ Terminal Challenge
 
 .. image:: /images/pythonescapeMOTD.png
 
-
-
-.. code-block:: none
-
-                :lllllllllllllllllllllllllllllllllllllllll,                      
-                'lllllllllllllllllllllllllllllllllllllllll:                      
-                 clllllllllllllllllllllllllllllllllllllllll.                     
-                 'lllllllllllllllllllllllllllllllllllllllll:                     
-                  ;lllllllllllllllllllllllllllllllllllllllll,                    
-                   :lllllllllllllllllllllllllllllllllllllllll.                   
-                    :lllllllllllllllllllllllllllllllllllllllll.                  
-                     ;lllllllllllllllllllllllllllllllllllllllll'                 
-                      'lllllllllllllllllllllllllllllllllllllllll;                
-                       .cllllllllllllllllllllllllllllllllllllllllc.              
-                       .:llllllllllllllllllllllllllllllllllllllllllc,.           
-                    .:llllllllllllllllllllllllllllllllllllllllllllllll;.         
-                 .,cllllllllllllllllllllllllllllllllllllllllllllllllllll,        
-               .;llllllllllllllllllllllllllllllllllllllllllllllllllllllllc.      
-              ;lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllc.     
-            'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllc     
-           :lllllll:..,..'cllllllllllllllllllllllc'.,'.'clllllllllllllllllll;    
-         .clllllll'  :XK.  :llllllllllllllllllll;  ,XX.  ;lllllllllllllllllll.   
-        .cllllllll.  oXX'  ,llllllllllllllllllll.  cXX;  .lllllllllllllllllll'   
-        clllllllll;  .xl  .cllllllllllllllllllllc.  do  .clllllllllllllllllll,   
-       :llllllllllll;'..':llllllllllllllllllllllll:'..':lllllllllllllllllllll'   
-      .llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll.   
-      ;lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllc    
-      clllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll.    
-      cllllllllllllllllllllllllll..;lc..:llllllllllllllllllllllllllllllllll;     
-      :lllllllllllllllllllllllll:  .l,  .lllllllllllllllllllllllllllllllll:      
-      ,lllllllllllllllllllllllllc  .l;  ,llllllllllllllllllllllllllllllll:       
-      .llllllllllllllllllllllllllc;lll::llllllllllllllllllllllllllllllll,        
-       'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllc.         
-        ,llllllllllllllllllllllllllllllllllllllllllllllllllllllllllll,           
-         'llllllllllllllllcccccccc;',.,clllllllllllllllllllllllllll,             
-          .cllllllc:::::;;,,,,'...':c:;...'',,;;;::::::lllllllllc,               
-            'cllllc::;::::cccccccccllc,,,,,,,'',:::::::lllllll;.                 
-              .:llllllllllkMMMMMMMMMdlclllllllllollllllllll;.                    
-                .':lllllllXMMMMMMMMMoloWMMMMMMMMXllllll:,.                       
-                    .,:llccccccccccllllXMMMMMMMMWl:;'.                           
-                        .,,,,,,,,,,clll:::::::::;                                
-                       'lllllllllc.    ',,,,,,,,.                                
-                      lMMMMMMMMMW,    .ddddddddd.                                
-                     kMMMMMMMMMX.     kMMMMMMMMK                                 
-                    ':::::::::,      .NWWWWWWWW:                                 
-                   ',,,,,,,,,.       .,,,,,,,,'                                  
-                 .oooooooooo.        ',,,,,,,,.                                  
-                .NMMMMMMMMW;        cOOOOOOOOx                                   
-                0MMMMMMMMMc         NMMMMMMMMk                                   
-                ;;;;;;;;;'         .KKKKKKKKK:                                   
-               .,,,,,,,,,           ,,,,,,,,,.                                   
-               .ddddddddo           ',,,,,,,,.                                   
-                XMMMMMMMN           cKKKKKKKKK.                                  
-     .;:::;;,,,,,:ldddddd.           0MMMMMMMMX.       ....                      
-       .,:ccccccccccccccc            'cccccccccc:::ccccc;.                       
-          .:ccccccccccccc            .ccccccccccccccc:'.                         
-            .;;;;;;;;;;;;            .ccccccccccccc;.                            
-                                     ..............                              
-                                                                                
-                                                                                
-
-
- I'm another elf in trouble,
- Caught within this Python bubble.
-
- Here I clench my merry elf fist -
- Words get filtered by a black list!
-
- Can't remember how I got stuck,
- Try it - maybe you'll have more luck?
-
- For this challenge, you are more fit.
- Beat this challenge - Mark and Bag it!
-
- -SugarPlum Mary
-
- To complete this challenge, escape Python
- and run ./i_escaped
- >>> 
-
 Our Solution
 ------------
 
@@ -110,9 +30,6 @@ We then tried to run ``eval('os.sys'+'tem("./i_escaped")')`` but got a ``NameErr
 Thus, we used ``os=eval('__im'+'port__("os"))`` to import the os as a parameter (os)
 
 Then, we used ``eval('os.sys'+'tem("./i_escaped")')`` to run ./i_escaped and solve the challenge.
-
-
-
 
 Hints for the Terminal Challenge
 --------------------------------
