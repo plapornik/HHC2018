@@ -135,3 +135,4 @@ Pressing the hidden option ``9`` opens a PowerShell shell.
 
 .. rubric:: Extra Info
 .. [#f1] After typing ``1`` we were taken to a registration page, which made us lose some time by trying to use that to solve the challenge. By typing ``q`` one cannot type anything more.
+

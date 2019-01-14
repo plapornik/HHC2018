@@ -55,3 +55,4 @@ To create the rule we edited ``/etc/snort/rules/local.rules`` using **nano** and
 * The rule utilises the ``malware-cnc`` classification
 
 After saving the rule, we received the following terminal message: ``Congratulation! Snort is alerting on all ransomware and only the ransomware!``
+

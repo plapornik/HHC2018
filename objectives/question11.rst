@@ -150,3 +150,4 @@ Step 3: Activate the kill-switch
 We activated ``yippeekiyaa.aaay`` at the North Pole's domain registrar `HoHoHo Daddy <https://hohohodaddy.kringlecastle.com/index.html>`_.
 
 The registrar returned **Successfully registered yippeekiyaa.aaay!**
+

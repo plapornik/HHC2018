@@ -33,3 +33,4 @@ The following hint was also unlocked in our badge:
   **Past Holiday Hack Challenges**
   From: Bushy Evergreen
   `Past Holiday Hack Challenges <https://holidayhackchallenge.com/past-challenges/>`_
+

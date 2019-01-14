@@ -49,3 +49,4 @@ Question 6
 Answer: *The Great Book*
 
 The challenge then displays ``Happy Trails`` as the secret phrase.
+

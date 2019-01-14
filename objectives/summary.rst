@@ -104,4 +104,3 @@ Question 14: Who Is Behind It All?
 | Who was the mastermind behind the whole KringleCon plan?
 
 Answer: *santa*
-

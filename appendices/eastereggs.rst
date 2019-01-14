@@ -31,6 +31,3 @@ The **Pokemon MissingNo. image** is accessible from the following URL:
   :scale: 50 %
   :alt: Pokemon MissingNo.
 
-
-
-

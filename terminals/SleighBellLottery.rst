@@ -120,3 +120,4 @@ Hints for Kringlecon :doc:`Question 9 </objectives/question9>`
 | Of course, this all depends how the key was encrypted and managed in memory. Proper public key encryption requires a private key to decrypt.
 | Perhaps there is a flaw in the wannacookie author's DNS server that we can manipulate to retrieve what we need.
 | If so, we can retrieve our keys from memory, decrypt the key, and then decrypt our ransomed files.
+

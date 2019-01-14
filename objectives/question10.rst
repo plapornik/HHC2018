@@ -112,3 +112,4 @@ string       77616E6E61636F6F6B69652E6D696E2E707331
 Examining ``WannacookieLoader.ps1`` showed that its purpose was to download the Wannacookie malware (``wannacookie.min.ps1``) via a clever use of DNS TXT records.
 
 The above script also provided us with the domain name from which the malware was downloaded from: ``erohetfanu.com``
+

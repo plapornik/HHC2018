@@ -342,3 +342,4 @@ The database showing the contents of the passwords table is shown in the followi
 
 .. note::
  We tried using the passwords with online services such as NetFlix, but found out that the accounts did not exist. Perhaps Santa has his own regionalised versions of these online services.
+

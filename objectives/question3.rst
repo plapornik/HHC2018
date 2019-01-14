@@ -23,3 +23,4 @@ The sequence we generated consisted of the following:
 Referring to above diagram, we entered the sequence one character at a time (substituting the shapes for numbers) into the door passcode and soon revealed the correct code.
 
 After entering the room and talking to Morcel Nouget we obtained the ``Welcome unprepared speaker!`` phrase which is the answer to the question.
+

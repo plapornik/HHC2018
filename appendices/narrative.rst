@@ -32,3 +32,4 @@ Narrative
 
 .. highlights::
  Congrats! You have solved the hardest challenge! Please visit Santa and Hans inside Santa's Secret Room for an update on your amazing accomplishment!
+ 

@@ -66,3 +66,4 @@ With a bit of experiementing we found that we could also find avatars of differe
 
 | Pink (with helmet): https://kringlecon.com/images/avatars/soldiers/kc18_soldiers_pink_2.png
 | Pink (without helmet): https://kringlecon.com/images/avatars/reveal/kc18_soldiers2_pink_3.png
+

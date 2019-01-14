@@ -87,6 +87,3 @@ Hints for Kringlecon :doc:`Question 6 </objectives/question6>`
  From: Pepper Minstix
  `SQL Injection <https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF#Auth_Bypass>`_
 
-
-
-

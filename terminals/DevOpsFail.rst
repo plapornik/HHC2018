@@ -157,7 +157,3 @@ Hints for Kringlecon :doc:`Question 7 </objectives/question7>`
  From: Sparkle Redberry
  `OWASP CSV Injection Page <https://www.owasp.org/index.php/CSV_Injection>`_
 
-
-
-
-

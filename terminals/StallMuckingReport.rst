@@ -70,5 +70,3 @@ Two hints are also unlocked in the badge:
  From: Wunorse Openslae
  `Brian Hostetler is giving a great Trufflehog talk <https://youtu.be/myKrWVaq3Cw>`_ upstairs
 
-
-
