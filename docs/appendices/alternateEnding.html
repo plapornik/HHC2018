@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>An Alternate Ending by Antonios &mdash; Holiday Hack Challenge 2018 Report  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Google Ventilation Maze" href="GoogleVent.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Holiday Hack Challenge 2018 Report
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Objectives:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/summary.html">Questions and Answers Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question1.html">Question 1: Orientation Challenge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question2.html">Question 2: Directory Browsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question3.html">Question 3: de Bruijn Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question4.html">Question 4: Data Repo Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question5.html">Question 5: AD Privilege Discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question6.html">Question 6: Badge Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question7.html">Question 7: HR Incident Response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question8.html">Question 8: Network Traffic Forensics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question9.html">Question 9: Catch the Malware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question10.html">Question 10: Identify the Domain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question11.html">Question 11: Stop the Malware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question12.html">Question 12: Recover Alabaster’s Password</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question13.html">Question 13: Santa’s Door</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../objectives/question14.html">Question 14: Who Is Behind It All?</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Terminals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/EssentialEditorSkills.html">Essential Editor Skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/TheNameGame.html">The Name Game</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/LethalForensicELFication.html">Lethal ForensicELFication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/StallMuckingReport.html">Stall Mucking Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/CURLingMaster.html">CURLing Master</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/YuleLogAnalysis.html">Yule Log Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/DevOpsFail.html">Dev Ops Fail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/PythonEscapefromLA.html">Python Escape from LA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminals/SleighBellLottery.html">Sleigh Bell Lottery</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Appendices:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="eastereggs.html">Easter Eggs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="narrative.html">Narrative</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoogleVent.html">Google Ventilation Maze</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">An Alternate Ending by Antonios</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#explanation-1-santa-is-bad">Explanation 1: Santa is bad</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#part-1-interviews">Part 1: Interviews</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-2-possible-plan-2019">Part 2: Possible Plan 2019</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-3-evidence-of-santa-trying-to-destroy-christmas">Part 3: Evidence of Santa trying to destroy Christmas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-4-possible-motives-reasons">Part 4: Possible Motives &amp; Reasons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-5-reason-for-kringlecon">Part 5: Reason for Kringlecon</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#explanation-2-someone-was-early-and-stole-christmas">Explanation 2: Someone was early and stole Christmas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Part 1: Interviews</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-2-possible-explanation">Part 2: Possible explanation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-3-evidence">Part 3: Evidence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-4-motive-reasons">Part 4: Motive &amp; Reasons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-5-reason-for-planning-kringlecon">Part 5: Reason for Planning Kringlecon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Holiday Hack Challenge 2018 Report</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>An Alternate Ending by Antonios</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="an-alternate-ending-by-antonios">
+<h1>An Alternate Ending by Antonios<a class="headerlink" href="#an-alternate-ending-by-antonios" title="Permalink to this headline">¶</a></h1>
+<p>Here are two possible alternate endings for KringleCon:</p>
+<div class="section" id="explanation-1-santa-is-bad">
+<h2>Explanation 1: Santa is bad<a class="headerlink" href="#explanation-1-santa-is-bad" title="Permalink to this headline">¶</a></h2>
+<p>Santa Claus is also known as Saint Nicholas, Kris Kringle, Father Christmas, Sinterklaas, Père Noël, Samichlaus, Joulupukki and Saint Basil.</p>
+<p>Santa Claus has commited a variety of crimes over the years including but not limited to: intruding in people’s homes, flying without a license and illegal distribution of coal.</p>
+<p>However, this report is about his many (possible) attempts to destroy Christmas.</p>
+<div class="section" id="part-1-interviews">
+<h3>Part 1: Interviews<a class="headerlink" href="#part-1-interviews" title="Permalink to this headline">¶</a></h3>
+<p>1)      “I received a message saying “URGENT: Your presence is requested at the North Pole”. I thus took the TARDIS and travelled there only to be kidnapped (!) by Santa and his elves. He said we should go back in time to steal the original CBBS. I didn’t accept, so he threw me in the TARDIS and hijacked the machine. Thankfully, some elves couldn’t find Santa and notified SANS. It was by pure luck that Christmas was saved in 2014. I confessed to kidnapping him because he is still my friend”
+-Dr Who</p>
+<p>2)       “The dwarves have always been excellent engineers. We were surprised to receive an order from Santa, to create a toy called the Gnome in Your Home. We did everything he asked for, but it seems he changed the software, somehow managing to blame us the ATNAS corporation for it”
+-the ATNAS corporation</p>
+<p>3)        “I was contacted by my friend the Grinch, who said “I want to steal Christmas. AGAIN.” At the time I didn’t know I was actually speaking with Santa, so I sent him an e-mail about this to warn him. It seems that he decided to contact SANS again to avoid suspicion. I was shocked to find out I had been framed for it, but no one would believe me.”
+-Cindy Lu Who</p>
+<p>4)       “I was quite shocked to find so many weapons in my storage room. I never touched a gun before! It seems that Santa used his magic to hypnotize the snowman so that he could frame me when SANS found out.”
+-Glinda</p>
+<p>5)       “Grrrrrrrrrrrr… Arrrgh Grrrrrr Roarrrrrr. Grrr arrgh arrrrgh. Roarrrr Grrr Argh Grrrrr. Roarrrrr. Grrrrrrrrrrrrrrrrrrrrrr!”
+translation: “Well…  Snowman must say Snowman is quite angry. He came to Snowman’s cave. Made Snowman believe he was hypnotized by Glinda. Good Glinda. Bad Santa!”
+-The abominable snowman</p>
+</div>
+<div class="section" id="part-2-possible-plan-2019">
+<h3>Part 2: Possible Plan 2019<a class="headerlink" href="#part-2-possible-plan-2019" title="Permalink to this headline">¶</a></h3>
+<p>Santa always wanted to be the only one to give gifts over Christmas.
+Thus, he called a conference and made the best hackers and security specialists (who came) stand outside barefoot.
+This way they would not only be busy solving his challenge but would also be sick and wouldn’t be able to use their skills to protect stores globally.
+He would then go in those stores and destroy all the toys there. However, some hackers were too good, and his plan didn’t work.</p>
+</div>
+<div class="section" id="part-3-evidence-of-santa-trying-to-destroy-christmas">
+<h3>Part 3: Evidence of Santa trying to destroy Christmas<a class="headerlink" href="#part-3-evidence-of-santa-trying-to-destroy-christmas" title="Permalink to this headline">¶</a></h3>
+<ol class="upperroman simple">
+<li>Hans seemed too confident when he talked about releasing the ‘bad guys’ from the previous years</li>
+<li>The challenges needed a wide range of skills. This was to slow the hackers down</li>
+<li>Santa kept everyone outside, barefoot until the 18th of December. This was to make them sick and unable to protect other organisations</li>
+<li>Santa had an empty vault, possibly to keep stolen toys</li>
+<li>Santa displayed that he is more than capable of creating an evil plan.</li>
+</ol>
+</div>
+<div class="section" id="part-4-possible-motives-reasons">
+<h3>Part 4: Possible Motives &amp; Reasons<a class="headerlink" href="#part-4-possible-motives-reasons" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>He is tired of travelling around the globe every year.</li>
+<li>He doesn’t like sharing people’s love</li>
+<li>He doesn’t know what he is doing (something like paranoia)</li>
+</ol>
+</div>
+<div class="section" id="part-5-reason-for-kringlecon">
+<h3>Part 5: Reason for Kringlecon<a class="headerlink" href="#part-5-reason-for-kringlecon" title="Permalink to this headline">¶</a></h3>
+<p>Besides the ones prementioned, it may have been to avert suspicion</p>
+</div>
+</div>
+<div class="section" id="explanation-2-someone-was-early-and-stole-christmas">
+<h2>Explanation 2: Someone was early and stole Christmas<a class="headerlink" href="#explanation-2-someone-was-early-and-stole-christmas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Part 1: Interviews<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>1)      “I woke up one morning hearing some strange noise in my secret room. I thought the vent was malfunctioning and decided I would fix it in the morning. I was stunned to find the vault empty but had to come up with an excuse and said that it was never full”
+-Santa Claus</p>
+<p>2)      “As the North Pole’s financial advisor, I was concerned when I found the vault to be empty. Without the resources stored in the vault we wouldn’t be able to manufacture toys and Christmas would be ruined”
+-Hans</p>
+<p>3)      “I am an extremely forgetful elf. Once, I left my badge to Santa’s secret room in the barn. I forgot to erase it from the database, and someone managed to get in Santa’s secret room. From there they accessed my Password vault and were able to get to Santa’s Vault. I am saddened by the possibility that I aided the destruction of Christmas.”
+Alabaster Snowball</p>
+<p>4)      “I saw Santa pacing the yard quite anxiously. He was anxiously murmuring that someone stole his secret ‘weapon’. My guess is that it is the Gift-Wrapping Machine.”
+-Jason</p>
+</div>
+<div class="section" id="part-2-possible-explanation">
+<h3>Part 2: Possible explanation<a class="headerlink" href="#part-2-possible-explanation" title="Permalink to this headline">¶</a></h3>
+<p>Given the info, the suspect possibly disguised themselves as an elf and accessed Alabaster’s password vault. They then unlocked the vault and stole its content.
+Therefore, possible suspects include: Yoda, Frodo Baggins, the Grinch</p>
+</div>
+<div class="section" id="part-3-evidence">
+<h3>Part 3: Evidence<a class="headerlink" href="#part-3-evidence" title="Permalink to this headline">¶</a></h3>
+<ol class="upperroman simple">
+<li>Kringle castle locked down. The extra security suggests that something happened</li>
+<li>There is a vent leading to Santa’s secret room. Possible access point</li>
+<li>Santa’s vault is empty</li>
+<li>Alabaster lost his badge during the conference</li>
+<li>Jason, a plant can talk and see (possible IoT implementation)</li>
+</ol>
+</div>
+<div class="section" id="part-4-motive-reasons">
+<h3>Part 4: Motive &amp; Reasons<a class="headerlink" href="#part-4-motive-reasons" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>They may dislike Christmas</li>
+<li>Christmas gifts are costly  stealing something related to them may bring profit</li>
+<li>They may like gifts and couldn’t control themselves.</li>
+</ol>
+</div>
+<div class="section" id="part-5-reason-for-planning-kringlecon">
+<h3>Part 5: Reason for Planning Kringlecon<a class="headerlink" href="#part-5-reason-for-planning-kringlecon" title="Permalink to this headline">¶</a></h3>
+<p>Santa didn’t want the fact that security at the North Pole was bad to be known.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="GoogleVent.html" class="btn btn-neutral" title="Google Ventilation Maze" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Antonios and Peter Lapornik
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
